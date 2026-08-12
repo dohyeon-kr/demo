@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>앱테크 환급정책 경쟁사 조사 및 정책 제안</title>
+<style>
+:root{
+  --bg:#f5f7fb; --paper:#fff; --text:#172033; --muted:#667085; --line:#e4e7ec;
+  --accent:#3157d5; --accent-soft:#eef2ff; --good:#157347; --good-bg:#ecfdf3;
+  --warn:#b54708; --warn-bg:#fffaeb; --danger:#b42318; --danger-bg:#fef3f2;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Pretendard","Noto Sans KR","Segoe UI",sans-serif;line-height:1.65}
+main{max-width:1120px;margin:42px auto;padding:0 24px 64px}
+.hero{background:linear-gradient(135deg,#1e2f73,#3157d5);color:#fff;padding:42px 46px;border-radius:22px;box-shadow:0 16px 44px rgba(30,47,115,.16)}
+.hero h1{font-size:32px;line-height:1.25;margin:0 0 12px}
+.hero p{margin:0;color:rgba(255,255,255,.82)}
+.meta{margin-top:18px;font-size:13px;color:rgba(255,255,255,.7)}
+section{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:34px 36px;margin-top:22px}
+h2{font-size:24px;margin:0 0 8px}
+h3{font-size:18px;margin:28px 0 10px}
+.lead{color:var(--muted);margin:0 0 24px}
+.badge{display:inline-block;padding:4px 9px;border-radius:999px;font-size:12px;font-weight:700;background:var(--accent-soft);color:var(--accent);margin-right:6px}
+.callout{padding:18px 20px;border-radius:14px;margin:18px 0}
+.callout.good{background:var(--good-bg);color:#14532d}
+.callout.warn{background:var(--warn-bg);color:#7a2e0e}
+.callout.info{background:var(--accent-soft);color:#263a87}
+table{width:100%;border-collapse:collapse;font-size:14px;margin-top:18px}
+th{background:#f8fafc;text-align:left;padding:12px 10px;border-bottom:1px solid #d0d5dd;white-space:nowrap}
+td{padding:13px 10px;border-bottom:1px solid #eaecf0;vertical-align:top}
+tr:last-child td{border-bottom:0}
+.small{font-size:13px;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}
+.card{border:1px solid var(--line);border-radius:14px;padding:18px}
+.card strong{display:block;font-size:16px;margin-bottom:5px}
+.metric{font-size:24px;font-weight:800;color:var(--accent)}
+ol,ul{padding-left:22px}
+li{margin:6px 0}
+.policy{border-left:4px solid var(--accent);padding:4px 0 4px 18px;margin:18px 0}
+.policy code{background:#f2f4f7;padding:2px 6px;border-radius:6px}
+.flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:18px 0}
+.flow span{padding:9px 12px;background:#f8fafc;border:1px solid var(--line);border-radius:10px;font-size:13px}
+.flow b{color:#98a2b3}
+.sources a{color:#3157d5;text-decoration:none;word-break:break-all}
+.sources li{margin:10px 0}
+.footer{font-size:12px;color:#98a2b3;margin:24px 6px}
+@media(max-width:800px){
+  main{padding:0 12px 40px;margin-top:16px}
+  .hero,section{padding:24px 20px;border-radius:14px}
+  .hero h1{font-size:25px}
+  .grid{grid-template-columns:1fr}
+  table{display:block;overflow-x:auto;white-space:normal}
+}
+@media print{
+  body{background:#fff}
+  main{max-width:none;margin:0;padding:0}
+  .hero{border-radius:0;box-shadow:none}
+  section{break-inside:avoid;border-radius:0;border-left:0;border-right:0}
+  a{color:#000}
+}
+</style>
+</head>
+<body>
+<main>
+  <header class="hero">
+    <div><span class="badge" style="background:rgba(255,255,255,.16);color:#fff">정책 조사</span></div>
+    <h1>앱테크 환급정책<br>경쟁사 조사 및 정책 제안</h1>
+    <p>환급정책 수립을 위한 국내 앱테크·포인트 서비스 비교 및 권고안</p>
+    <div class="meta">기준일 2026-08-12 · 공개된 공식 약관/고객센터/서비스 안내 우선</div>
+  </header>
+
+  <section>
+    <h2>1. 경쟁사 비교</h2>
+    <p class="lead">핵심 비교축은 “현금화 가능 여부” 자체보다 <b>최소 환급 조건, 지급 지연, 본인확인, 수수료, 적립원천별 제한</b>이다.</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>서비스</th><th>환급 방식</th><th>최소/조건</th><th>지급 시점</th><th>통제 장치</th><th>시사점</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><b>머니워크</b></td>
+          <td>계좌 현금인출</td>
+          <td>29,900P 이상 보유 시 15,000원부터</td>
+          <td>신청일 기준 다음 주 월요일</td>
+          <td>휴대폰·계좌 명의 일치, 미성년자 제한</td>
+          <td>최소금액 + 지급지연 + KYC가 결합된 강한 통제형</td>
+        </tr>
+        <tr>
+          <td><b>돈이돼지</b></td>
+          <td>현금·상품권</td>
+          <td>1:1 현금비율 안내, 5만원 출금 수수료 0원</td>
+          <td>‘출금데이’ 및 예약 구조 운영</td>
+          <td>출금 금액·시점에 따른 인센티브</td>
+          <td>현금성을 유지하면서 지급시점을 행동설계에 활용</td>
+        </tr>
+        <tr>
+          <td><b>모니모</b></td>
+          <td>모니머니 → 본인명의 계좌</td>
+          <td>보유 모니머니 일부 또는 전부</td>
+          <td>약관상 환급요청 접수 즉시</td>
+          <td>본인명의 계좌</td>
+          <td>높은 현금성·유동성을 제공하는 금융형 모델</td>
+        </tr>
+        <tr>
+          <td><b>OK캐쉬백</b></td>
+          <td>포인트 현금상환 / 충전포인트 환급</td>
+          <td>충전포인트는 마지막 충전잔액 60% 사용(1만원 이하는 80%) 후 환급 가능</td>
+          <td>신청일 익일부터 영업일 기준 3일</td>
+          <td>본인계좌, 포인트 원천에 따른 별도 정책</td>
+          <td>‘적립’과 ‘충전’을 분리해 환급규칙을 다르게 적용</td>
+        </tr>
+        <tr>
+          <td><b>H.Point</b></td>
+          <td>충전포인트 환급 중심</td>
+          <td>충전포인트에 한정. 60% 사용(1만원 이하 80%) 등 조건</td>
+          <td>약관·운영절차에 따름</td>
+          <td>충전/적립 원천 분리, 환급 횟수 제한 가능</td>
+          <td>원천별 Ledger 설계의 대표 사례</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout info">
+      <b>시장 관찰:</b> “포인트를 얻은 직후 몇 초 안에 전액 현금화”가 보편적 표준은 아니다.
+      경쟁사들은 최소금액, 특정 지급일, 영업일 지연, 사용률 조건, 본인명의 확인 등 서로 다른 마찰 장치를 사용한다.
+    </div>
+  </section>
+
+  <section>
+    <h2>2. 방향 설정</h2>
+    <p class="lead">정책 목표를 “환급을 어렵게 만들기”가 아니라 <b>정상 사용자는 예측 가능하게 환급하고, 확정되지 않은 적립·부정적립은 지급 전에 검증할 수 있게 만드는 것</b>으로 설정한다.</p>
+
+    <div class="grid">
+      <div class="card"><strong>사용자 신뢰</strong><div class="metric">명확성</div><span class="small">언제, 얼마부터, 언제 입금되는지 명확히 고지</span></div>
+      <div class="card"><strong>운영 안정성</strong><div class="metric">D+N</div><span class="small">광고·제휴 정산 및 부정적립 검증시간 확보</span></div>
+      <div class="card"><strong>규제 대응</strong><div class="metric">원천분리</div><span class="small">적립·충전·이벤트·취소 가능 포인트를 구분</span></div>
+    </div>
+
+    <h3>권장 원칙</h3>
+    <ol>
+      <li><b>잔액(balance)</b>과 <b>환급가능잔액(withdrawable balance)</b>을 구분한다.</li>
+      <li>모든 포인트에 동일한 대기기간을 부여하지 말고 <b>적립 원천별 환급가능 시점</b>을 관리한다.</li>
+      <li>현금환급은 상품권 교환보다 강한 본인확인·지급대기 정책을 적용한다.</li>
+      <li>최소 환급액과 지급주기를 약관·FAQ·환급 화면에서 동일하게 고지한다.</li>
+      <li>부정적립 확인, 광고주 취소, 거래취소 등 객관적 사유가 있을 때만 지급보류가 가능하도록 사유를 명문화한다.</li>
+    </ol>
+
+    <div class="flow">
+      <span>포인트 적립</span><b>→</b><span>검증/확정</span><b>→</b><span>환급가능 잔액</span><b>→</b><span>환급 신청</span><b>→</b><span>지급대기</span><b>→</b><span>본인계좌 지급</span>
+    </div>
+  </section>
+
+  <section>
+    <h2>3. 제안</h2>
+    <p class="lead">초기 운영안은 머니워크처럼 강한 지연형과 모니모처럼 즉시 환급형의 중간 수준이 적절하다.</p>
+
+    <div class="callout good">
+      <b>제안안:</b> 최소 <b>10,000원</b>부터 환급 · <b>주 1회</b> 신청 · 신청 후 <b>D+3~7일</b> 지급 · <b>본인명의 계좌</b>만 허용 · 포인트 원천별 <b>withdrawable_at</b> 관리
+    </div>
+
+    <h3>3.1 환급 자격</h3>
+    <ul>
+      <li>환급가능잔액 10,000P 이상</li>
+      <li>본인인증 완료 회원</li>
+      <li>본인명의 계좌 등록 완료</li>
+      <li>회원 상태가 정상이며 부정이용 조사 상태가 아닐 것</li>
+    </ul>
+
+    <h3>3.2 지급 정책</h3>
+    <ul>
+      <li>환급 신청 즉시 신청금액을 <code>pending_withdrawal</code>로 잠금</li>
+      <li>주 1회 또는 월 N회 신청 가능</li>
+      <li>신청 후 3~7영업일 이내 지급</li>
+      <li>대기기간 중 적립취소·광고주 승인취소가 발생하면 해당 포인트를 상계하거나 해당 신청만 보류</li>
+    </ul>
+
+    <h3>3.3 포인트 원천별 권장 상태</h3>
+    <table>
+      <thead><tr><th>원천</th><th>예시</th><th>환급가능 시점 제안</th></tr></thead>
+      <tbody>
+        <tr><td>자체 활동형</td><td>걷기, 출석, 자체 미션</td><td>즉시 또는 D+1</td></tr>
+        <tr><td>광고 리워드</td><td>광고 시청, 클릭</td><td>D+1 또는 내부 로그 검증 후</td></tr>
+        <tr><td>오퍼월/CPA</td><td>가입, 구매, 설치</td><td>광고주 승인 또는 취소 가능기간 종료 후</td></tr>
+        <tr><td>이벤트</td><td>프로모션 지급</td><td>이벤트별 별도 정책</td></tr>
+        <tr><td>구매 연동</td><td>구매 리워드·캐시백</td><td>반품·취소 가능기간 고려</td></tr>
+        <tr><td>운영 지급</td><td>CS 보상, 관리자 지급</td><td>지급 목적에 따라 즉시/환급불가 속성 부여</td></tr>
+      </tbody>
+    </table>
+
+    <h3>3.4 데이터 모델 핵심</h3>
+    <div class="policy">
+      <b>사용자에게 보여주는 총 잔액과 실제 출금 가능한 금액을 반드시 분리한다.</b><br>
+      예: balance = 10,000P / withdrawableBalance = 9,990P / pendingBalance = 10P
+    </div>
+    <p>이 구조라면 9,990P를 보유한 사용자가 검증되지 않은 10P를 추가로 적립했다고 해서 즉시 10,000P 전체를 환급하는 상황을 막을 수 있다.</p>
+
+    <h3>3.5 UX 권장안</h3>
+    <ul>
+      <li>“보유 포인트 12,500P / 지금 환급 가능한 포인트 10,300P”를 별도로 표시</li>
+      <li>대기 포인트에는 “8월 15일부터 환급 가능”처럼 날짜를 직접 노출</li>
+      <li>환급 신청 후 예상 지급일을 고정적으로 표시</li>
+      <li>보류 시 ‘부정 이용 의심’ 같은 모호한 표현만 사용하지 말고 가능한 범위에서 구체적 사유와 이의제기 경로 제공</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>4. 법적 근거 및 검토 포인트</h2>
+    <p class="lead">아래는 정책 설계를 위한 법적 검토 포인트이며, 개별 서비스 구조에 대한 최종 법률의견을 대신하지 않는다.</p>
+
+    <h3>4.1 리워드 포인트도 선불전자지급수단이 될 수 있음</h3>
+    <p>
+      금융위원회는 2025년 법령해석에서, 앱 활동으로 지급된 리워드 포인트가 <b>제3자인 제휴사의 재화·용역을 구매하는 데 사용되는 경우</b>
+      전자금융거래법상 선불전자지급수단에 해당할 수 있다고 회신했다. 특히 포인트로 제휴사 쿠폰을 구매하고 운영사가 제휴처와 현금정산하는 구조도 판단 대상이 되었다.
+    </p>
+
+    <h3>4.2 현행 전자금융거래법상 정의</h3>
+    <p>
+      전자금융거래법 제2조 제14호는 선불전자지급수단을, 이전 가능한 금전적 가치가 전자적으로 저장되어 발행되고
+      <b>발행인 외 제3자의 재화 또는 용역을 구입하고 대가를 지급하는 데 사용되는 수단</b>으로 정의한다.
+      따라서 “우리 서비스 안에서만 점수처럼 사용”하는 경우와 “외부 제휴 상품·쿠폰 결제에 사용”하는 경우는 법적 성격이 달라질 수 있다.
+    </p>
+
+    <h3>4.3 선불업 등록 및 이용자 보호</h3>
+    <p>
+      금융위원회는 개정 전자금융거래법 시행(2024-09-15) 후 선불업 등록대상이 확대되었고,
+      등록 선불업자에게 선불충전금 별도관리 등 강화된 이용자 보호 규제가 적용된다고 안내했다.
+      다만 발행규모가 일정 기준 미만이거나 하나의 가맹점에서만 사용되는 경우 등 등록 제외·면제 가능성이 있어 실제 사업구조 기준 검토가 필요하다.
+    </p>
+
+    <h3>4.4 환급정책 설계 시 법무 확인이 필요한 항목</h3>
+    <ol>
+      <li>리워드 포인트가 현금으로 직접 환급되는 구조인지</li>
+      <li>포인트로 제3자 상품권·쿠폰을 구매할 수 있는지</li>
+      <li>사용처가 자사 단일 사용처인지 제휴사 다수인지</li>
+      <li>이용자가 돈을 지급해 포인트를 충전할 수 있는지</li>
+      <li>포인트의 양도·선물·이전이 가능한지</li>
+      <li>발행잔액 및 연간 발행규모가 등록/면제 기준에 해당하는지</li>
+      <li>환급 거절·보류·소멸 조항이 이용자에게 사전에 명확하게 고지되는지</li>
+    </ol>
+
+    <div class="callout warn">
+      <b>핵심:</b> 단순 광고 리워드 포인트라고 해서 자동으로 전자금융 규제 밖에 있는 것은 아니다.
+      특히 제휴사 쿠폰·상품권 교환, 다수 사용처, 충전 기능이 결합되면 선불전자지급수단 해당 여부를 먼저 검토하는 편이 안전하다.
+    </div>
+  </section>
+
+  <section class="sources">
+    <h2>참고자료</h2>
+    <p class="lead">정책은 수시로 변경될 수 있으므로 실제 도입 직전 재확인이 필요하다.</p>
+    <ol>
+      <li><b>머니워크 고객센터 – 현금인출 기능</b><br><a href="https://docs.channel.io/moneywalk/ko/articles/%ED%98%84%EA%B8%88%EC%9D%B8%EC%B6%9C-%EA%B8%B0%EB%8A%A5%EC%97%90%EC%84%9C-%EB%AC%B8%EC%A0%9C%EA%B0%80-%EB%B0%9C%EC%83%9D%ED%96%88%EC%96%B4%EC%9A%94-4e724a89">공식 고객센터</a></li>
+      <li><b>돈이돼지 공식 홈페이지 / App Store 서비스 안내</b><br><a href="https://moneypiggy.kr/">공식 홈페이지</a> · <a href="https://apps.apple.com/kr/app/id6742818389">App Store</a></li>
+      <li><b>모니머니 이용약관 제15조(환급)</b><br><a href="https://www.samsungcard.com/personal/customer-service/conditions/message/UHPPCC0418M0.jsp">삼성카드 공식 약관</a></li>
+      <li><b>OK캐쉬백 충전포인트 환급</b><br><a href="https://www.okcashbag.com/my/point/refund">OK캐쉬백 공식</a></li>
+      <li><b>H.Point 이용약관 제14조(포인트 환급)</b><br><a href="https://www.h-point.co.kr/cu/footer/terms.nhd">H.Point 공식 약관</a></li>
+      <li><b>금융위원회 법령해석 – 리워드 포인트의 선불전자지급수단 해당 여부</b><br><a href="https://better.fsc.go.kr/fsc_new/replyCase/LawreqDetail.do?lawreqIdx=5041&muGpNo=75&muNo=85&stNo=11">금융위원회</a></li>
+      <li><b>금융위원회 – 선불업 등록 처리 상황 및 소비자 유의사항</b><br><a href="https://fsc.go.kr/po010103/84178">금융위원회</a></li>
+      <li><b>전자금융거래법 제2조 제14호 등</b><br><a href="https://www.law.go.kr/LSW/lsSideInfoP.do?docCls=jo&joNo=0002">국가법령정보센터</a></li>
+    </ol>
+  </section>
+
+  <div class="footer">
+    본 문서는 2026-08-12 기준 공개정보를 바탕으로 작성한 내부 정책 검토자료입니다.
+    경쟁사의 실제 앱 화면·회원별 조건·프로모션 등에 따라 일부 정책이 달라질 수 있으며, 법적 판단은 서비스의 구체적 구조를 기준으로 별도 검토해야 합니다.
+  </div>
+</main>
+</body>
+</html>
