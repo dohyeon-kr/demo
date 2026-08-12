@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>demo</title>
+    <link rel="icon" href="data:," />
+    <style>
+      :root {
+        color-scheme: light dark;
+        --bg: #ffffff;
+        --fg: #16181d;
+        --muted: #5c6370;
+        --line: #e3e6ea;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #14161a;
+          --fg: #e8eaed;
+          --muted: #9aa3af;
+          --line: #2b2f36;
+        }
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 4rem 1.25rem;
+        background: var(--bg);
+        color: var(--fg);
+        font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR",
+          sans-serif;
+      }
+      main {
+        max-width: 42rem;
+        margin: 0 auto;
+      }
+      h1 {
+        margin: 0 0 0.5rem;
+        font-size: 2rem;
+        letter-spacing: -0.02em;
+      }
+      p {
+        color: var(--muted);
+        margin: 0 0 1.5rem;
+      }
+      code {
+        padding: 0.15em 0.4em;
+        border: 1px solid var(--line);
+        border-radius: 4px;
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 0.9em;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>demo</h1>
+      <p>GitHub Pages 정적 사이트입니다.</p>
+      <p>
+        저장소 루트의 HTML 파일을 그대로 배포합니다. <code>index.html</code>을
+        수정하고 <code>main</code>에 push 하면 됩니다.
+      </p>
+    </main>
+  </body>
+</html>
