@@ -3,142 +3,132 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="이직을 통제 가능한 행동, 층화 샘플링, 반복 실험, AI 운영, 지속 가능한 실행 조건과 자원 재배치로 설계하는 방법에 대한 생각" />
+  <meta name="description" content="이직을 통제 가능한 행동, 실험, AI 운영, 실행 조건, 자원 재배치와 전제의 빌드업으로 설계하는 생각" />
   <title>이직을 확률 게임에서 실험 시스템으로 바꾸기</title>
   <style>
-    :root {
-      --bg:#f6f7f4; --paper:#fff; --text:#1d211e; --muted:#687069; --line:#dfe4df;
-      --accent:#245c46; --accent-soft:#e9f1ed; --accent-2:#7d4a16; --warm:#f6efe5; --code:#f1f3f1; --max:780px;
-    }
-    @media (prefers-color-scheme:dark){:root{--bg:#111411;--paper:#181c18;--text:#edf1ec;--muted:#a9b1aa;--line:#303731;--accent:#8bcbae;--accent-soft:#1e3028;--accent-2:#e0ad70;--warm:#2b241b;--code:#202520}}
-    *{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR",sans-serif;line-height:1.9;letter-spacing:-.016em}
-    a{color:inherit}.wrap{width:min(calc(100% - 32px),940px);margin:0 auto}header{padding:76px 0 42px}.eyebrow{display:inline-block;margin-bottom:18px;color:var(--accent);font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
-    h1{margin:0;max-width:860px;font-size:clamp(38px,7vw,66px);line-height:1.08;letter-spacing:-.055em;font-weight:850}.lead{max-width:760px;margin:28px 0 0;color:var(--muted);font-size:clamp(18px,2.6vw,22px);line-height:1.72}.meta{margin-top:22px;color:var(--muted);font-size:14px}
-    main{margin-bottom:64px;background:var(--paper);border:1px solid var(--line);border-radius:24px;overflow:hidden}article{width:min(calc(100% - 40px),var(--max));margin:0 auto;padding:62px 0 76px}.toc{margin:0 0 54px;padding:24px 26px;background:var(--accent-soft);border-radius:16px}.toc strong{display:block;margin-bottom:8px}.toc a{color:var(--muted);text-decoration:none;margin-right:14px;font-size:14px}.toc a:hover{color:var(--accent)}
-    h2{margin:72px 0 20px;font-size:29px;line-height:1.35;letter-spacing:-.038em}h2:first-of-type{margin-top:0}h3{margin:34px 0 12px;font-size:19px;line-height:1.45;letter-spacing:-.025em}p{margin:0 0 22px}strong{font-weight:780}
-    blockquote{margin:34px 0;padding:22px 24px;background:var(--accent-soft);border-left:4px solid var(--accent);border-radius:0 14px 14px 0;font-size:19px;line-height:1.72;font-weight:680}code{padding:.12em .36em;background:var(--code);border-radius:6px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.9em}
-    .flow{margin:30px 0;display:grid;gap:10px}.flow div{padding:16px 18px;border:1px solid var(--line);border-radius:12px;background:var(--paper);font-weight:700}.flow span{color:var(--muted);font-weight:500}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:28px 0}.card{padding:20px;border:1px solid var(--line);border-radius:14px;background:var(--paper)}.card b{display:block;margin-bottom:6px;color:var(--accent)}.card p{margin:0;color:var(--muted);font-size:15px;line-height:1.65}
-    .sample{margin:30px 0;padding:24px;background:var(--warm);border-radius:16px}.sample strong{color:var(--accent-2)}.sample p:last-child{margin-bottom:0}table{width:100%;margin:30px 0;border-collapse:collapse;font-size:15px}th,td{padding:13px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}th{color:var(--muted);font-size:13px}.closing{margin-top:62px;padding:30px;background:var(--accent-soft);border-radius:18px}.closing p:last-child{margin-bottom:0}footer{padding:0 0 56px;color:var(--muted);font-size:14px}footer a{color:var(--accent);text-decoration:none}
-    @media(max-width:640px){header{padding-top:50px}main{border-radius:18px}article{width:min(calc(100% - 28px),var(--max));padding-top:42px}h2{margin-top:58px;font-size:25px}.grid{grid-template-columns:1fr}table{font-size:14px}th,td{padding:11px 8px}}
+    :root{--bg:#f6f7f4;--paper:#fff;--text:#1d211e;--muted:#687069;--line:#dfe4df;--accent:#245c46;--soft:#e9f1ed;--warm:#f6efe5;--accent2:#7d4a16;--code:#f1f3f1;--max:780px}
+    @media(prefers-color-scheme:dark){:root{--bg:#111411;--paper:#181c18;--text:#edf1ec;--muted:#a9b1aa;--line:#303731;--accent:#8bcbae;--soft:#1e3028;--warm:#2b241b;--accent2:#e0ad70;--code:#202520}}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR",sans-serif;line-height:1.9;letter-spacing:-.016em}a{color:inherit}.wrap{width:min(calc(100% - 32px),940px);margin:0 auto}header{padding:76px 0 42px}.eyebrow{display:inline-block;margin-bottom:18px;color:var(--accent);font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}h1{margin:0;max-width:880px;font-size:clamp(38px,7vw,66px);line-height:1.08;letter-spacing:-.055em;font-weight:850}.lead{max-width:780px;margin:28px 0 0;color:var(--muted);font-size:clamp(18px,2.6vw,22px);line-height:1.72}.meta{margin-top:22px;color:var(--muted);font-size:14px}main{margin-bottom:64px;background:var(--paper);border:1px solid var(--line);border-radius:24px;overflow:hidden}article{width:min(calc(100% - 40px),var(--max));margin:0 auto;padding:62px 0 76px}.toc{margin:0 0 54px;padding:24px 26px;background:var(--soft);border-radius:16px}.toc strong{display:block;margin-bottom:8px}.toc a{color:var(--muted);text-decoration:none;margin-right:14px;font-size:14px}.toc a:hover{color:var(--accent)}h2{margin:72px 0 20px;font-size:29px;line-height:1.35;letter-spacing:-.038em}h2:first-of-type{margin-top:0}h3{margin:34px 0 12px;font-size:19px;line-height:1.45}p{margin:0 0 22px}strong{font-weight:780}blockquote{margin:34px 0;padding:22px 24px;background:var(--soft);border-left:4px solid var(--accent);border-radius:0 14px 14px 0;font-size:19px;line-height:1.72;font-weight:680}code{padding:.12em .36em;background:var(--code);border-radius:6px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.9em}.flow{margin:30px 0;display:grid;gap:10px}.flow div{padding:16px 18px;border:1px solid var(--line);border-radius:12px;background:var(--paper);font-weight:700}.flow span{color:var(--muted);font-weight:500}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:28px 0}.card{padding:20px;border:1px solid var(--line);border-radius:14px;background:var(--paper)}.card b{display:block;margin-bottom:6px;color:var(--accent)}.card p{margin:0;color:var(--muted);font-size:15px;line-height:1.65}.sample{margin:30px 0;padding:24px;background:var(--warm);border-radius:16px}.sample strong{color:var(--accent2)}.sample p:last-child{margin-bottom:0}table{width:100%;margin:30px 0;border-collapse:collapse;font-size:15px}th,td{padding:13px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}th{color:var(--muted);font-size:13px}.closing{margin-top:62px;padding:30px;background:var(--soft);border-radius:18px}.closing p:last-child{margin-bottom:0}footer{padding:0 0 56px;color:var(--muted);font-size:14px}footer a{color:var(--accent);text-decoration:none}@media(max-width:640px){header{padding-top:50px}main{border-radius:18px}article{width:min(calc(100% - 28px),var(--max));padding-top:42px}h2{margin-top:58px;font-size:25px}.grid{grid-template-columns:1fr}table{font-size:14px}th,td{padding:11px 8px}}
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <header>
-      <span class="eyebrow">Career System · 2026.08.13</span>
-      <h1>이직을 확률 게임에서<br />실험 시스템으로 바꾸기</h1>
-      <p class="lead">더 높은 연봉과 안정적인 라이프스타일을 원한다면, 한 번의 합격을 바라보기보다 제한된 채용 기회를 어떻게 학습하고 배분할지 설계할 수 있다. 그리고 그 시스템이 실제 삶에서 돌아갈 조건과 자원까지 다시 배치해야 한다.</p>
-      <div class="meta">통제 가능한 목표 · 층화 샘플링 · 실험 · 최적 정지 · AI 운영 · 실행 조건 · 자원 재배치</div>
-    </header>
+<div class="wrap">
+  <header>
+    <span class="eyebrow">Career System · 2026.08.13</span>
+    <h1>이직을 확률 게임에서<br>실험 시스템으로 바꾸기</h1>
+    <p class="lead">원하는 결과로 곧바로 점프하려 하지 않는다. 그 일을 좋아하고 부딪혀보는 데서 시작해, 결과가 가능한 전제와 환경을 차근차근 쌓고, 통제 가능한 행동을 반복한다.</p>
+    <div class="meta">동경 · 접촉 · 통제 가능한 목표 · 실험 · AI 운영 · 실행 조건 · 자원 재배치 · 전제 설계</div>
+  </header>
 
-    <main>
-      <article>
-        <nav class="toc" aria-label="목차">
-          <strong>생각의 흐름</strong>
-          <a href="#control">통제 가능한 목표</a><a href="#feedback">피드백</a><a href="#pool">400개 풀</a><a href="#sampling">층화 샘플링</a><a href="#stopping">37% 법칙</a><a href="#ai">AI 운영</a><a href="#conditions">조건 만들기</a><a href="#time">시간 실험</a><a href="#journal">일기</a><a href="#pivot">피벗과 포기</a>
-        </nav>
+  <main><article>
+    <nav class="toc" aria-label="목차">
+      <strong>생각의 흐름</strong>
+      <a href="#control">통제</a><a href="#feedback">피드백</a><a href="#pool">400개 풀</a><a href="#sampling">샘플링</a><a href="#stopping">37% 법칙</a><a href="#ai">AI 운영</a><a href="#conditions">조건</a><a href="#time">시간</a><a href="#journal">일기</a><a href="#pivot">포기</a><a href="#buildup">전제</a><a href="#aspiration">제1노동</a>
+    </nav>
 
-        <section id="control">
-          <h2>1. 결과가 아니라 입력을 통제한다</h2>
-          <p>조급함은 대개 내가 통제할 수 없는 결과를 붙잡을 때 커진다. 취업에서는 특히 그렇다. <strong>합격, 오퍼, 연봉</strong>은 내가 원하는 결과지만 전부 상대의 판단을 포함한다.</p>
-          <p>그래서 목표를 바꾼다. “좋은 회사에 합격한다”가 아니라 <strong>좋은 기업 풀을 만들고, JD를 분석하고, 이력서 가설을 세우고, 일정량을 지원하고, 결과를 기록한다</strong>로 바꾼다. 결과는 목표가 아니라 다음 행동을 고치는 피드백이 된다.</p>
-          <blockquote>통제할 수 없는 결과는 계기판으로 보고, 통제할 수 있는 행동을 운전대에 둔다.</blockquote>
-          <p>영업에서 “고객 10건 유치” 대신 “잠재 고객 400건에게 메일 보내기”를 목표로 잡는 것과 같은 구조다. 400건을 실행했더니 <code>400 → 12 → 4 → 1</code>이라는 퍼널이 나왔다면, 이제 막연함 대신 숫자가 생긴다.</p>
-        </section>
+    <section id="control">
+      <h2>1. 결과가 아니라 입력을 통제한다</h2>
+      <p>조급함은 대개 통제할 수 없는 결과를 붙잡을 때 커진다. 취업에서는 합격, 오퍼, 연봉이 모두 상대의 판단을 포함한다. 내가 직접 통제할 수 있는 것은 그 결과에 이르는 입력이다.</p>
+      <p>그래서 “좋은 회사에 합격한다”를 <strong>기업 풀을 만들고, JD를 분석하고, 이력서 가설을 만들고, 일정량을 지원하고, 결과를 기록한다</strong>로 바꾼다. 결과는 목표라기보다 다음 행동을 고치는 계기판이 된다.</p>
+      <blockquote>통제할 수 없는 결과는 계기판으로 보고, 통제할 수 있는 행동을 운전대에 둔다.</blockquote>
+      <p>영업에서 “고객 10건 유치” 대신 “잠재 고객 400건에게 메일 보내기”를 목표로 잡는 것과 같다. <code>400 → 12 → 4 → 1</code>이라는 퍼널이 나오면 이제 막연함 대신 관찰 가능한 시스템이 생긴다.</p>
+    </section>
 
-        <section id="feedback">
-          <h2>2. 전환율도 직접 통제할 수는 없다</h2>
-          <p>전환율을 높이는 것 역시 결과다. 외부 변수가 너무 많다. 내가 통제할 수 있는 것은 <strong>전환에 영향을 줄 것 같은 요인을 발견하고 실험하는 것</strong>까지다.</p>
-          <p>그래서 계약한 사람, 미팅한 사람, 답장을 준 사람에게 무엇이 마음에 들었는지 묻는다. 고객의 말은 정답이 아니라 가설의 재료다. 공개 데이터와 다른 사람의 노하우도 같은 방식으로 활용한다. 내가 직접 수백 번 실패해서 알아낼 내용을 더 싼 비용으로 가져오는 것이다.</p>
-          <div class="flow"><div>공개 데이터 <span>→ 시장과 기업에 대한 값싼 사전 정보</span></div><div>타인의 노하우 <span>→ 압축된 시행착오</span></div><div>정성 피드백 <span>→ 실험할 변수 발견</span></div><div>소규모 실험 <span>→ 내 시장에서 실제로 통하는지 검증</span></div></div>
-          <p>좋은 정보의 가치는 정보량보다 <strong>내가 하지 않아도 되게 만들어주는 시행착오의 양</strong>으로 볼 수 있다.</p>
-        </section>
+    <section id="feedback">
+      <h2>2. 전환율도 직접 통제할 수는 없다</h2>
+      <p>전환율을 높이는 것 역시 결과다. 통제할 수 있는 것은 <strong>전환에 영향을 줄 것 같은 변수를 발견하고 실험하는 일</strong>까지다.</p>
+      <p>계약한 사람, 미팅한 사람, 답장을 준 사람에게 무엇이 마음에 들었는지 묻는다. 공개 데이터와 타인의 노하우도 쓴다. 그것들은 정답이 아니라 더 싼 비용으로 실험 후보를 얻는 수단이다.</p>
+      <div class="flow"><div>공개 데이터 <span>→ 시장에 대한 값싼 사전 정보</span></div><div>타인의 노하우 <span>→ 압축된 시행착오</span></div><div>정성 피드백 <span>→ 실험할 변수 발견</span></div><div>소규모 실험 <span>→ 내 상황에서 통하는지 확인</span></div></div>
+      <p>좋은 정보의 가치는 정보량보다 <strong>내가 직접 하지 않아도 되게 만드는 시행착오의 양</strong>으로 볼 수 있다.</p>
+    </section>
 
-        <section id="pool">
-          <h2>3. 이직에도 같은 구조를 적용할 수 있다</h2>
-          <p>목표는 “더 높은 연봉” 하나가 아니다. 내가 원하는 것은 <strong>연봉과 안정적인 라이프스타일의 교차점</strong>이다. 먼저 그 교차점을 만족할 가능성이 있는 기업과 JD의 풀을 만든다.</p>
-          <p>가령 400개의 JD를 확보했다고 하자. 각 JD에서 반복되는 요구를 분석하고, 내 경력 중 어떤 부분을 전면에 내세울지 몇 개의 이력서 가설을 만든다.</p>
-          <div class="grid"><div class="card"><b>기술 리더형</b><p>아키텍처, 마이그레이션, 기술 의사결정, 팀 리딩을 강조한다.</p></div><div class="card"><b>Product FE형</b><p>사용자 문제, 제품 개선, 비즈니스 성과와 지표를 강조한다.</p></div><div class="card"><b>UX Engineer형</b><p>디자인 배경, UI 구조화, 컴포넌트와 디자인 시스템 역량을 강조한다.</p></div><div class="card"><b>문제 해결형</b><p>구조 분석 → 병목 발견 → 개선이라는 일관된 문제 해결 방식을 강조한다.</p></div></div>
-          <p>중요한 것은 사실을 바꾸는 것이 아니라, <strong>같은 경력에서 어떤 증거를 앞에 배치할 것인지</strong>를 실험하는 것이다.</p>
-        </section>
+    <section id="pool">
+      <h2>3. 이직에도 같은 구조를 적용한다</h2>
+      <p>목표는 단순히 연봉 최대화가 아니다. <strong>더 높은 연봉과 안정적인 라이프스타일의 교차점</strong>을 가진 기업과 JD를 먼저 모은다.</p>
+      <p>가령 400개의 JD를 확보했다면 반복되는 요구를 분석하고, 동일한 경력에서 무엇을 전면에 둘지 몇 개의 이력서 가설을 만든다.</p>
+      <div class="grid"><div class="card"><b>기술 리더형</b><p>아키텍처, 마이그레이션, 기술 의사결정과 리딩을 강조한다.</p></div><div class="card"><b>Product FE형</b><p>사용자 문제, 제품 개선, 비즈니스 성과를 강조한다.</p></div><div class="card"><b>UX Engineer형</b><p>디자인 배경, UI 구조화, 컴포넌트와 디자인 시스템을 강조한다.</p></div><div class="card"><b>문제 해결형</b><p>구조 분석 → 병목 발견 → 개선이라는 방식을 강조한다.</p></div></div>
+      <p>사실을 바꾸는 것이 아니라 <strong>같은 사실 중 어떤 증거를 앞에 놓을지</strong>를 실험한다.</p>
+    </section>
 
-        <section id="sampling">
-          <h2>4. 채용 기회는 소모된다. 그래서 층화해서 쓴다</h2>
-          <p>채용시장은 일반적인 A/B 테스트와 다르다. 한 번 탈락한 회사는 일정 기간 다시 도전하기 어렵고, 같은 포지션은 사라질 수 있다. 즉 각 지원은 어느 정도 <strong>비가역적인 실험 자원</strong>이다.</p>
-          <p>그래서 400개를 무작위로 태우면 안 된다. 선호도와 JD 유형을 기준으로 층화한다. 초반에는 상대적으로 아쉬움이 적은 회사의 비중을 높이되, 상위 기업과 비슷한 JD를 가진 회사를 골라야 한다. 그래야 학습이 뒤쪽의 중요한 기회에도 전이된다.</p>
-          <div class="sample"><p><strong>예시: 400개 기업 풀</strong></p><p>S급 40개 · A급 80개 · B급 120개 · C급 160개</p><p>1차 실험 40개를 <code>S 2 / A 6 / B 12 / C 20</code>처럼 배분한다. 가장 중요한 기회의 대부분을 보존하면서도, 상위 시장에서도 가설이 통하는지 소량 검증한다.</p></div>
-          <p>선호도만으로 나누는 것도 부족하다. <strong>선호도 × JD 유형</strong>으로 층화해야 한다. C급 Product FE에서 잘 먹힌 이력서가 S급 Platform 조직에서도 먹힌다는 보장은 없기 때문이다.</p>
-          <h3>단계별로 지원 예산을 키운다</h3>
-          <table><thead><tr><th>라운드</th><th>지원량</th><th>목적</th></tr></thead><tbody><tr><td>1차</td><td>10% · 40개</td><td>가설을 넓게 탐색하고 기본 퍼널을 측정</td></tr><tr><td>2차</td><td>20% · 80개</td><td>성과가 좋았던 가설에 비중 확대</td></tr><tr><td>3차</td><td>30% · 120개</td><td>기업군 × 이력서 조합을 세분화하고 수렴</td></tr><tr><td>후반</td><td>남은 핵심 풀</td><td>검증된 전략을 가장 가치 높은 기회에 집중</td></tr></tbody></table>
-          <p>매 라운드가 끝날 때마다 전체 순위를 다시 계산한다. 처음에는 150등이던 회사가 실제 지원 데이터를 보니 내 강점과 훨씬 잘 맞는 것으로 드러나 70등으로 올라올 수도 있다.</p>
-        </section>
+    <section id="sampling">
+      <h2>4. 채용 기회는 소모된다. 그래서 층화해서 쓴다</h2>
+      <p>지원은 완전히 되돌릴 수 있는 실험이 아니다. 한 번 탈락한 회사는 일정 기간 다시 지원하기 어렵고, 같은 포지션은 사라질 수 있다. 그러므로 400개를 무작위로 태우기보다 <strong>선호도 × JD 유형</strong>으로 층화한다.</p>
+      <div class="sample"><p><strong>예시: 400개 기업 풀</strong></p><p>S 40 · A 80 · B 120 · C 160</p><p>1차 40개를 <code>S 2 / A 6 / B 12 / C 20</code>처럼 배분한다. 중요한 기회의 대부분을 보존하면서 상위 시장에도 가설이 전이되는지 소량 확인한다.</p></div>
+      <h3>단계별로 지원 예산을 키운다</h3>
+      <table><thead><tr><th>라운드</th><th>지원량</th><th>목적</th></tr></thead><tbody><tr><td>1차</td><td>10% · 40개</td><td>가설을 넓게 탐색</td></tr><tr><td>2차</td><td>20% · 80개</td><td>유망한 가설에 비중 확대</td></tr><tr><td>3차</td><td>30% · 120개</td><td>기업군 × 이력서 조합 수렴</td></tr><tr><td>후반</td><td>핵심 풀</td><td>검증된 전략을 중요한 기회에 집중</td></tr></tbody></table>
+      <p>매 라운드가 끝날 때마다 회사 순위와 가설의 비중을 다시 계산한다.</p>
+    </section>
 
-        <section id="stopping">
-          <h2>5. 37% 법칙은 규칙보다 태도로 차용한다</h2>
-          <p>비서 문제와 최적 정지 이론의 유명한 37% 법칙은 매력적이다. 하지만 실제 채용시장은 후보 수를 정확히 알기 어렵고, 여러 회사와 병렬로 진행할 수 있으며, 회사도 나를 선택해야 하고, 평가축도 하나가 아니다.</p>
-          <p>따라서 “앞의 37%는 무조건 버린다”로 적용하면 안 된다. 대신 <strong>초반 일정 비율을 의도적인 학습 구간으로 확보한다</strong>는 원리만 가져온다.</p>
-          <blockquote>초반 지원은 실패를 감수하는 구간이 아니라, 후반의 더 비싼 기회를 위한 시장 학습 비용이다.</blockquote>
-          <p>이 과정에서 이력서만 학습하는 것도 아니다. 실제 면접과 오퍼를 경험하면서 내가 중요하다고 생각했던 연봉·안정성 외에 상사, 개발문화, 출퇴근, 재택, 책임 범위 같은 요소의 진짜 가중치도 다시 알게 된다.</p>
-        </section>
+    <section id="stopping">
+      <h2>5. 37% 법칙은 규칙보다 태도로 차용한다</h2>
+      <p>비서 문제의 37% 법칙을 실제 이직에 그대로 적용할 수는 없다. 대신 <strong>초반 일정 비율을 의도적인 학습 구간으로 확보한다</strong>는 원리를 차용한다.</p>
+      <blockquote>초반 지원은 버리는 기회가 아니라, 후반의 더 비싼 의사결정을 위한 시장 학습 비용이다.</blockquote>
+      <p>이 과정에서는 이력서뿐 아니라 내가 실제로 원하는 직장의 조건도 학습한다. 연봉, 상사, 개발문화, 출퇴근, 재택, 책임 범위의 진짜 가중치가 경험을 통해 달라질 수 있다.</p>
+    </section>
 
-        <section id="ai">
-          <h2>6. 분석과 설계는 내가, 반복 실행은 AI가 맡는다</h2>
-          <p>이 전략에는 현실적인 약점이 있다. 구조를 설계하는 것과 수백 건의 데이터를 꾸준히 기록하는 것은 다른 능력이다. 분석과 설계에 강해도, 매번 JD를 복사하고 결과를 표에 넣고 면접 질문을 태깅하는 운영은 쉽게 지친다.</p>
-          <p>그래서 AI를 바로 이 지점에 쓴다. AI는 이직 조언자가 아니라 <strong>운영팀</strong>에 가깝다.</p>
-          <div class="grid"><div class="card"><b>수집</b><p>JD에서 회사, 역할, 요구역량, 근무형태, 핵심 키워드를 구조화한다.</p></div><div class="card"><b>기록</b><p>서류, 코테, 1차, 2차, 오퍼 상태와 면접 피드백을 누적한다.</p></div><div class="card"><b>분석</b><p>어떤 기업군 × JD × 이력서 가설 조합에서 성과가 좋은지 비교한다.</p></div><div class="card"><b>재배분</b><p>다음 라운드에서 어떤 가설과 회사군에 지원 예산을 더 줄지 제안한다.</p></div></div>
-          <p>면접이 끝난 뒤 “아키텍처 이야기는 반응이 좋았고, 인원관리 경험을 깊게 물었다. 디자인 경험에는 관심이 적었다”고 자연어로 남기기만 해도 AI가 이를 구조화된 데이터로 바꿀 수 있다.</p>
-          <p>AI는 <strong>수집 → 정리 → 비교 → 패턴 발견 → 후보 제안</strong>을 맡고, 나는 <strong>무엇을 원하는가 → 어떤 리스크를 감수할 것인가 → 어떤 회사를 선택할 것인가</strong>를 결정한다.</p>
-        </section>
+    <section id="ai">
+      <h2>6. 분석과 설계는 내가, 반복 실행은 AI가 맡는다</h2>
+      <p>구조를 설계하는 능력과 수백 건을 꾸준히 기록하는 능력은 다르다. 반복적인 운영이 약점이라면 그 부분을 의지로 고치기보다 AI에 넘긴다.</p>
+      <div class="grid"><div class="card"><b>수집</b><p>JD에서 회사, 역할, 요구역량과 조건을 구조화한다.</p></div><div class="card"><b>기록</b><p>서류, 코테, 면접, 오퍼 상태와 피드백을 누적한다.</p></div><div class="card"><b>분석</b><p>어떤 기업군 × JD × 이력서 조합이 잘 작동하는지 비교한다.</p></div><div class="card"><b>재배분</b><p>다음 라운드의 지원 비중을 제안한다.</p></div></div>
+      <p>AI는 <strong>수집 → 정리 → 비교 → 패턴 발견 → 후보 제안</strong>을 맡고, 사람은 무엇을 원하고 어떤 위험을 감수할지 결정한다.</p>
+    </section>
 
-        <section id="system">
-          <h2>7. 이직은 한 번의 시험이 아니라 학습하는 시스템이 된다</h2>
-          <div class="flow"><div>기업/JD 풀 구성 <span>→ 원하는 삶과 시장의 교차점 정의</span></div><div>층화 샘플링 <span>→ 중요한 기회를 보존하며 대표성 있는 실험</span></div><div>이력서 가설 배분 <span>→ 동일한 경력을 서로 다른 관점으로 검증</span></div><div>퍼널·면접 피드백 기록 <span>→ 탈락까지 데이터로 전환</span></div><div>AI 분석과 재배분 <span>→ 다음 라운드의 기대값을 높임</span></div><div>충분히 좋은 오퍼에서 정지 <span>→ 연봉과 삶의 조건을 함께 만족하는 선택</span></div></div>
-          <p>이렇게 보면 탈락 하나는 나의 가치에 대한 판결이 아니다. 특정 JD, 특정 회사, 특정 포지셔닝에서 나온 관측값 하나다. 중요한 것은 매 지원마다 반드시 붙는 것이 아니라, <strong>다음 지원의 기대값이 이전보다 높아지도록 시스템을 운영하는 것</strong>이다.</p>
-        </section>
+    <section id="conditions">
+      <h2>7. 프로는 결과가 아니라 결과가 나올 조건을 만든다</h2>
+      <p>창작자의 루틴을 생각하면 선명하다. 좋은 문장이나 영감은 직접 통제할 수 없지만, <strong>정해진 시간 동안 창작 상태에 머무르는 것</strong>은 통제할 수 있다.</p>
+      <blockquote>영감을 통제하는 것이 아니라, 영감이 발생할 수 있는 환경에 머무는 시간을 통제한다.</blockquote>
+      <p>이직도 같다. 합격을 강요하는 대신 JD를 보고, 지원하고, 피드백을 기록하고, 다음 가설을 만들 수 있는 조건을 반복적으로 만든다.</p>
+    </section>
 
-        <section id="conditions">
-          <h2>8. 프로는 결과가 아니라 결과가 나올 조건을 만든다</h2>
-          <p>여기서 창작의 루틴이 떠오른다. 무라카미 하루키가 프로 작가로서 일정 시간 동안 매일 글을 쓰는 루틴을 지킨다는 이야기는, 창작처럼 불확실한 활동을 통제 가능한 행동으로 바꾼 사례처럼 보인다.</p>
-          <p>“오늘 좋은 문장을 쓴다”, “좋은 영감이 떠오른다”는 통제할 수 없다. 하지만 <strong>정해진 시간 동안 창작 상태에 머무른다</strong>는 것은 통제할 수 있다. 그 시간 동안 바로 좋은 문장이 나오지 않아도 생각하고, 고치고, 소재를 뒤적이며 영감이 발생할 수 있는 표면적을 넓힌다.</p>
-          <blockquote>영감을 통제하는 것이 아니라, 영감이 발생할 수 있는 환경에 머무는 시간을 통제한다.</blockquote>
-          <p>이직도 같다. “이번 주에 합격한다”는 목표 대신 <strong>결과가 나올 수 있는 조건을 반복해서 만든다</strong>. JD를 볼 시간, 지원할 시간, 피드백을 기록할 시간, 다음 가설을 만드는 시간을 생활 안에 확보한다.</p>
-        </section>
+    <section id="time">
+      <h2>8. 그러면 먼저 시간과 환경을 테스트한다</h2>
+      <p>아무리 좋은 시스템도 생활 안에서 돌아가지 않으면 의미가 없다. 처음부터 “매일 두 시간”을 선언하기보다 <strong>어떤 시간이 실제로 남고 어떤 조건에서 집중이 가능한지</strong>부터 실험한다.</p>
+      <div class="grid"><div class="card"><b>출근 전</b><p>집중은 좋지만 수면과 준비에 영향을 주는지 본다.</p></div><div class="card"><b>점심</b><p>짧은 분류·기록 작업에 맞는지 본다.</p></div><div class="card"><b>퇴근 후</b><p>시간은 있지만 피로로 품질이 떨어지는지 본다.</p></div><div class="card"><b>주말 오전</b><p>긴 집중 작업과 생활 일정이 양립하는지 본다.</p></div></div>
+      <div class="flow"><div>시간 탐색 <span>→ 실제로 비는 슬롯</span></div><div>조건 탐색 <span>→ 집중 가능한 장소와 상태</span></div><div>최소 반복 단위 <span>→ 30분이든 45분이든 지속 가능한 크기</span></div><div>작업 투입 <span>→ JD 분석·지원·기록 배치</span></div><div>관찰과 조정 <span>→ 실패하면 의지보다 조건을 수정</span></div></div>
+    </section>
 
-        <section id="time">
-          <h2>9. 그러면 가장 먼저 테스트할 것은 시간과 환경이다</h2>
-          <p>시스템이 아무리 좋아도 내 생활 안에서 돌아가지 않으면 의미가 없다. 그래서 처음부터 “매일 두 시간 이직 준비”라고 선언하기보다, <strong>어떤 시간이 실제로 남고 어떤 조건에서 집중이 가능한지</strong>부터 실험한다.</p>
-          <div class="grid"><div class="card"><b>출근 전</b><p>머리는 맑지만 수면과 출근 준비에 영향을 주는지 본다.</p></div><div class="card"><b>점심</b><p>짧지만 꾸준히 확보 가능한지, JD 분류 같은 작은 작업에 맞는지 본다.</p></div><div class="card"><b>퇴근 후</b><p>시간은 있지만 피로 때문에 분석 품질이 떨어지는지 관찰한다.</p></div><div class="card"><b>주말 오전</b><p>긴 집중 작업에 적합한지, 가족 일정과 충돌하지 않는지 본다.</p></div></div>
-          <p>평가 대상은 단순한 여유 시간이 아니다. <strong>집중도, 피로도, 방해 빈도, 다음 날 다시 반복할 수 있는가</strong>까지 포함한다.</p>
-          <div class="flow"><div>시간 탐색 <span>→ 실제로 비는 슬롯을 찾는다</span></div><div>조건 탐색 <span>→ 집중 가능한 장소·상태를 찾는다</span></div><div>최소 반복 단위 확정 <span>→ 30분이든 45분이든 지속 가능한 크기로 정한다</span></div><div>작업 투입 <span>→ JD 분석·지원·기록을 슬롯 안에 배치한다</span></div><div>관찰과 조정 <span>→ 실패하면 의지가 아니라 조건을 먼저 수정한다</span></div></div>
-        </section>
+    <section id="journal">
+      <h2>9. 일기는 실행 조건을 읽는 센서가 된다</h2>
+      <p>일기를 또 하나의 숙제로 만들 필요는 없다. 목적은 나를 평가하는 것이 아니라 <strong>어떤 조건에서 내가 실제로 움직이는지 기록하는 것</strong>이다.</p>
+      <div class="sample"><p><strong>하루 2~3분 로그</strong></p><p><code>21:30~22:10 / 집중도 4·5 / JD 5개 분류 / 피곤했지만 방해 적음 / 다시 사용 가능</code></p></div>
+      <p>기록이 쌓이면 AI가 가장 지속 가능한 시간대, 자주 무너진 조건, 실제 처리량을 분석할 수 있다.</p>
+      <blockquote>기록의 목적은 나를 평가하는 것이 아니라, 내가 잘 움직이는 조건을 발견하는 것이다.</blockquote>
+    </section>
 
-        <section id="journal">
-          <h2>10. 일기는 감정 기록이 아니라 실행 조건을 읽는 센서가 될 수 있다</h2>
-          <p>이 과정에서 일기가 유용하다. 다만 길게 쓰는 일기를 하나의 새로운 숙제로 만들 필요는 없다. 목적은 나를 표현하는 것이 아니라 <strong>어떤 조건에서 내가 실제로 움직이는지 데이터를 남기는 것</strong>이다.</p>
-          <div class="sample"><p><strong>하루 2~3분짜리 로그</strong></p><p><code>21:30~22:10 / 집중도 4·5 / JD 5개 분류 / 피곤했지만 방해 적음 / 다시 사용 가능</code></p><p>여기에 실제로 비었던 시간, 한 일, 방해 요인, 반복 가능 여부만 남긴다.</p></div>
-          <p>일주일이나 이주일이 쌓이면 “나는 밤에 잘하는 것 같다” 같은 인상 대신 실제 패턴을 볼 수 있다. 그리고 이 기록 역시 AI에게 넘겨 <strong>가장 지속 가능했던 시간대, 자주 무너진 조건, 실제 처리량</strong>을 분석하게 할 수 있다.</p>
-          <blockquote>기록의 목적은 나를 평가하는 것이 아니라, 내가 잘 움직이는 조건을 발견하는 것이다.</blockquote>
-        </section>
+    <section id="pivot">
+      <h2>10. 피벗의 시작은 추가가 아니라 포기다</h2>
+      <p>시간, 집중력, 체력, 돈은 이미 다른 활동에 배분되어 있다. 새로운 목표를 넣으려면 기존 무언가를 밀어내야 한다. 그래서 첫 질문은 <strong>“이걸 시작하려면 지금 무엇을 포기해야 하는가?”</strong>가 된다.</p>
+      <div class="grid"><div class="card"><b>그만둘 것</b><p>가치가 낮고 반복적으로 자원을 잡아먹는 활동을 제거한다.</p></div><div class="card"><b>줄일 것</b><p>좋지만 지금 우선순위가 낮은 활동의 빈도를 낮춘다.</p></div><div class="card"><b>지킬 것</b><p>수면, 건강, 가족처럼 전체 시스템의 기반은 보호한다.</p></div><div class="card"><b>재배치할 것</b><p>AI, 자동화, 도구, 외주로 직접 해야 할 일을 줄인다.</p></div></div>
+      <blockquote>피벗은 새로운 일을 추가하는 것이 아니라, 제한된 자원을 새로운 방향으로 옮기는 일이다.</blockquote>
+    </section>
 
-        <section id="pivot">
-          <h2>11. 피벗의 시작은 추가가 아니라 포기다</h2>
-          <p>무언가 새로 하고 싶을 때 우리는 보통 “무엇을 더 할까?”부터 생각한다. 하지만 시간, 집중력, 체력, 돈은 이미 다른 활동에 배분되어 있다. 새로운 목표를 넣으려면 기존 무언가를 밀어내야 한다. 그래서 피벗의 첫 질문은 <strong>“이걸 시작하려면 지금 무엇을 포기해야 하는가?”</strong>가 된다.</p>
-          <p>여기서 포기는 실패가 아니라 자원 재배치다. 이직 준비에 주 7시간이 필요하다면 그 7시간은 공짜로 생기지 않는다. 여가 일부를 줄일 수도 있고, 의미 없이 늘어지는 시간을 제거할 수도 있고, 반복적인 일을 자동화하거나 위임할 수도 있다. 때로는 업무 방식이나 생활 구조 자체를 조정해야 할 수도 있다.</p>
-          <div class="grid"><div class="card"><b>그만둘 것</b><p>가치가 낮고 반복적으로 시간을 잡아먹는 활동은 아예 제거한다.</p></div><div class="card"><b>줄일 것</b><p>좋지만 지금의 우선순위보다 낮은 활동은 빈도나 시간을 축소한다.</p></div><div class="card"><b>지킬 것</b><p>수면, 건강, 가족처럼 무너지면 전체 시스템이 흔들리는 기반은 보호한다.</p></div><div class="card"><b>재배치할 것</b><p>AI, 자동화, 도구, 외주를 활용해 사람이 직접 해야 할 일을 줄인다.</p></div></div>
-          <p>중요한 점은 모든 포기가 “나쁜 습관 제거”로 끝나지 않는다는 것이다. 운동도 좋고, 공부도 좋고, 가족과 보내는 시간도 좋다. 좋은 것끼리 경쟁할 때는 무엇이 덜 가치 있는지를 따지기보다 <strong>지금 이 시기에 무엇을 우선순위에서 잠시 내릴지</strong> 결정해야 한다.</p>
-          <div class="flow"><div>새 목표 정의 <span>→ 무엇을 원하는지 명확히 한다</span></div><div>필요 자원 계산 <span>→ 시간·집중력·돈·체력이 얼마나 필요한지 본다</span></div><div>포기 설계 <span>→ 그만둘 것·줄일 것·지킬 것을 구분한다</span></div><div>확보된 슬롯 확인 <span>→ 실제로 새 행동이 들어갈 공간이 생겼는지 본다</span></div><div>작은 실험 <span>→ 지속 가능성을 검증하고 확대한다</span></div></div>
-          <blockquote>피벗은 새로운 일을 추가하는 것이 아니라, 제한된 자원을 새로운 방향으로 옮기는 일이다.</blockquote>
-          <p>계획이 자꾸 실행되지 않는다면 의지 부족보다 먼저 확인할 것이 있다. <strong>새 행동이 들어갈 자리를 실제로 만들었는가.</strong> 모든 것을 유지한 채 방향만 바꾸는 것은 어렵다. 좋은 피벗은 더 열심히 하는 것이 아니라, 덜 중요한 것을 의도적으로 내려놓아 중요한 것에 공간을 만드는 데서 시작한다.</p>
-        </section>
+    <section id="buildup">
+      <h2>11. 원하는 것을 얻는 일은 그곳으로 곧바로 가는 일이 아니다</h2>
+      <p>어떤 일을 하고 싶고 어떤 것을 얻고 싶을 때 우리는 결과를 하나의 목적지처럼 본다. 하지만 실제로는 목적지로 점프하는 것이 아니라 <strong>그 결과가 가능해지는 전제들을 앞에서부터 하나씩 쌓는 과정</strong>에 가깝다.</p>
+      <p>좋은 회사로 이직하고 싶다면 바로 “합격”을 만들 수는 없다. 먼저 시장을 알고, 나의 강점을 정의하고, 시간을 비우고, 반복 가능한 환경을 만들고, 충분한 시행을 하고, 피드백으로 가설을 고쳐야 한다. 결과는 이 계단의 가장 뒤에 있다.</p>
+      <div class="flow"><div>원하는 방향 발견 <span>→ 무엇을 원하는지 알아차린다</span></div><div>필요한 전제 식별 <span>→ 무엇이 갖춰져야 가능한지 분해한다</span></div><div>환경과 자원 설계 <span>→ 시간·집중력·도구·정보를 배치한다</span></div><div>통제 가능한 행동 반복 <span>→ 결과와 만날 표면적을 넓힌다</span></div><div>피드백과 수정 <span>→ 전제를 계속 갱신한다</span></div><div>결과 <span>→ 앞선 조건들이 충분히 쌓였을 때 나타난다</span></div></div>
+      <blockquote>목표를 향해 점프하는 것이 아니라, 목표가 가능한 세계를 차근차근 빌드한다.</blockquote>
+      <p>이렇게 보면 계획의 대상도 달라진다. “무엇을 해야 하지?”만 묻는 것이 아니라 <strong>“이 행동이 자연스럽게 가능하려면 그 이전에 무엇이 갖춰져 있어야 하지?”</strong>를 묻게 된다.</p>
+    </section>
 
-        <div class="closing">
-          <p><strong>결국 내가 해야 할 일은 결과를 붙잡는 것이 아니다.</strong></p>
-          <p>결과가 나올 수 있는 시장을 찾고, 그 안에서 좋은 가설을 세우고, 중요한 기회를 아껴가며 실험한다. 그리고 그 실험이 일상에서 계속 돌아갈 시간과 환경을 찾는다. 그 과정에서 무엇을 포기하고 무엇을 지킬지도 의도적으로 정한다. 분석과 설계는 내가 하고, 반복적인 축적과 관찰은 AI에게 맡긴다.</p>
-          <p><strong>성공을 통제할 수는 없지만, 성공과 마주칠 수 있는 조건과 그 조건에 투입할 자원은 설계할 수 있다.</strong></p>
-        </div>
-      </article>
-    </main>
-    <footer><a href="../">← demo 인덱스로 돌아가기</a></footer>
-  </div>
+    <section id="aspiration">
+      <h2>12. 모든 일의 제1노동은 그 일을 좋아하고, 부딪혀보는 것일 수 있다</h2>
+      <p>전제의 가장 앞에는 더 원초적인 것이 있다. <strong>그 일을 동경하고, 가까이 가보고, 직접 해보는 것</strong>이다. 아직 본격적인 계획도 성과도 없지만, 이것 자체가 첫 번째 노동이다.</p>
+      <p>동경은 행동할 에너지를 만든다. 다만 동경만으로는 부족하다. 내가 원하는 것이 그 일의 결과와 이미지인지, 아니면 실제 과정까지 감당할 수 있는지는 직접 부딪혀봐야 알 수 있다.</p>
+      <div class="grid"><div class="card"><b>동경하기</b><p>그 일을 하는 삶과 결과에 자연스럽게 관심이 가는지 본다.</p></div><div class="card"><b>가까이 가기</b><p>사례를 보고, 하는 사람의 이야기를 듣고, 실제 작업을 관찰한다.</p></div><div class="card"><b>작게 해보기</b><p>완벽한 준비 전에 아주 작은 형태로 직접 부딪혀본다.</p></div><div class="card"><b>과정을 확인하기</b><p>결과뿐 아니라 반복되는 실제 과정에도 흥미를 느낄 수 있는지 본다.</p></div></div>
+      <p>예컨대 창작자를 동경하는 것과 매일 쓰고 고치는 일을 견디는 것은 다르다. 사업가를 동경하는 것과 고객에게 묻고 팔고 거절당하는 과정은 다르다. 개발자를 동경하는 것과 긴 시간 문제를 추적하고 디버깅하는 일 역시 다르다.</p>
+      <blockquote>결과를 좋아하는지, 그 결과를 만드는 일을 좋아할 수 있는지는 부딪혀보기 전에는 모른다.</blockquote>
+      <p>반대로 작은 접촉을 반복할수록 흥미가 생길 수도 있다. 좋아함이 항상 완성된 상태로 먼저 존재하는 것도 아니다. <strong>접촉 → 이해 → 작은 성취 → 더 깊은 관심</strong>으로 만들어질 수도 있다.</p>
+      <div class="flow"><div>동경 <span>→ 방향을 발견한다</span></div><div>접촉 <span>→ 실제 세계와 만난다</span></div><div>작은 시행 <span>→ 과정에 대한 적합성을 확인한다</span></div><div>전제와 환경 설계 <span>→ 계속할 수 있는 구조를 만든다</span></div><div>반복과 학습 <span>→ 점점 그 일을 할 수 있는 사람이 된다</span></div><div>결과 <span>→ 어느 순간 목표가 가능한 상태에 도달한다</span></div></div>
+    </section>
+
+    <div class="closing">
+      <p><strong>결국 무언가를 얻는다는 것은 결과를 붙잡는 일이 아니다.</strong></p>
+      <p>먼저 그 일을 동경하고 가까이 가본다. 실제 과정에 부딪혀보며 내가 원하는 것이 무엇인지 확인한다. 그다음 필요한 전제를 찾고, 기존 자원을 재배치하고, 결과가 나올 수 있는 환경을 만든다. 그 환경 안에서 통제 가능한 행동을 반복하고 피드백으로 전제를 갱신한다.</p>
+      <p><strong>목표는 한 번에 도달하는 장소가 아니라, 그 목표가 가능한 나와 환경을 차근차근 만들어가는 과정이다.</strong></p>
+    </div>
+  </article></main>
+  <footer><a href="../">← demo 인덱스로 돌아가기</a></footer>
+</div>
 </body>
 </html>
