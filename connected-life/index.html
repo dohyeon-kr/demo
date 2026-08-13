@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="광고에서 시작해 기여, 성공, 구직, 비교, 선택과 변화까지 이어진 생각을 정리한 글" />
+  <title>연결된 삶 — 기여, 성공, 선택, 그리고 변화</title>
+  <style>
+    :root {
+      --bg: #f7f7f4;
+      --paper: #ffffff;
+      --text: #20211f;
+      --muted: #666962;
+      --line: #e3e4de;
+      --accent: #1e5f4a;
+      --accent-soft: #e8f1ed;
+      --quote: #f0f4f2;
+      --max: 760px;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #111412;
+        --paper: #171b18;
+        --text: #ecefe9;
+        --muted: #a8afa8;
+        --line: #303630;
+        --accent: #8bc9ae;
+        --accent-soft: #1e3028;
+        --quote: #1c2420;
+      }
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", sans-serif;
+      line-height: 1.9;
+      letter-spacing: -0.015em;
+    }
+    a { color: inherit; }
+    .wrap {
+      width: min(calc(100% - 32px), 920px);
+      margin: 0 auto;
+    }
+    header {
+      padding: 72px 0 40px;
+    }
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 18px;
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    h1 {
+      margin: 0;
+      max-width: 820px;
+      font-size: clamp(36px, 7vw, 64px);
+      line-height: 1.12;
+      letter-spacing: -0.055em;
+      font-weight: 800;
+    }
+    .lead {
+      max-width: 720px;
+      margin: 28px 0 0;
+      color: var(--muted);
+      font-size: clamp(18px, 2.5vw, 22px);
+      line-height: 1.75;
+    }
+    .meta {
+      margin-top: 24px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    main {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      margin-bottom: 64px;
+      overflow: hidden;
+    }
+    article {
+      width: min(calc(100% - 40px), var(--max));
+      margin: 0 auto;
+      padding: 64px 0 76px;
+    }
+    .toc {
+      margin: 0 0 56px;
+      padding: 24px 26px;
+      background: var(--accent-soft);
+      border-radius: 16px;
+    }
+    .toc strong { display: block; margin-bottom: 8px; }
+    .toc a {
+      color: var(--muted);
+      text-decoration: none;
+      margin-right: 14px;
+      font-size: 14px;
+    }
+    .toc a:hover { color: var(--accent); }
+    h2 {
+      margin: 72px 0 20px;
+      font-size: 28px;
+      line-height: 1.35;
+      letter-spacing: -0.035em;
+    }
+    h2:first-of-type { margin-top: 0; }
+    p { margin: 0 0 22px; }
+    strong { font-weight: 750; }
+    blockquote {
+      margin: 34px 0;
+      padding: 22px 24px;
+      background: var(--quote);
+      border-left: 4px solid var(--accent);
+      border-radius: 0 14px 14px 0;
+      font-size: 19px;
+      line-height: 1.75;
+      font-weight: 650;
+    }
+    .formula {
+      margin: 28px 0;
+      padding: 22px 24px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      text-align: center;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+    .divider {
+      width: 64px;
+      height: 1px;
+      background: var(--line);
+      margin: 64px 0;
+    }
+    .closing {
+      margin-top: 64px;
+      padding: 30px;
+      background: var(--accent-soft);
+      border-radius: 18px;
+    }
+    .closing p:last-child { margin-bottom: 0; }
+    footer {
+      padding: 0 0 56px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+    @media (max-width: 600px) {
+      header { padding-top: 48px; }
+      main { border-radius: 18px; }
+      article { width: min(calc(100% - 28px), var(--max)); padding-top: 42px; }
+      h2 { margin-top: 58px; font-size: 25px; }
+      blockquote { font-size: 17px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <span class="eyebrow">Essay · 2026.08.13</span>
+      <h1>연결된 삶</h1>
+      <p class="lead">광고를 바라보는 태도에서 출발해, 사회적 기여와 성공의 상대성, 구직의 본질, 비교의 함정, 그리고 계속 변하는 ‘나’에 대해 생각했다.</p>
+      <div class="meta">기여 · 연결 · 성공 · 커리어 · 선택 · 전제</div>
+    </header>
+
+    <main>
+      <article>
+        <nav class="toc" aria-label="목차">
+          <strong>생각의 흐름</strong>
+          <a href="#trade">정당한 거래</a>
+          <a href="#contribution">기여와 연결</a>
+          <a href="#success">성공의 기반</a>
+          <a href="#matching">구직과 매칭</a>
+          <a href="#comparison">비교와 삶의 패키지</a>
+          <a href="#premise">전제의 갱신</a>
+        </nav>
+
+        <section id="trade">
+          <h2>1. 광고는 공해이기 전에 거래 방식이다</h2>
+          <p>광고를 무조건 피하려는 태도를 볼 때 종종 불편함을 느낀다. 무료 서비스를 이용하면서 광고도 보기 싫고, 유료 구독도 싫고, 서비스의 품질 저하도 원하지 않는다면 결국 누군가가 대신 비용을 부담해야 한다.</p>
+          <p>내가 중요하게 보는 것은 광고 그 자체가 아니라 <strong>거래의 일관성</strong>이다. 서비스를 제공받는다면 그 대가는 돈일 수도 있고, 광고 시청일 수도 있고, 다른 방식의 참여일 수도 있다. 내가 혜택은 온전히 누리면서 부담할 몫에서는 모두 빠지려 한다면 그 비용은 결국 다른 구성원에게 이전된다.</p>
+          <p>더구나 광고주는 나와 완전히 분리된 존재가 아니다. 내가 다니는 회사가 광고주일 수도 있고, 광고주의 협력사나 서드파티일 수도 있다. 광고비는 플랫폼에서 끝나는 돈이 아니라 대행사, 제작사, 솔루션 기업, 임금과 소비로 다시 흘러간다. 나는 광고의 시청자인 동시에 그 경제의 생산자이자 수혜자일 수 있다.</p>
+          <blockquote>좋은 광고 구조란 광고주, 플랫폼, 시청자가 서로의 비용을 줄이면서 동시에 가치를 얻는 구조다.</blockquote>
+          <p>그 점에서 잘 설계된 타게팅 광고는 꽤 합리적인 해법이 될 수 있다. 관심 없는 사람 천 명에게 광고를 뿌리는 대신 필요한 사람에게 정확히 도달할 수 있다면 광고주의 비용도 줄고, 플랫폼은 운영되고, 사용자는 불필요한 주의력 소모를 줄인다.</p>
+        </section>
+
+        <section id="contribution">
+          <h2>2. 연결되어 있다면 기여할 책임이 생긴다</h2>
+          <p>이 생각의 밑바닥에는 더 큰 가치가 있다. <strong>인간은 세상에 어떤 형태로든 기여해야 한다</strong>는 생각이다.</p>
+          <p>태어난 이상 우리는 연결을 피할 수 없다. 누군가의 돌봄을 받고, 사회 인프라를 사용하고, 이전 세대가 축적한 지식과 제도를 이용한다. 완전히 독립적으로 살아가는 인간은 없다. 그렇다면 받는 것이 필연적인 만큼, 가능한 시점에는 다시 연결망으로 무언가를 돌려주는 것이 자연스럽다.</p>
+          <p>여기서 기여는 특정 시점의 생산성으로 판단할 수 없다. 사람의 삶은 길다. 아동기에는 먼저 받고, 성인이 되어 노동과 세금으로 기여할 수 있다. 질병이나 실직 시기에는 다시 도움을 받고, 이후 또 다른 방식으로 돌려줄 수 있다. 보험은 이런 시간축의 교환을 제도화한 대표적인 방식이다.</p>
+          <p>그리고 일반적인 노동 방식으로 기여하기 어려운 사람에게는 사회가 그 사람이 참여할 수 있는 경로를 설계해야 한다. 개인 역시 자신이 할 수 있는 역할을 계속 탐색할 필요가 있다. 기여의 절대량을 재는 일은 의미가 없다. 각자의 상황과 전제는 유일하기 때문이다.</p>
+          <blockquote>모두가 같은 양을 내야 하는 것이 아니다. 각자의 조건에서 가능한 만큼 연결에 참여하는 것이 중요하다.</blockquote>
+        </section>
+
+        <section id="success">
+          <h2>3. 누구도 혼자 성공하지 않는다</h2>
+          <p>그래서 나는 “나는 스스로 성공했다”는 말을 경계한다. 개인의 노력과 능력은 분명 중요하지만, 성공이 성립하려면 반드시 기반이 필요하다.</p>
+          <p>장사하는 사람에게는 고객이 있고, 의사에게는 환자가 있으며, 정치인에게는 유권자와 지지자가 있다. 개발자에게도 사용자, 동료, 오픈소스 생태계, 인프라와 시장이 있다. 성공의 규모가 커질수록 더 많은 사람의 선택과 신뢰를 연결해야 한다.</p>
+          <p>큰 성공을 장기간 유지하는 사람은 대개 이 사실을 무시하기 어렵다. 자기 혼자 잘해서 모든 것이 만들어졌다고 생각하면 고객, 직원, 협력사와의 관계를 오래 유지하기 어렵다. 결국 성공의 스케일은 타인의 기여를 얼마나 잘 연결하고, 다시 그들에게 가치를 돌려주느냐와도 관련된다.</p>
+          <div class="formula">받은 기여 → 개인의 역량으로 증폭 → 다시 타인의 기반이 됨</div>
+          <p>성공자는 순환의 종착점이 아니라 중계점에 가깝다.</p>
+
+          <h2>4. 성공은 상대적이지만 제로섬만은 아니다</h2>
+          <p>성공의 맛에는 분명 상대성이 있다. 어떤 축에서 높은 위치에 있다는 감각은 비교 대상이 있어야 성립한다. 그러나 인간의 성공은 하나의 축에만 존재하지 않는다.</p>
+          <p>누군가는 돈에서, 누군가는 전문성에서, 누군가는 좋은 부모가 되는 데서, 창작이나 자유시간, 인간관계나 사회적 영향력에서 성취를 느낀다. 사회가 하나의 순위표가 아니라 수많은 서로 다른 순위표가 겹친 구조라면 모두가 같은 게임에서 서로를 밀어낼 필요가 없다.</p>
+          <p>더 나아가 내가 성공할수록 다른 사람의 성공도 커지는 관계가 가능하다. 좋은 의사는 환자의 건강을 회복시키며 성공하고, 좋은 사업가는 고객의 문제를 해결하면서 돈을 벌고, 좋은 교사는 학생을 성장시키며 자신의 성취도 얻는다.</p>
+          <blockquote>좋은 성공은 타인을 낮춰 내 위치를 높이는 것보다, 타인의 가치까지 높이면서 내 가치도 함께 커지는 방식에 가깝다.</blockquote>
+        </section>
+
+        <section id="matching">
+          <h2>5. 구직은 순위 경쟁보다 매칭에 가깝다</h2>
+          <p>이 관점은 이직 활동을 바라보는 방식도 바꿨다. 예전에는 회사가 원하는 기준에 나를 맞추려 했다. 그러면 늘 부족한 점이 먼저 보였다. 기술 스택, 경력, 학력, 경험 같은 하나의 공통 축에서 내가 얼마나 위에 있는지를 생각하게 된다.</p>
+          <p>하지만 질문을 <strong>“내가 해결할 수 있는 문제를 가진 회사는 어디인가?”</strong>로 바꾸자 수많은 채용공고가 기회로 보이기 시작했다.</p>
+          <p>회사가 React 5년, Next.js 경험, 리더십을 적어 놓았다고 해서 진짜 문제가 그 단어들 자체인 것은 아닐 수 있다. 실제로는 개발 속도가 느리거나, 기술부채가 쌓였거나, 조직 간 의사소통이 막혀 있거나, 장애의 원인을 찾지 못하고 있을 수 있다. JD는 조직의 문제를 인재 요건으로 번역한 문서일 뿐이다.</p>
+          <div class="formula">내가 잘 푸는 문제 × 회사가 실제로 가진 문제 × 해결에 비용을 지불할 의사</div>
+          <p>이 세 가지가 겹치는 곳이 좋은 일자리다. 구직은 “누가 나를 뽑아줄까?”가 아니라 “내 능력이 가장 유효하게 쓰일 곳은 어디인가?”라는 매칭 문제가 된다.</p>
+          <p>이렇게 보면 자기계발도 달라진다. 모든 약점을 평균 이상으로 끌어올리기보다 내 장점이 어디서 가장 비싸게 쓰이는지 찾고, 그 장점을 더 강하게 만드는 쪽으로 생각하게 된다. 약점은 장점의 발현을 막는 경우에만 우선순위를 높이면 된다.</p>
+        </section>
+
+        <section id="comparison">
+          <h2>6. SNS의 단편과 내 일상을 비교할 수는 없다</h2>
+          <p>사람들이 자꾸 “나는 무엇이 부족하지?”라고 묻는 데는 이유가 있다. 사회는 명시적으로든 암묵적으로든 성공한 삶의 표본을 제공한다. 특히 SNS는 다른 사람의 가장 빛나는 단편을 끊임없이 보여준다.</p>
+          <p>하지만 그 장면들은 대개 그 사람이 가진 가장 소중하고 잘 다듬어진 순간이다. 누군가의 최고의 순간과 나의 평범한 일상을 비교하는 것은 애초에 대칭적인 비교가 아니다.</p>
+          <p>더 중요한 것은 결과에는 삶의 방식이 붙어 있다는 점이다. 부자가 되고 싶다면 부를 만들어내는 선택과 습관, 자기통제, 위험 감수, 시간 배분까지 어느 정도 받아들여야 한다. 좋은 몸, 높은 전문성, 큰 사업, 안정된 가족생활도 마찬가지다.</p>
+          <blockquote>“저것을 갖고 싶은가?”보다 “저것을 자연스럽게 만들어내는 사람이 되고 싶은가?”를 물어야 한다.</blockquote>
+          <p>사람들은 종종 타인의 결과만 원하고 그 결과를 만든 삶의 패키지는 원하지 않는다. 그러나 결과만 떼어 가져오는 것은 어렵다. 지금의 나를 완전히 유지한 채 지금의 나를 초월할 수는 없다.</p>
+          <p>그렇다고 무조건 가진 것에 만족하자는 뜻은 아니다. 더 원한다면 그에 필요한 다른 선택을 하면 된다. 다만 그 결과에 따라오는 다른 면들까지 내가 정말 원하는지를 함께 봐야 한다.</p>
+        </section>
+
+        <section id="premise">
+          <h2>7. 현재의 나는 선택의 누적이다</h2>
+          <p>이렇게 생각하면 인생을 지나치게 불안해할 이유가 줄어든다. 지금의 모습은 내가 살아오면서 취사선택한 것들이 누적된 결과일 가능성이 크다.</p>
+          <p>무언가를 얻지 못했다면 항상 실패해서 못 가진 것만은 아니다. 다른 것을 지키기 위해 선택하지 않았을 수도 있다. 돈을 덜 벌고 시간을 택했을 수 있고, 위험한 기회를 포기하고 안정성을 택했을 수도 있다.</p>
+          <p>예측하지 못했던 변수나 과거에는 알 수 없었던 정보도 있다. 하지만 과거는 바꿀 수 없다. 더 중요한 것은 <strong>당시의 지식과 전제가 같다면 다시 돌아가도 비슷한 선택을 했을 가능성이 높다</strong>는 점이다.</p>
+          <p>그래서 발전을 과거의 나를 부정하는 일로 볼 필요가 없다. 경험을 통해 전제가 바뀌고, 그 전제에 맞춰 지금의 선택을 강화하면 된다.</p>
+          <div class="formula">정보 → 전제 → 판단 → 선택 → 결과 → 새로운 정보</div>
+          <p>삶은 이 루프를 반복한다. 전제가 달라졌다면 결론이 달라지는 것이 오히려 자연스럽다.</p>
+
+          <h2>8. 그래서 ‘나’를 단정짓는 것도 위험하다</h2>
+          <p>“나는 원래 이런 사람이야”라는 말은 과거의 관측을 미래의 법칙으로 바꾸기 쉽다. 나는 영업을 못한다, 나는 위험을 싫어한다, 나는 끈기가 없다는 식의 자기규정은 특정 조건에서 반복된 행동을 정체성으로 고정한다.</p>
+          <p>더 정확한 표현은 “지금까지 이런 조건에서는 이렇게 선택해왔다”에 가깝다. 조건과 정보, 중요하게 여기는 것이 달라지면 선택도 달라질 수 있다.</p>
+          <p>정체성은 참고할 데이터이지 바꿀 수 없는 법칙은 아니다.</p>
+
+          <h2>9. 결국 가장 많이 고민해야 할 것은 ‘무엇이 중요한가’다</h2>
+          <p>삶에 하나의 정답이 없다면 모든 판단의 시작은 “지금 나에게 무엇이 중요한가?”가 된다.</p>
+          <p>가족, 자유, 안정, 돈, 성장, 건강, 기여, 관계, 성취 중 무엇의 비중이 지금 높은지 살펴야 한다. 그리고 내가 중요하다고 말하는 것과 실제로 시간과 돈을 쓰고 위험을 감수하는 대상이 같은지도 봐야 한다.</p>
+          <p>중요한 것은 영원한 답을 내리는 일이 아니다. <strong>전제가 변할 때마다 중요도의 순서를 다시 정하는 것</strong>이다.</p>
+          <div class="closing">
+            <p><strong>나는 고정된 사람이 아니다.</strong></p>
+            <p>나는 지금까지의 정보와 전제 속에서 선택해왔고, 그 선택의 누적이 현재를 만들었다. 앞으로 더 나은 삶을 산다는 것은 과거의 나를 부정하는 일이 아니라 새로운 경험으로 전제를 갱신하고, 지금 중요하다고 생각하는 것에 맞춰 다음 선택을 하는 일이다.</p>
+            <p>그리고 그 선택은 혼자 존재하지 않는다. 우리는 연결되어 있고, 누군가의 기반 위에서 살아가며, 다시 누군가의 기반이 된다. 각자의 상황에서 가능한 만큼 기여하고, 자신이 가장 잘 기여할 수 있는 자리를 찾아가는 것. 지금 내가 생각하는 좋은 삶은 그에 가깝다.</p>
+          </div>
+        </section>
+      </article>
+    </main>
+
+    <footer>
+      <a href="../">← demo 홈으로</a>
+    </footer>
+  </div>
+</body>
+</html>
