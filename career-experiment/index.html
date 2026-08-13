@@ -3,198 +3,23 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="이직을 통제 가능한 행동, 층화 샘플링, 반복 실험, 최적 정지, AI 운영으로 설계하는 방법에 대한 생각" />
+  <meta name="description" content="이직을 통제 가능한 행동, 층화 샘플링, 반복 실험, AI 운영, 지속 가능한 실행 조건으로 설계하는 방법에 대한 생각" />
   <title>이직을 확률 게임에서 실험 시스템으로 바꾸기</title>
   <style>
     :root {
-      --bg: #f6f7f4;
-      --paper: #ffffff;
-      --text: #1d211e;
-      --muted: #687069;
-      --line: #dfe4df;
-      --accent: #245c46;
-      --accent-soft: #e9f1ed;
-      --accent-2: #7d4a16;
-      --warm: #f6efe5;
-      --code: #f1f3f1;
-      --max: 780px;
+      --bg:#f6f7f4; --paper:#fff; --text:#1d211e; --muted:#687069; --line:#dfe4df;
+      --accent:#245c46; --accent-soft:#e9f1ed; --accent-2:#7d4a16; --warm:#f6efe5; --code:#f1f3f1; --max:780px;
     }
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #111411;
-        --paper: #181c18;
-        --text: #edf1ec;
-        --muted: #a9b1aa;
-        --line: #303731;
-        --accent: #8bcbae;
-        --accent-soft: #1e3028;
-        --accent-2: #e0ad70;
-        --warm: #2b241b;
-        --code: #202520;
-      }
-    }
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      background: var(--bg);
-      color: var(--text);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", sans-serif;
-      line-height: 1.9;
-      letter-spacing: -0.016em;
-    }
-    a { color: inherit; }
-    .wrap { width: min(calc(100% - 32px), 940px); margin: 0 auto; }
-    header { padding: 76px 0 42px; }
-    .eyebrow {
-      display: inline-block;
-      margin-bottom: 18px;
-      color: var(--accent);
-      font-size: 13px;
-      font-weight: 800;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-    }
-    h1 {
-      margin: 0;
-      max-width: 860px;
-      font-size: clamp(38px, 7vw, 66px);
-      line-height: 1.08;
-      letter-spacing: -.055em;
-      font-weight: 850;
-    }
-    .lead {
-      max-width: 760px;
-      margin: 28px 0 0;
-      color: var(--muted);
-      font-size: clamp(18px, 2.6vw, 22px);
-      line-height: 1.72;
-    }
-    .meta { margin-top: 22px; color: var(--muted); font-size: 14px; }
-    main {
-      margin-bottom: 64px;
-      background: var(--paper);
-      border: 1px solid var(--line);
-      border-radius: 24px;
-      overflow: hidden;
-    }
-    article {
-      width: min(calc(100% - 40px), var(--max));
-      margin: 0 auto;
-      padding: 62px 0 76px;
-    }
-    .toc {
-      margin: 0 0 54px;
-      padding: 24px 26px;
-      background: var(--accent-soft);
-      border-radius: 16px;
-    }
-    .toc strong { display: block; margin-bottom: 8px; }
-    .toc a {
-      color: var(--muted);
-      text-decoration: none;
-      margin-right: 14px;
-      font-size: 14px;
-    }
-    .toc a:hover { color: var(--accent); }
-    h2 {
-      margin: 72px 0 20px;
-      font-size: 29px;
-      line-height: 1.35;
-      letter-spacing: -.038em;
-    }
-    h2:first-of-type { margin-top: 0; }
-    h3 {
-      margin: 34px 0 12px;
-      font-size: 19px;
-      line-height: 1.45;
-      letter-spacing: -.025em;
-    }
-    p { margin: 0 0 22px; }
-    strong { font-weight: 780; }
-    blockquote {
-      margin: 34px 0;
-      padding: 22px 24px;
-      background: var(--accent-soft);
-      border-left: 4px solid var(--accent);
-      border-radius: 0 14px 14px 0;
-      font-size: 19px;
-      line-height: 1.72;
-      font-weight: 680;
-    }
-    code {
-      padding: .12em .36em;
-      background: var(--code);
-      border-radius: 6px;
-      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-      font-size: .9em;
-    }
-    .flow {
-      margin: 30px 0;
-      display: grid;
-      gap: 10px;
-    }
-    .flow div {
-      padding: 16px 18px;
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      background: var(--paper);
-      font-weight: 700;
-    }
-    .flow span { color: var(--muted); font-weight: 500; }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
-      margin: 28px 0;
-    }
-    .card {
-      padding: 20px;
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      background: var(--paper);
-    }
-    .card b { display: block; margin-bottom: 6px; color: var(--accent); }
-    .card p { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.65; }
-    .sample {
-      margin: 30px 0;
-      padding: 24px;
-      background: var(--warm);
-      border-radius: 16px;
-    }
-    .sample strong { color: var(--accent-2); }
-    .sample p:last-child { margin-bottom: 0; }
-    table {
-      width: 100%;
-      margin: 30px 0;
-      border-collapse: collapse;
-      font-size: 15px;
-    }
-    th, td {
-      padding: 13px 12px;
-      border-bottom: 1px solid var(--line);
-      text-align: left;
-      vertical-align: top;
-    }
-    th { color: var(--muted); font-size: 13px; }
-    .closing {
-      margin-top: 62px;
-      padding: 30px;
-      background: var(--accent-soft);
-      border-radius: 18px;
-    }
-    .closing p:last-child { margin-bottom: 0; }
-    footer { padding: 0 0 56px; color: var(--muted); font-size: 14px; }
-    footer a { color: var(--accent); text-decoration: none; }
-    @media (max-width: 640px) {
-      header { padding-top: 50px; }
-      main { border-radius: 18px; }
-      article { width: min(calc(100% - 28px), var(--max)); padding-top: 42px; }
-      h2 { margin-top: 58px; font-size: 25px; }
-      .grid { grid-template-columns: 1fr; }
-      table { font-size: 14px; }
-      th, td { padding: 11px 8px; }
-    }
+    @media (prefers-color-scheme:dark){:root{--bg:#111411;--paper:#181c18;--text:#edf1ec;--muted:#a9b1aa;--line:#303731;--accent:#8bcbae;--accent-soft:#1e3028;--accent-2:#e0ad70;--warm:#2b241b;--code:#202520}}
+    *{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR",sans-serif;line-height:1.9;letter-spacing:-.016em}
+    a{color:inherit}.wrap{width:min(calc(100% - 32px),940px);margin:0 auto}header{padding:76px 0 42px}.eyebrow{display:inline-block;margin-bottom:18px;color:var(--accent);font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+    h1{margin:0;max-width:860px;font-size:clamp(38px,7vw,66px);line-height:1.08;letter-spacing:-.055em;font-weight:850}.lead{max-width:760px;margin:28px 0 0;color:var(--muted);font-size:clamp(18px,2.6vw,22px);line-height:1.72}.meta{margin-top:22px;color:var(--muted);font-size:14px}
+    main{margin-bottom:64px;background:var(--paper);border:1px solid var(--line);border-radius:24px;overflow:hidden}article{width:min(calc(100% - 40px),var(--max));margin:0 auto;padding:62px 0 76px}.toc{margin:0 0 54px;padding:24px 26px;background:var(--accent-soft);border-radius:16px}.toc strong{display:block;margin-bottom:8px}.toc a{color:var(--muted);text-decoration:none;margin-right:14px;font-size:14px}.toc a:hover{color:var(--accent)}
+    h2{margin:72px 0 20px;font-size:29px;line-height:1.35;letter-spacing:-.038em}h2:first-of-type{margin-top:0}h3{margin:34px 0 12px;font-size:19px;line-height:1.45;letter-spacing:-.025em}p{margin:0 0 22px}strong{font-weight:780}
+    blockquote{margin:34px 0;padding:22px 24px;background:var(--accent-soft);border-left:4px solid var(--accent);border-radius:0 14px 14px 0;font-size:19px;line-height:1.72;font-weight:680}code{padding:.12em .36em;background:var(--code);border-radius:6px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.9em}
+    .flow{margin:30px 0;display:grid;gap:10px}.flow div{padding:16px 18px;border:1px solid var(--line);border-radius:12px;background:var(--paper);font-weight:700}.flow span{color:var(--muted);font-weight:500}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:28px 0}.card{padding:20px;border:1px solid var(--line);border-radius:14px;background:var(--paper)}.card b{display:block;margin-bottom:6px;color:var(--accent)}.card p{margin:0;color:var(--muted);font-size:15px;line-height:1.65}
+    .sample{margin:30px 0;padding:24px;background:var(--warm);border-radius:16px}.sample strong{color:var(--accent-2)}.sample p:last-child{margin-bottom:0}table{width:100%;margin:30px 0;border-collapse:collapse;font-size:15px}th,td{padding:13px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}th{color:var(--muted);font-size:13px}.closing{margin-top:62px;padding:30px;background:var(--accent-soft);border-radius:18px}.closing p:last-child{margin-bottom:0}footer{padding:0 0 56px;color:var(--muted);font-size:14px}footer a{color:var(--accent);text-decoration:none}
+    @media(max-width:640px){header{padding-top:50px}main{border-radius:18px}article{width:min(calc(100% - 28px),var(--max));padding-top:42px}h2{margin-top:58px;font-size:25px}.grid{grid-template-columns:1fr}table{font-size:14px}th,td{padding:11px 8px}}
   </style>
 </head>
 <body>
@@ -202,19 +27,15 @@
     <header>
       <span class="eyebrow">Career System · 2026.08.13</span>
       <h1>이직을 확률 게임에서<br />실험 시스템으로 바꾸기</h1>
-      <p class="lead">더 높은 연봉과 안정적인 라이프스타일을 원한다면, 한 번의 합격을 바라보기보다 제한된 채용 기회를 어떻게 학습하고 배분할지 설계할 수 있다.</p>
-      <div class="meta">통제 가능한 목표 · 층화 샘플링 · 실험 · 최적 정지 · AI 운영</div>
+      <p class="lead">더 높은 연봉과 안정적인 라이프스타일을 원한다면, 한 번의 합격을 바라보기보다 제한된 채용 기회를 어떻게 학습하고 배분할지 설계할 수 있다. 그리고 그 시스템이 실제 삶에서 돌아갈 조건까지 설계해야 한다.</p>
+      <div class="meta">통제 가능한 목표 · 층화 샘플링 · 실험 · 최적 정지 · AI 운영 · 실행 조건</div>
     </header>
 
     <main>
       <article>
         <nav class="toc" aria-label="목차">
           <strong>생각의 흐름</strong>
-          <a href="#control">통제 가능한 목표</a>
-          <a href="#pool">400개 풀</a>
-          <a href="#sampling">층화 샘플링</a>
-          <a href="#stopping">37% 법칙의 차용</a>
-          <a href="#ai">AI의 역할</a>
+          <a href="#control">통제 가능한 목표</a><a href="#feedback">피드백</a><a href="#pool">400개 풀</a><a href="#sampling">층화 샘플링</a><a href="#stopping">37% 법칙</a><a href="#ai">AI 운영</a><a href="#conditions">조건 만들기</a><a href="#time">시간 실험</a><a href="#journal">일기</a>
         </nav>
 
         <section id="control">
@@ -229,12 +50,7 @@
           <h2>2. 전환율도 직접 통제할 수는 없다</h2>
           <p>전환율을 높이는 것 역시 결과다. 외부 변수가 너무 많다. 내가 통제할 수 있는 것은 <strong>전환에 영향을 줄 것 같은 요인을 발견하고 실험하는 것</strong>까지다.</p>
           <p>그래서 계약한 사람, 미팅한 사람, 답장을 준 사람에게 무엇이 마음에 들었는지 묻는다. 고객의 말은 정답이 아니라 가설의 재료다. 공개 데이터와 다른 사람의 노하우도 같은 방식으로 활용한다. 내가 직접 수백 번 실패해서 알아낼 내용을 더 싼 비용으로 가져오는 것이다.</p>
-          <div class="flow">
-            <div>공개 데이터 <span>→ 시장과 기업에 대한 값싼 사전 정보</span></div>
-            <div>타인의 노하우 <span>→ 압축된 시행착오</span></div>
-            <div>정성 피드백 <span>→ 실험할 변수 발견</span></div>
-            <div>소규모 실험 <span>→ 내 시장에서 실제로 통하는지 검증</span></div>
-          </div>
+          <div class="flow"><div>공개 데이터 <span>→ 시장과 기업에 대한 값싼 사전 정보</span></div><div>타인의 노하우 <span>→ 압축된 시행착오</span></div><div>정성 피드백 <span>→ 실험할 변수 발견</span></div><div>소규모 실험 <span>→ 내 시장에서 실제로 통하는지 검증</span></div></div>
           <p>좋은 정보의 가치는 정보량보다 <strong>내가 하지 않아도 되게 만들어주는 시행착오의 양</strong>으로 볼 수 있다.</p>
         </section>
 
@@ -242,12 +58,7 @@
           <h2>3. 이직에도 같은 구조를 적용할 수 있다</h2>
           <p>목표는 “더 높은 연봉” 하나가 아니다. 내가 원하는 것은 <strong>연봉과 안정적인 라이프스타일의 교차점</strong>이다. 먼저 그 교차점을 만족할 가능성이 있는 기업과 JD의 풀을 만든다.</p>
           <p>가령 400개의 JD를 확보했다고 하자. 각 JD에서 반복되는 요구를 분석하고, 내 경력 중 어떤 부분을 전면에 내세울지 몇 개의 이력서 가설을 만든다.</p>
-          <div class="grid">
-            <div class="card"><b>기술 리더형</b><p>아키텍처, 마이그레이션, 기술 의사결정, 팀 리딩을 강조한다.</p></div>
-            <div class="card"><b>Product FE형</b><p>사용자 문제, 제품 개선, 비즈니스 성과와 지표를 강조한다.</p></div>
-            <div class="card"><b>UX Engineer형</b><p>디자인 배경, UI 구조화, 컴포넌트와 디자인 시스템 역량을 강조한다.</p></div>
-            <div class="card"><b>문제 해결형</b><p>구조 분석 → 병목 발견 → 개선이라는 일관된 문제 해결 방식을 강조한다.</p></div>
-          </div>
+          <div class="grid"><div class="card"><b>기술 리더형</b><p>아키텍처, 마이그레이션, 기술 의사결정, 팀 리딩을 강조한다.</p></div><div class="card"><b>Product FE형</b><p>사용자 문제, 제품 개선, 비즈니스 성과와 지표를 강조한다.</p></div><div class="card"><b>UX Engineer형</b><p>디자인 배경, UI 구조화, 컴포넌트와 디자인 시스템 역량을 강조한다.</p></div><div class="card"><b>문제 해결형</b><p>구조 분석 → 병목 발견 → 개선이라는 일관된 문제 해결 방식을 강조한다.</p></div></div>
           <p>중요한 것은 사실을 바꾸는 것이 아니라, <strong>같은 경력에서 어떤 증거를 앞에 배치할 것인지</strong>를 실험하는 것이다.</p>
         </section>
 
@@ -255,25 +66,10 @@
           <h2>4. 채용 기회는 소모된다. 그래서 층화해서 쓴다</h2>
           <p>채용시장은 일반적인 A/B 테스트와 다르다. 한 번 탈락한 회사는 일정 기간 다시 도전하기 어렵고, 같은 포지션은 사라질 수 있다. 즉 각 지원은 어느 정도 <strong>비가역적인 실험 자원</strong>이다.</p>
           <p>그래서 400개를 무작위로 태우면 안 된다. 선호도와 JD 유형을 기준으로 층화한다. 초반에는 상대적으로 아쉬움이 적은 회사의 비중을 높이되, 상위 기업과 비슷한 JD를 가진 회사를 골라야 한다. 그래야 학습이 뒤쪽의 중요한 기회에도 전이된다.</p>
-          <div class="sample">
-            <p><strong>예시: 400개 기업 풀</strong></p>
-            <p>S급 40개 · A급 80개 · B급 120개 · C급 160개</p>
-            <p>1차 실험 40개를 <code>S 2 / A 6 / B 12 / C 20</code>처럼 배분한다. 가장 중요한 기회의 대부분을 보존하면서도, 상위 시장에서도 가설이 통하는지 소량 검증한다.</p>
-          </div>
+          <div class="sample"><p><strong>예시: 400개 기업 풀</strong></p><p>S급 40개 · A급 80개 · B급 120개 · C급 160개</p><p>1차 실험 40개를 <code>S 2 / A 6 / B 12 / C 20</code>처럼 배분한다. 가장 중요한 기회의 대부분을 보존하면서도, 상위 시장에서도 가설이 통하는지 소량 검증한다.</p></div>
           <p>선호도만으로 나누는 것도 부족하다. <strong>선호도 × JD 유형</strong>으로 층화해야 한다. C급 Product FE에서 잘 먹힌 이력서가 S급 Platform 조직에서도 먹힌다는 보장은 없기 때문이다.</p>
-
           <h3>단계별로 지원 예산을 키운다</h3>
-          <table>
-            <thead>
-              <tr><th>라운드</th><th>지원량</th><th>목적</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>1차</td><td>10% · 40개</td><td>가설을 넓게 탐색하고 기본 퍼널을 측정</td></tr>
-              <tr><td>2차</td><td>20% · 80개</td><td>성과가 좋았던 가설에 비중 확대</td></tr>
-              <tr><td>3차</td><td>30% · 120개</td><td>기업군 × 이력서 조합을 세분화하고 수렴</td></tr>
-              <tr><td>후반</td><td>남은 핵심 풀</td><td>검증된 전략을 가장 가치 높은 기회에 집중</td></tr>
-            </tbody>
-          </table>
+          <table><thead><tr><th>라운드</th><th>지원량</th><th>목적</th></tr></thead><tbody><tr><td>1차</td><td>10% · 40개</td><td>가설을 넓게 탐색하고 기본 퍼널을 측정</td></tr><tr><td>2차</td><td>20% · 80개</td><td>성과가 좋았던 가설에 비중 확대</td></tr><tr><td>3차</td><td>30% · 120개</td><td>기업군 × 이력서 조합을 세분화하고 수렴</td></tr><tr><td>후반</td><td>남은 핵심 풀</td><td>검증된 전략을 가장 가치 높은 기회에 집중</td></tr></tbody></table>
           <p>매 라운드가 끝날 때마다 전체 순위를 다시 계산한다. 처음에는 150등이던 회사가 실제 지원 데이터를 보니 내 강점과 훨씬 잘 맞는 것으로 드러나 70등으로 올라올 수도 있다.</p>
         </section>
 
@@ -287,38 +83,50 @@
 
         <section id="ai">
           <h2>6. 분석과 설계는 내가, 반복 실행은 AI가 맡는다</h2>
-          <p>이 전략에는 한 가지 현실적인 약점이 있다. 구조를 설계하는 것과 수백 건의 데이터를 꾸준히 기록하는 것은 다른 능력이다. 분석과 설계에 강해도, 매번 JD를 복사하고 결과를 표에 넣고 면접 질문을 태깅하는 운영은 쉽게 지친다.</p>
+          <p>이 전략에는 현실적인 약점이 있다. 구조를 설계하는 것과 수백 건의 데이터를 꾸준히 기록하는 것은 다른 능력이다. 분석과 설계에 강해도, 매번 JD를 복사하고 결과를 표에 넣고 면접 질문을 태깅하는 운영은 쉽게 지친다.</p>
           <p>그래서 AI를 바로 이 지점에 쓴다. AI는 이직 조언자가 아니라 <strong>운영팀</strong>에 가깝다.</p>
-          <div class="grid">
-            <div class="card"><b>수집</b><p>JD에서 회사, 역할, 요구역량, 근무형태, 핵심 키워드를 구조화한다.</p></div>
-            <div class="card"><b>기록</b><p>서류, 코테, 1차, 2차, 오퍼 상태와 면접 피드백을 누적한다.</p></div>
-            <div class="card"><b>분석</b><p>어떤 기업군 × JD × 이력서 가설 조합에서 성과가 좋은지 비교한다.</p></div>
-            <div class="card"><b>재배분</b><p>다음 라운드에서 어떤 가설과 회사군에 지원 예산을 더 줄지 제안한다.</p></div>
-          </div>
+          <div class="grid"><div class="card"><b>수집</b><p>JD에서 회사, 역할, 요구역량, 근무형태, 핵심 키워드를 구조화한다.</p></div><div class="card"><b>기록</b><p>서류, 코테, 1차, 2차, 오퍼 상태와 면접 피드백을 누적한다.</p></div><div class="card"><b>분석</b><p>어떤 기업군 × JD × 이력서 가설 조합에서 성과가 좋은지 비교한다.</p></div><div class="card"><b>재배분</b><p>다음 라운드에서 어떤 가설과 회사군에 지원 예산을 더 줄지 제안한다.</p></div></div>
           <p>면접이 끝난 뒤 “아키텍처 이야기는 반응이 좋았고, 인원관리 경험을 깊게 물었다. 디자인 경험에는 관심이 적었다”고 자연어로 남기기만 해도 AI가 이를 구조화된 데이터로 바꿀 수 있다.</p>
-          <p>다만 최종 선택은 사람이 해야 한다. AI는 <strong>수집 → 정리 → 비교 → 패턴 발견 → 후보 제안</strong>을 맡고, 나는 <strong>무엇을 원하는가 → 어떤 리스크를 감수할 것인가 → 어떤 회사를 선택할 것인가</strong>를 결정한다.</p>
+          <p>AI는 <strong>수집 → 정리 → 비교 → 패턴 발견 → 후보 제안</strong>을 맡고, 나는 <strong>무엇을 원하는가 → 어떤 리스크를 감수할 것인가 → 어떤 회사를 선택할 것인가</strong>를 결정한다.</p>
         </section>
 
         <section id="system">
           <h2>7. 이직은 한 번의 시험이 아니라 학습하는 시스템이 된다</h2>
-          <div class="flow">
-            <div>기업/JD 풀 구성 <span>→ 내가 원하는 삶과 시장의 교차점 정의</span></div>
-            <div>층화 샘플링 <span>→ 중요한 기회를 보존하며 대표성 있는 실험</span></div>
-            <div>이력서 가설 배분 <span>→ 동일한 경력을 서로 다른 관점으로 검증</span></div>
-            <div>퍼널·면접 피드백 기록 <span>→ 탈락까지 데이터로 전환</span></div>
-            <div>AI 분석과 재배분 <span>→ 다음 라운드의 기대값을 높임</span></div>
-            <div>충분히 좋은 오퍼에서 정지 <span>→ 연봉과 삶의 조건을 함께 만족하는 선택</span></div>
-          </div>
+          <div class="flow"><div>기업/JD 풀 구성 <span>→ 원하는 삶과 시장의 교차점 정의</span></div><div>층화 샘플링 <span>→ 중요한 기회를 보존하며 대표성 있는 실험</span></div><div>이력서 가설 배분 <span>→ 동일한 경력을 서로 다른 관점으로 검증</span></div><div>퍼널·면접 피드백 기록 <span>→ 탈락까지 데이터로 전환</span></div><div>AI 분석과 재배분 <span>→ 다음 라운드의 기대값을 높임</span></div><div>충분히 좋은 오퍼에서 정지 <span>→ 연봉과 삶의 조건을 함께 만족하는 선택</span></div></div>
           <p>이렇게 보면 탈락 하나는 나의 가치에 대한 판결이 아니다. 특정 JD, 특정 회사, 특정 포지셔닝에서 나온 관측값 하나다. 중요한 것은 매 지원마다 반드시 붙는 것이 아니라, <strong>다음 지원의 기대값이 이전보다 높아지도록 시스템을 운영하는 것</strong>이다.</p>
+        </section>
+
+        <section id="conditions">
+          <h2>8. 프로는 결과가 아니라 결과가 나올 조건을 만든다</h2>
+          <p>여기서 창작의 루틴이 떠오른다. 무라카미 하루키가 프로 작가로서 일정 시간 동안 매일 글을 쓰는 루틴을 지킨다는 이야기는, 창작처럼 불확실한 활동을 통제 가능한 행동으로 바꾼 사례처럼 보인다.</p>
+          <p>“오늘 좋은 문장을 쓴다”, “좋은 영감이 떠오른다”는 통제할 수 없다. 하지만 <strong>정해진 시간 동안 창작 상태에 머무른다</strong>는 것은 통제할 수 있다. 그 시간 동안 바로 좋은 문장이 나오지 않아도 생각하고, 고치고, 소재를 뒤적이며 영감이 발생할 수 있는 표면적을 넓힌다.</p>
+          <blockquote>영감을 통제하는 것이 아니라, 영감이 발생할 수 있는 환경에 머무는 시간을 통제한다.</blockquote>
+          <p>이직도 같다. “이번 주에 합격한다”는 목표 대신 <strong>결과가 나올 수 있는 조건을 반복해서 만든다</strong>. JD를 볼 시간, 지원할 시간, 피드백을 기록할 시간, 다음 가설을 만드는 시간을 생활 안에 확보한다.</p>
+        </section>
+
+        <section id="time">
+          <h2>9. 그러면 가장 먼저 테스트할 것은 시간과 환경이다</h2>
+          <p>시스템이 아무리 좋아도 내 생활 안에서 돌아가지 않으면 의미가 없다. 그래서 처음부터 “매일 두 시간 이직 준비”라고 선언하기보다, <strong>어떤 시간이 실제로 남고 어떤 조건에서 집중이 가능한지</strong>부터 실험한다.</p>
+          <div class="grid"><div class="card"><b>출근 전</b><p>머리는 맑지만 수면과 출근 준비에 영향을 주는지 본다.</p></div><div class="card"><b>점심</b><p>짧지만 꾸준히 확보 가능한지, JD 분류 같은 작은 작업에 맞는지 본다.</p></div><div class="card"><b>퇴근 후</b><p>시간은 있지만 피로 때문에 분석 품질이 떨어지는지 관찰한다.</p></div><div class="card"><b>주말 오전</b><p>긴 집중 작업에 적합한지, 가족 일정과 충돌하지 않는지 본다.</p></div></div>
+          <p>평가 대상은 단순한 여유 시간이 아니다. <strong>집중도, 피로도, 방해 빈도, 다음 날 다시 반복할 수 있는가</strong>까지 포함한다.</p>
+          <div class="flow"><div>시간 탐색 <span>→ 실제로 비는 슬롯을 찾는다</span></div><div>조건 탐색 <span>→ 집중 가능한 장소·상태를 찾는다</span></div><div>최소 반복 단위 확정 <span>→ 30분이든 45분이든 지속 가능한 크기로 정한다</span></div><div>작업 투입 <span>→ JD 분석·지원·기록을 슬롯 안에 배치한다</span></div><div>관찰과 조정 <span>→ 실패하면 의지가 아니라 조건을 먼저 수정한다</span></div></div>
+        </section>
+
+        <section id="journal">
+          <h2>10. 일기는 감정 기록이 아니라 실행 조건을 읽는 센서가 될 수 있다</h2>
+          <p>이 과정에서 일기가 유용하다. 다만 길게 쓰는 일기를 하나의 새로운 숙제로 만들 필요는 없다. 목적은 나를 표현하는 것이 아니라 <strong>어떤 조건에서 내가 실제로 움직이는지 데이터를 남기는 것</strong>이다.</p>
+          <div class="sample"><p><strong>하루 2~3분짜리 로그</strong></p><p><code>21:30~22:10 / 집중도 4·5 / JD 5개 분류 / 피곤했지만 방해 적음 / 다시 사용 가능</code></p><p>여기에 실제로 비었던 시간, 한 일, 방해 요인, 반복 가능 여부만 남긴다.</p></div>
+          <p>일주일이나 이주일이 쌓이면 “나는 밤에 잘하는 것 같다” 같은 인상 대신 실제 패턴을 볼 수 있다. 그리고 이 기록 역시 AI에게 넘겨 <strong>가장 지속 가능했던 시간대, 자주 무너진 조건, 실제 처리량</strong>을 분석하게 할 수 있다.</p>
+          <blockquote>기록의 목적은 나를 평가하는 것이 아니라, 내가 잘 움직이는 조건을 발견하는 것이다.</blockquote>
         </section>
 
         <div class="closing">
           <p><strong>결국 내가 해야 할 일은 결과를 붙잡는 것이 아니다.</strong></p>
-          <p>좋은 기회가 있는 시장을 찾고, 통제 가능한 행동을 반복하고, 데이터로 배우고, 더 좋은 가설에 자원을 재배분하는 것이다. 분석과 설계는 내가 하고, 반복적인 축적은 AI에게 맡긴다. 그러면 이직은 조급한 도박이 아니라 점점 정교해지는 탐색이 된다.</p>
+          <p>결과가 나올 수 있는 시장을 찾고, 그 안에서 좋은 가설을 세우고, 중요한 기회를 아껴가며 실험한다. 그리고 그 실험이 일상에서 계속 돌아갈 시간과 환경을 찾는다. 분석과 설계는 내가 하고, 반복적인 축적과 관찰은 AI에게 맡긴다.</p>
+          <p><strong>성공을 통제할 수는 없지만, 성공과 마주칠 수 있는 조건은 설계할 수 있다.</strong></p>
         </div>
       </article>
     </main>
-
     <footer><a href="../">← demo 인덱스로 돌아가기</a></footer>
   </div>
 </body>
