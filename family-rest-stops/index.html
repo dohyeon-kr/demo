@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="목3동에서 전주 송천동까지 아이와 이동할 때 들르기 좋은 서해안·경부 고속도로 휴게소 후보군과 수유실 정보" />
+  <title>아이와 전주 가는 길 · 휴게소 후보군</title>
+  <style>
+    :root{
+      --bg:#f6f7f3;--paper:#fff;--fg:#182018;--muted:#687268;--line:#dfe5dc;
+      --green:#176b4d;--green-soft:#e9f4ee;--amber:#a15d08;--amber-soft:#fff3df;
+      --blue:#315f8c;--blue-soft:#eaf2f9;--danger:#9e3d35;--danger-soft:#fcecea;
+      --shadow:0 14px 40px rgba(23,40,29,.07);
+    }
+    @media(prefers-color-scheme:dark){:root{--bg:#101410;--paper:#181e19;--fg:#edf2ed;--muted:#a7b0a7;--line:#303a31;--green:#74d0aa;--green-soft:#173126;--amber:#ffc36f;--amber-soft:#342714;--blue:#9bc7ee;--blue-soft:#182b3d;--danger:#ff9b91;--danger-soft:#39201e;--shadow:none}}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR",sans-serif;letter-spacing:-.015em}
+    a{color:inherit}.wrap{max-width:920px;margin:auto;padding:28px 18px 72px}.hero{padding:44px 0 28px}.eyebrow{font-weight:800;color:var(--green);font-size:13px;letter-spacing:.02em}.hero h1{font-size:clamp(32px,7vw,58px);line-height:1.05;letter-spacing:-.055em;margin:10px 0 14px;max-width:760px}.hero p{font-size:17px;color:var(--muted);max-width:700px;margin:0}.route-summary{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:26px 0 34px}.route-card{background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:20px;box-shadow:var(--shadow)}.route-card h2{font-size:19px;margin:0 0 4px}.route-card .sub{color:var(--muted);font-size:13px;margin-bottom:16px}.stops{display:flex;flex-wrap:wrap;gap:7px}.stop-chip{padding:7px 10px;border-radius:999px;background:var(--green-soft);color:var(--green);font-weight:750;font-size:13px}.pick{margin-top:15px;padding-top:14px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}.pick strong{color:var(--fg)}
+    .section-title{margin:42px 0 14px}.section-title h2{font-size:25px;letter-spacing:-.035em;margin:0}.section-title p{color:var(--muted);margin:4px 0 0}.accordion{display:grid;gap:10px}details{background:var(--paper);border:1px solid var(--line);border-radius:17px;overflow:hidden;box-shadow:var(--shadow)}summary{cursor:pointer;list-style:none;padding:17px 18px;display:flex;align-items:center;gap:12px;font-weight:800}summary::-webkit-details-marker{display:none}.num{display:grid;place-items:center;width:30px;height:30px;border-radius:9px;background:var(--green-soft);color:var(--green);font-size:13px;flex:none}.name{flex:1}.direction{font-size:12px;color:var(--muted);font-weight:650}.chev{font-size:18px;color:var(--muted);transition:.2s}details[open] .chev{transform:rotate(180deg)}.detail{border-top:1px solid var(--line);padding:18px}.visual{display:grid;grid-template-columns:1.15fr .85fr;gap:12px;margin-bottom:18px}.visual iframe,.visual img,.map-only iframe{width:100%;height:220px;border:0;border-radius:13px;object-fit:cover;background:var(--bg)}.map-only{margin-bottom:18px}.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.info{padding:14px;border:1px solid var(--line);border-radius:13px}.info h3{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin:0 0 6px}.info p{margin:0}.badge{display:inline-block;padding:3px 8px;border-radius:999px;font-size:11px;font-weight:800;margin-left:6px;vertical-align:1px}.ok{background:var(--green-soft);color:var(--green)}.warn{background:var(--danger-soft);color:var(--danger)}.note{margin-top:12px;padding:12px 14px;border-radius:12px;background:var(--amber-soft);color:var(--amber);font-size:13px}.links{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}.btn{display:inline-flex;align-items:center;gap:5px;text-decoration:none;border:1px solid var(--line);padding:8px 11px;border-radius:10px;font-size:12px;font-weight:750;background:var(--paper)}.btn:hover{background:var(--bg)}.legend{margin-top:34px;padding:18px;border:1px solid var(--line);border-radius:16px;color:var(--muted);font-size:13px}.legend strong{color:var(--fg)}footer{margin-top:30px;color:var(--muted);font-size:12px;text-align:center}
+    @media(max-width:700px){.route-summary,.info-grid{grid-template-columns:1fr}.visual{grid-template-columns:1fr}.visual iframe,.visual img,.map-only iframe{height:190px}.hero{padding-top:24px}.wrap{padding-left:14px;padding-right:14px}.direction{display:none}}
+  </style>
+</head>
+<body>
+<main class="wrap">
+  <header class="hero">
+    <div class="eyebrow">목3동 → 전주 송천동 · BABY ROAD TRIP</div>
+    <h1>아이와 전주 가는 길<br>휴게소 후보군</h1>
+    <p>서해안고속도로와 경부→논산천안→호남고속도로 두 코스에서, 수유·기저귀 교환과 실내 휴식을 고려해 미리 찍어둘 휴게소 5곳씩을 정리했습니다.</p>
+  </header>
+
+  <section class="route-summary" aria-label="코스별 후보군">
+    <article class="route-card">
+      <h2>서해안고속도로</h2><div class="sub">목포방향 · 후보 5곳</div>
+      <div class="stops"><span class="stop-chip">화성</span><span class="stop-chip">행담도</span><span class="stop-chip">서산</span><span class="stop-chip">홍성</span><span class="stop-chip">군산</span></div>
+      <div class="pick"><strong>3회 정차 예시</strong> · 화성 → 서산 → 군산<br>첫 휴식을 늦추면 행담도 → 홍성 → 군산</div>
+    </article>
+    <article class="route-card">
+      <h2>경부 · 논산천안 · 호남</h2><div class="sub">부산/순천방향 · 후보 5곳</div>
+      <div class="stops"><span class="stop-chip">기흥</span><span class="stop-chip">안성</span><span class="stop-chip">망향</span><span class="stop-chip">정안알밤</span><span class="stop-chip">익산미륵사지</span></div>
+      <div class="pick"><strong>3회 정차 예시</strong> · 안성 → 정안알밤 → 익산미륵사지<br>아이가 일찍 보채면 기흥을 첫 정차로 사용</div>
+    </article>
+  </section>
+
+  <section>
+    <div class="section-title"><h2>서해안고속도로 후보</h2><p>서울에서 전주 방향, 목포방향 기준입니다.</p></div>
+    <div class="accordion">
+      <details><summary><span class="num">01</span><span class="name">화성휴게소</span><span class="direction">목포방향</span><span class="chev">⌄</span></summary><div class="detail">
+        <div class="visual"><img src="https://cdn.welfarehello.com/naver-blog/production/hsview/2023-12/223284379601/hsview_223284379601_1.jpg?f=webp&q=80&w=800" alt="화성휴게소 전경" loading="lazy"><iframe loading="lazy" title="화성휴게소 지도" src="https://www.google.com/maps?q=%ED%99%94%EC%84%B1%ED%9C%B4%EA%B2%8C%EC%86%8C%20%EB%AA%A9%ED%8F%AC%EB%B0%A9%ED%96%A5&output=embed"></iframe></div>
+        <div class="info-grid"><div class="info"><h3>수유실</h3><p>가족수유실 <span class="badge ok">아빠 이용 가능</span><br>주차장 우측 · 운영중</p></div><div class="info"><h3>아이 동반 포인트</h3><p>서울을 빠져나온 직후 첫 컨디션 체크 지점으로 쓰기 좋습니다. 짧게 쉬는 용도로 적합합니다.</p></div></div>
+        <div class="note">공공데이터 기준 2026-07-26 확인. 현장 위치 표지가 변경될 수 있어 도착 후 안내판을 함께 확인하세요.</div>
+        <div class="links"><a class="btn" href="https://mapcdn.todaysmamma.kr/static/nursing/nursing-3445.html" target="_blank" rel="noopener">수유실 정보 ↗</a><a class="btn" href="https://www.welfarehello.com/community/hometownNews/990d7a01-e1c7-4020-9f97-ac7cff4c4b8e" target="_blank" rel="noopener">휴게소 사진/소개 ↗</a></div>
+      </div></details>
+
+      <details><summary><span class="num">02</span><span class="name">행담도휴게소</span><span class="direction">서해안선</span><span class="chev">⌄</span></summary><div class="detail">
+        <div class="map-only"><iframe loading="lazy" title="행담도휴게소 지도" src="https://www.google.com/maps?q=%ED%96%89%EB%8B%B4%EB%8F%84%ED%9C%B4%EA%B2%8C%EC%86%8C&output=embed"></iframe></div>
+        <div class="info-grid"><div class="info"><h3>수유실</h3><p>가족수유실 <span class="badge ok">아빠 이용 가능</span><br>1층 푸드코트 내부</p></div><div class="info"><h3>아이 동반 포인트</h3><p>규모가 큰 편이라 식사와 수유를 한 번에 해결할 메인 휴식지 후보입니다.</p></div></div>
+        <div class="note">공공데이터 기준 2026-07-28 확인. 오래된 후기에 나온 세부 비품은 현재와 다를 수 있어 위치·수유실 유형만 확정 정보로 사용했습니다.</div>
+        <div class="links"><a class="btn" href="https://mapcdn.todaysmamma.kr/static/nursing/nursing-3557.html" target="_blank" rel="noopener">수유실 정보 ↗</a></div>
+      </div></details>
+
+      <details><summary><span class="num">03</span><span class="name">서산휴게소</span><span class="direction">목포방향</span><span class="chev">⌄</span></summary><div class="detail">
+        <div class="map-only"><iframe loading="lazy" title="서산휴게소 지도" src="https://www.google.com/maps?q=%EC%84%9C%EC%82%B0%ED%9C%B4%EA%B2%8C%EC%86%8C%20%EB%AA%A9%ED%8F%AC%EB%B0%A9%ED%96%A5&output=embed"></iframe></div>
+        <div class="info-grid"><div class="info"><h3>수유실</h3><p>가족수유실 <span class="badge ok">아빠 이용 가능</span><br>1층 식당 안 · 문의 041-688-8814</p></div><div class="info"><h3>아이 동반 포인트</h3><p>화성과 군산 사이를 균형 있게 나눠주는 지점이라 3회 정차 플랜의 가운데 휴식지로 좋습니다.</p></div></div>
+        <div class="note">공공데이터 기준 2026-07-16 확인.</div>
+        <div class="links"><a class="btn" href="https://mapcdn.todaysmamma.kr/static/nursing/nursing-3451.html" target="_blank" rel="noopener">수유실 정보 ↗</a></div>
+      </div></details>
+
+      <details><summary><span class="num">04</span><span class="name">홍성휴게소</span><span class="direction">목포방향</span><span class="chev">⌄</span></summary><div class="detail">
+        <div class="map-only"><iframe loading="lazy" title="홍성휴게소 지도" src="https://www.google.com/maps?q=%ED%99%8D%EC%84%B1%ED%9C%B4%EA%B2%8C%EC%86%8C%20%EB%AA%A9%ED%8F%AC%EB%B0%A9%ED%96%A5&output=embed"></iframe></div>
+        <div class="info-grid"><div class="info"><h3>수유실</h3><p>수유실 운영 · 식당가/매장 내부 쪽에 위치한 것으로 안내되며 기저귀 교환이 가능한 휴식 후보입니다.</p></div><div class="info"><h3>아이 동반 포인트</h3><p>행담도 이후 너무 오래 달리지 않도록 끊어주는 예비 정차 지점. 첫 휴식을 행담도에서 했다면 특히 유용합니다.</p></div></div>
+        <div class="note">한국도로공사 기반 최신 편의시설 데이터에서 수유실·쉼터가 확인됩니다. 세부 위치 표현은 출처별 차이가 있어 현장 안내판 확인을 권장합니다.</div>
+        <div class="links"><a class="btn" href="https://rest.mustarddata.com/rest-area/hongseong-mogpo/" target="_blank" rel="noopener">편의시설 정보 ↗</a></div>
+      </div></details>
+
+      <details><summary><span class="num">05</span><span class="name">군산휴게소</span><span class="direction">목포방향</span><span class="chev">⌄</span></summary><div class="detail">
+        <div class="map-only"><iframe loading="lazy" title="군산휴게소 지도" src="https://www.google.com/maps?q=%EA%B5%B0%EC%82%B0%ED%9C%B4%EA%B2%8C%EC%86%8C%20%EB%AA%A9%ED%8F%AC%EB%B0%A9%ED%96%A5&output=embed"></iframe></div>
+        <div class="info-grid"><div class="info"><h3>수유실</h3><p>가족수유실<br>1층 휴게소 식당 내</p></div><div class="info"><h3>아이 동반 포인트</h3><p>전주 진입 전 마지막 수유·기저귀 정비 지점으로 쓰기 좋습니다.</p></div></div>
+        <div class="note">수유정보알리미 최신 목록에서 군산(목포)휴게소 가족수유실이 확인됩니다.</div>
+        <div class="links"><a class="btn" href="https://sooyusil.com/home/22.htm?cityName=&pageNo=258&roomTypeCode=&zoneName=" target="_blank" rel="noopener">공공 수유실 목록 ↗</a></div>
+      </div></details>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-title"><h2>경부 · 논산천안 · 호남 후보</h2><p>경부 부산방향에서 논산천안·호남 순천방향으로 이어지는 코스입니다.</p></div>
+    <div class="accordion">
+      <details><summary><span class="num">01</span><span class="name">기흥휴게소</span><span class="direction">부산방향</span><span class="chev">⌄</span></summary><div class="detail">
+        <div class="visual"><img src="https://cdn.welfarehello.com/naver-blog/production/govlrodtnr/2023-03/223046268243/govlrodtnr_223046268243_2.jpg?f=webp&q=80&w=800" alt="기흥휴게소 전경" loading="lazy"><iframe loading="lazy" title="기흥휴게소 지도" src="https://www.google.com/maps?q=%EA%B8%B0%ED%9D%A5%ED%9C%B4%EA%B2%8C%EC%86%8C%20%EB%B6%80%EC%82%B0%EB%B0%A9%ED%96%A5&output=embed"></iframe></div>
+        <div class="info-grid"><div class="info"><h3>수유실</h3><p>가족수유실 <span class="badge ok">아빠 이용 가능</span><br>1층 왼쪽 끝 · 풍전식당 옆</p></div><div class="info"><h3>아이 동반 포인트</h3><p>서울을 빠져나온 뒤 아이가 예상보다 일찍 보챌 때 쓰는 첫 번째 안전망입니다.</p></div></div>
+        <div class="note">공공데이터 기준 2026-07-28 확인.</div>
+        <div class="links"><a class="btn" href="https://mapcdn.todaysmamma.kr/static/nursing/nursing-3482.html" target="_blank" rel="noopener">수유실 정보 ↗</a></div>
+      </div></details>
+
+      <details><summary><span class="num">02</span><span class="name">안성휴게소</span><span class="direction">부산방향</span><span class="chev">⌄</span></summary><div class="detail">
+        <div class="visual"><img src="https://ojsfile.ohmynews.com/PHT_IMG_FILE/2022/1025/IE003069475_PHT.jpg" alt="안성휴게소 부산방향 전경" loading="lazy"><iframe loading="lazy" title="안성휴게소 지도" src="https://www.google.com/maps?q=%EC%95%88%EC%84%B1%ED%9C%B4%EA%B2%8C%EC%86%8C%20%EB%B6%80%EC%82%B0%EB%B0%A9%ED%96%A5&output=embed"></iframe></div>
+        <div class="info-grid"><div class="info"><h3>수유실</h3><p>가족수유실<br>휴게소 좌측 끝 · 복권판매소 안쪽</p></div><div class="info"><h3>최근 확인된 비품</h3><p>최근 방문 후기에서 개별 수유공간, 정수기, 전자레인지, 젖병소독기, 기저귀갈이대가 확인됩니다.</p></div></div>
+        <div class="note">공공 수유실 정보는 2025-09-23 수정, 2026년 최근 방문 후기로 운영 상태와 비품을 교차 확인했습니다.</div>
+        <div class="links"><a class="btn" href="https://sooyusil.com/home/42.htm?cityName=&pageNo=42&roomNo=3511&roomTypeCode=&zoneName=" target="_blank" rel="noopener">공공 수유실 정보 ↗</a><a class="btn" href="https://www.ohmynews.com/NWS_Web/View/img_pg.aspx?CNTN_CD=IE003069475" target="_blank" rel="noopener">대표 사진 출처 ↗</a></div>
+      </div></details>
+
+      <details><summary><span class="num">03</span><span class="name">망향휴게소</span><span class="direction">부산방향</span><span class="chev">⌄</span></summary><div class="detail">
+        <div class="map-only"><iframe loading="lazy" title="망향휴게소 지도" src="https://www.google.com/maps?q=%EB%A7%9D%ED%96%A5%ED%9C%B4%EA%B2%8C%EC%86%8C%20%EB%B6%80%EC%82%B0%EB%B0%A9%ED%96%A5&output=embed"></iframe></div>
+        <div class="info-grid"><div class="info"><h3>수유실</h3><p>모유수유·착유실 <span class="badge warn">아빠 이용 제한</span><br>1층 화장실 옆</p></div><div class="info"><h3>아이 동반 포인트</h3><p>안성 이후 아이 컨디션이 갑자기 떨어질 때 사용할 예비 정차지. 가족 전체가 함께 수유실에 들어가야 한다면 우선순위를 낮추세요.</p></div></div>
+        <div class="note">공공데이터 기준 2026-07-27. 이 후보군 중 수유실 유형이 가장 다르므로 주의가 필요합니다.</div>
+        <div class="links"><a class="btn" href="https://mapcdn.todaysmamma.kr/static/nursing/nursing-2632.html" target="_blank" rel="noopener">수유실 정보 ↗</a></div>
+      </div></details>
+
+      <details><summary><span class="num">04</span><span class="name">정안알밤휴게소</span><span class="direction">순천방향</span><span class="chev">⌄</span></summary><div class="detail">
+        <div class="map-only"><iframe loading="lazy" title="정안알밤휴게소 지도" src="https://www.google.com/maps?q=%EC%A0%95%EC%95%88%EC%95%8C%EB%B0%A4%ED%9C%B4%EA%B2%8C%EC%86%8C%20%EC%88%9C%EC%B2%9C%EB%B0%A9%ED%96%A5&output=embed"></iframe></div>
+        <div class="info-grid"><div class="info"><h3>수유·아동시설</h3><p>수유실과 어린이 놀이터가 확인됩니다. 최근 후기에는 기저귀갈이대·세면대·정수기·전자레인지·젖병소독기가 안내되어 있습니다.</p></div><div class="info"><h3>아이 동반 포인트</h3><p>두 번째 코스의 메인 휴식지. 수유뿐 아니라 아이를 안고 자세를 풀어주거나 식사를 하기에도 좋은 후보입니다.</p></div></div>
+        <div class="note">충청남도 공식 지역 소개에서도 수유실·어린이 놀이터가 확인됩니다.</div>
+        <div class="links"><a class="btn" href="https://www.chungnam.go.kr/cnportal/media/article/view.do?articleNo=MD0003231777&articleSectNo2=500169&menuNo=500169" target="_blank" rel="noopener">충남 공식 소개 ↗</a></div>
+      </div></details>
+
+      <details><summary><span class="num">05</span><span class="name">익산미륵사지휴게소</span><span class="direction">순천방향</span><span class="chev">⌄</span></summary><div class="detail">
+        <div class="map-only"><iframe loading="lazy" title="익산미륵사지휴게소 지도" src="https://www.google.com/maps?q=%EC%9D%B5%EC%82%B0%EB%AF%B8%EB%A5%B5%EC%82%AC%EC%A7%80%ED%9C%B4%EA%B2%8C%EC%86%8C%20%EC%88%9C%EC%B2%9C%EB%B0%A9%ED%96%A5&output=embed"></iframe></div>
+        <div class="info-grid"><div class="info"><h3>수유실</h3><p>가족수유실 <span class="badge ok">아빠 이용 가능</span><br>CU 앞 안내센터 옆</p></div><div class="info"><h3>편의 비품</h3><p>수유실 24시간 안내와 함께 유축기, 물티슈, 젖병소독기, 기저귀갈이대 비치 정보가 확인됩니다.</p></div></div>
+        <div class="note">공공데이터의 기존 명칭은 여산휴게소(순천방향)로 남아 있을 수 있습니다. 주소는 전북 익산시 여산면 호남고속도로 191로 동일합니다.</div>
+        <div class="links"><a class="btn" href="https://mapcdn.todaysmamma.kr/static/nursing/nursing-3575.html" target="_blank" rel="noopener">수유실 정보 ↗</a><a class="btn" href="https://rest.mustarddata.com/rest-area/igsanmireugsaji-sunceon/" target="_blank" rel="noopener">편의시설 정보 ↗</a></div>
+      </div></details>
+    </div>
+  </section>
+
+  <aside class="legend"><strong>사용 팁</strong> · 3곳을 반드시 고정해두기보다는 후보 5곳을 내비에 저장한 뒤 아이 수유·수면 리듬과 정체 상황에 맞춰 하나씩 선택하는 편이 실전에서 편합니다. 시설 운영·비품은 바뀔 수 있으므로 당일 현장 안내를 최종 기준으로 보세요.</aside>
+  <footer>정보 확인: 2026-08-15 · 수유정보알리미/공공데이터 및 최근 공개 자료 기반</footer>
+</main>
+</body>
+</html>
