@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="노력만능주의에서 출발해 포기, 기회비용, 피드백 정제, 비난, 베이지안 업데이트와 현실의 불완전한 검증에 대해 정리한 글" />
+  <title>노력은 업데이트다 — 포기, 피드백, 그리고 베이지안하게 살아가기</title>
+  <style>
+    :root {
+      --bg: #f7f7f4;
+      --paper: #ffffff;
+      --text: #20211f;
+      --muted: #666962;
+      --line: #e3e4de;
+      --accent: #725f22;
+      --accent-soft: #f4f0df;
+      --quote: #f7f4ea;
+      --max: 760px;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #111412;
+        --paper: #171b18;
+        --text: #ecefe9;
+        --muted: #a8afa8;
+        --line: #303630;
+        --accent: #d4bd68;
+        --accent-soft: #292617;
+        --quote: #222015;
+      }
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", sans-serif;
+      line-height: 1.9;
+      letter-spacing: -0.015em;
+    }
+    a { color: inherit; }
+    .wrap { width: min(calc(100% - 32px), 920px); margin: 0 auto; }
+    header { padding: 72px 0 40px; }
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 18px;
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    h1 {
+      margin: 0;
+      max-width: 850px;
+      font-size: clamp(36px, 7vw, 64px);
+      line-height: 1.12;
+      letter-spacing: -0.055em;
+      font-weight: 800;
+    }
+    .lead {
+      max-width: 760px;
+      margin: 28px 0 0;
+      color: var(--muted);
+      font-size: clamp(18px, 2.5vw, 22px);
+      line-height: 1.75;
+    }
+    .meta { margin-top: 24px; color: var(--muted); font-size: 14px; }
+    main {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      margin-bottom: 64px;
+      overflow: hidden;
+    }
+    article {
+      width: min(calc(100% - 40px), var(--max));
+      margin: 0 auto;
+      padding: 64px 0 76px;
+    }
+    .toc {
+      margin: 0 0 56px;
+      padding: 24px 26px;
+      background: var(--accent-soft);
+      border-radius: 16px;
+    }
+    .toc strong { display: block; margin-bottom: 8px; }
+    .toc a {
+      color: var(--muted);
+      text-decoration: none;
+      margin-right: 14px;
+      font-size: 14px;
+    }
+    .toc a:hover { color: var(--accent); }
+    h2 {
+      margin: 72px 0 20px;
+      font-size: 28px;
+      line-height: 1.35;
+      letter-spacing: -0.035em;
+    }
+    h2:first-of-type { margin-top: 0; }
+    h3 { margin: 36px 0 14px; font-size: 20px; letter-spacing: -.025em; }
+    p { margin: 0 0 22px; }
+    strong { font-weight: 750; }
+    blockquote {
+      margin: 34px 0;
+      padding: 22px 24px;
+      background: var(--quote);
+      border-left: 4px solid var(--accent);
+      border-radius: 0 14px 14px 0;
+      font-size: 19px;
+      line-height: 1.75;
+      font-weight: 650;
+    }
+    .formula {
+      margin: 28px 0;
+      padding: 22px 24px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      text-align: center;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+    .loop {
+      margin: 28px 0;
+      padding: 22px 24px;
+      background: var(--accent-soft);
+      border-radius: 14px;
+      font-weight: 700;
+      text-align: center;
+    }
+    .note {
+      margin: 28px 0;
+      padding: 20px 22px;
+      border: 1px dashed var(--line);
+      border-radius: 14px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+    .divider { width: 64px; height: 1px; background: var(--line); margin: 64px 0; }
+    .closing { margin-top: 64px; padding: 30px; background: var(--accent-soft); border-radius: 18px; }
+    .closing p:last-child { margin-bottom: 0; }
+    footer { padding: 0 0 56px; color: var(--muted); font-size: 14px; }
+    footer a { color: var(--accent); text-decoration: none; }
+    @media (max-width: 600px) {
+      header { padding-top: 48px; }
+      main { border-radius: 18px; }
+      article { width: min(calc(100% - 28px), var(--max)); padding-top: 42px; }
+      h2 { margin-top: 58px; font-size: 25px; }
+      blockquote { font-size: 17px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <span class="eyebrow">Essay · 2026.08.18</span>
+      <h1>노력은 업데이트다</h1>
+      <p class="lead">노력만능주의를 완전히 버릴 필요는 없다. 다만 노력의 정의를 ‘끝까지 버티는 것’에서 ‘현실의 피드백을 정제하고, 믿음과 자원 배분을 계속 수정하는 것’으로 바꿀 필요가 있다.</p>
+      <div class="meta">노력 · 포기 · 기회비용 · 효용 · 피드백 · 비난 · 베이지안 업데이트</div>
+    </header>
+
+    <main>
+      <article>
+        <nav class="toc" aria-label="목차">
+          <strong>생각의 흐름</strong>
+          <a href="#effort">노력만능주의</a>
+          <a href="#quit">포기와 고집</a>
+          <a href="#economics">경제적인 노력</a>
+          <a href="#context">타인의 맥락</a>
+          <a href="#feedback">피드백 정제</a>
+          <a href="#sampling">통제되지 않는 현실</a>
+        </nav>
+
+        <section id="effort">
+          <h2>1. 노력만능주의는 틀렸지만, 버릴 필요는 없다</h2>
+          <p>“노력하면 된다”는 말은 현실을 지나치게 압축한다. 성과에는 노력뿐 아니라 방향, 환경, 자원, 시간, 운이 함께 작동한다. 같은 시간을 투입해도 출발점과 정보, 주변 조건에 따라 결과는 크게 달라진다.</p>
+          <p>그렇다고 노력의 힘을 과소평가하는 것도 위험하다. 노력만능주의가 가진 중요한 장점은 <strong>개인의 행위자성</strong>을 강조한다는 데 있다. 통제할 수 없는 조건을 인정하면서도, 내가 바꿀 수 있는 부분을 끝까지 탐색하게 만든다.</p>
+          <blockquote>노력은 결과를 보장하지 않는다. 대신 결과의 확률과 선택지를 바꾸는 가장 중요한 개인 변수 중 하나다.</blockquote>
+          <p>따라서 필요한 것은 노력만능주의의 폐기가 아니라 수정이다. “열심히 하면 반드시 성공한다”가 아니라 “좋은 방향의 노력을 계속하면 성공 가능성과 선택 가능한 경로가 늘어난다”에 가깝다.</p>
+        </section>
+
+        <section id="quit">
+          <h2>2. 어디까지가 노력이고, 어디부터가 고집인가</h2>
+          <p>900차례의 시도 끝에 운전면허를 취득한 할머니의 사례를 생각했다. 면허 취득에는 성공했지만 이후 사고로 자동차를 폐차했고, 가족의 만류로 운전을 그만두었다. 이 사례는 “포기하지 않으면 된다”는 문장을 곤란하게 만든다.</p>
+          <p>횟수 자체는 노력과 고집을 구분하지 못한다. 중요한 것은 <strong>새로운 결과가 들어왔을 때 행동과 믿음이 업데이트되고 있는가</strong>다.</p>
+          <div class="loop">실패 → 관찰 → 원인 가설 → 방법 수정 → 재검증 → 업데이트</div>
+          <p>실패할 때마다 점수가 올라가고, 약점이 줄고, 실제 수행 능력이 개선된다면 많은 반복은 합리적인 노력일 수 있다. 반대로 같은 실패가 반복되는데도 전략을 바꾸지 않는다면 반복은 점점 고집에 가까워진다.</p>
+          <p>여기에 운전처럼 타인의 안전이 걸린 문제라면 판단 기준은 더 엄격해진다. 면허를 땄다는 사실은 “시험의 통과 기준을 충족했다”는 증거지만, “지속적으로 안전하게 운전할 수 있다”는 명제와는 다르다. 실제 사고는 후자의 믿음을 다시 낮추는 새로운 데이터다.</p>
+          <blockquote>포기는 노력의 반대가 아니다. 새로운 증거를 받아들여 목표나 전략을 수정하는 것 역시 노력의 일부다.</blockquote>
+        </section>
+
+        <section id="economics">
+          <h2>3. 경제적인 노력은 포기 임계점을 계산한다</h2>
+          <p>노력을 자원 배분의 문제로 보면 포기는 더 이상 패배 선언이 아니다. 질문은 “여기까지 얼마나 했는가”가 아니라 “지금부터 한 단위의 자원을 어디에 넣는 것이 가장 가치 있는가”가 된다.</p>
+          <div class="formula">계속할 기대가치 ≈ 성공확률 × 성공의 효용 − 추가 비용 − 최선의 대안을 포기한 비용</div>
+          <p>이미 투입한 시간과 돈은 매몰비용이다. 앞으로의 의사결정에서는 지금부터의 기대가치를 비교해야 한다. 성공확률이 낮아도 성공의 효용이 매우 크고 추가비용이 작다면 계속할 수 있다. 반대로 성공 가능성이 높더라도 더 좋은 대안이 있다면 포기하는 것이 합리적일 수 있다.</p>
+          <p>여기서 비용과 효용은 돈에 한정되지 않는다. 재미, 의미, 건강, 관계, 자유시간, 자존감, 성장 가능성도 모두 효용함수의 일부다. 재미없는 고연봉 직장이 낮은 총효용을 만들 수 있고, 돈이 되지 않는 취미가 높은 총효용을 만들 수도 있다.</p>
+          <blockquote>합리적인 선택은 돈을 극대화하는 것이 아니라, 자신의 효용함수 안에서 제한된 자원을 가장 가치 있게 배분하는 것이다.</blockquote>
+        </section>
+
+        <section id="context">
+          <h2>4. 타인의 선택이 비합리적으로 보이는 이유</h2>
+          <p>누군가의 행동이 비합리적으로 보일 때, 실제로는 그 사람의 효용함수와 맥락을 우리가 모르기 때문일 수 있다. 돈보다 명예를 크게 보는 사람, 자유시간을 중요하게 보는 사람, 가족과의 시간을 최우선으로 두는 사람은 같은 상황에서도 전혀 다른 선택을 한다.</p>
+          <p>모두가 모두의 맥락을 알 수는 없다. 따라서 타인의 동기를 완전히 이해하는 것은 판단의 필수조건이 아니다. 중요한 것은 <strong>동기와 결과를 분리하는 것</strong>이다.</p>
+          <p>“왜 그런 선택을 했는지 모르겠다”와 “그 선택으로 이런 결과가 발생했다”는 전혀 다른 문장이다. 전자는 해석이고 후자는 관찰이다. 동기를 이해하지 못하더라도 결과는 결과대로 받아들일 수 있다.</p>
+          <p>동시에 결과에 대한 피드백은 솔직해야 한다. 피드백은 다음 업데이트의 데이터가 되기 때문이다. 다만 현실에서 사람들이 자신의 감정을 정교하게 재구성해 유익한 피드백으로 전달해주리라고 기대하는 것 역시 비현실적이다.</p>
+        </section>
+
+        <section id="feedback">
+          <h2>5. 비난은 설명이 아니라 이벤트다</h2>
+          <p>현실의 피드백은 깨끗한 데이터가 아니다. 칭찬에는 호의와 아부가 섞이고, 조언에는 조언자의 가치관이 섞이며, 비난에는 분노와 과장이 섞인다. 따라서 베이지안 업데이트에서 중요한 것은 피드백의 존재보다 <strong>피드백을 어떻게 정제하느냐</strong>다.</p>
+          <p>특히 비난은 원인을 설명하는 벡터라기보다 하나의 이벤트에 가깝다.</p>
+          <div class="formula">ComplaintOccurred — 어떤 변화가 임계치를 넘어 부정적인 반응이 발생했다.</div>
+          <p>“너 때문에 망했다”는 말을 들었다고 해서 곧바로 “내 모든 행동이 잘못됐다”고 업데이트할 수는 없다. 확실한 관찰은 일단 “상대에게 강한 부정적 반응이 발생했다”는 사실뿐이다.</p>
+          <p>자세한 벡터를 알고 싶다면 질문하고 탐색해야 한다. 어느 행동이 문제였는지, 결과와 과정 중 무엇이 더 중요했는지, 반복되는 패턴인지, 다른 사람에게서도 같은 반응이 나타나는지를 확인해야 한다.</p>
+          <blockquote>관찰은 단단하게, 해석은 느슨하게, 검증은 적극적으로.</blockquote>
+          <p>좋은 피드백만 기다리는 능력보다 더 현실적인 능력은 <strong>거친 피드백에서 유효한 정보를 추출하는 능력</strong>이다. 비난을 전부 무시하지도 않고, 전부 진실로 받아들이지도 않는 것. 그 둘을 동시에 가능하게 하는 것이 관찰, 가설 설정, 검증이다.</p>
+        </section>
+
+        <section id="sampling">
+          <h2>6. 문제는 현실의 실험 환경이 통제되지 않는다는 것이다</h2>
+          <p>여기서 가장 어려운 문제가 남는다. 현실에서는 가설을 깨끗하게 검증할 수 없다. A사 면접에서 세운 가설을 B사 면접에 그대로 적용해도 회사, 면접관, 직무, 질문, 경쟁자가 전부 달라진다.</p>
+          <p>즉 A사 면접 결과는 “나의 능력”만을 측정한 값이 아니라, <strong>A사의 환경 × 당시의 나</strong>가 만들어낸 하나의 표본이다. 단일 사건으로 원인을 확정하면 과적합하기 쉽다.</p>
+          <p>따라서 현실에서는 한 번의 사건을 진실로 받아들이기보다 여러 컨텍스트에서 표본을 모아야 한다. 기술 질문의 깊이, 설명의 길이, 시스템 설계, 면접관 반응, 답변 확신도 같은 특징을 기록하고 반복되는 패턴을 찾는다.</p>
+          <div class="formula">단일 사건 → 신호<br/>반복되는 사건 → 패턴<br/>서로 다른 컨텍스트를 관통하는 패턴 → 강한 증거</div>
+          <p>여기서는 단순히 표본 수만 늘리는 것보다 <strong>표본의 독립성과 다양성</strong>이 중요할 수 있다. 같은 환경에서 20번 반복한 결과보다 서로 다른 환경에서 같은 약점이 나타나는 것이 더 강한 증거가 된다.</p>
+          <p>완벽한 통제 실험이 불가능한 삶에서는 샘플링, 조건 비교, 의도적인 작은 실험을 섞어야 한다. 가설을 하나만 세우지 않고 경쟁 가설을 유지하고, 새로운 관측마다 각각의 가능성을 조금씩 조정한다.</p>
+          <div class="note">이 관점은 엄밀한 통계 모델을 삶에 그대로 적용하자는 뜻이 아니다. 핵심은 단일 사건에 과도한 의미를 부여하지 않고, 불완전한 데이터를 반복적으로 정제해 판단을 갱신하는 태도에 있다.</div>
+        </section>
+
+        <div class="divider"></div>
+
+        <section class="closing">
+          <h2>노력의 정의를 다시 쓰기</h2>
+          <p>처음에는 노력만능주의가 너무 단순하다는 이야기에서 시작했다. 하지만 이야기를 계속할수록 노력은 오히려 더 넓은 개념이 되었다.</p>
+          <p>노력은 단순한 지속이 아니다. 시도하고, 결과를 관찰하고, 피드백의 노이즈를 제거하고, 여러 가설을 세우고, 현실에서 다시 검증하고, 믿음을 수정하고, 필요하면 방향을 바꾸거나 끝내 포기하는 과정 전체다.</p>
+          <blockquote>노력은 끝까지 버티는 힘이 아니라, 현실에 맞춰 계속 업데이트할 수 있는 힘이다.</blockquote>
+          <p>이렇게 보면 포기도 노력의 실패가 아니다. 어떤 목표의 한계효용이 다른 선택지보다 낮아졌다는 충분한 증거가 쌓였을 때 자원을 옮기는 것 또한 노력의 일부다. 중요한 것은 절대 포기하지 않는 것이 아니라, <strong>무엇을 계속하고 무엇을 접어야 하는지를 더 잘 판단해가는 것</strong>이다.</p>
+        </section>
+      </article>
+    </main>
+
+    <footer>
+      <a href="../">← demo index</a>
+    </footer>
+  </div>
+</body>
+</html>
