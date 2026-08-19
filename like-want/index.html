@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Like × Want − Opportunity Cost로 소비 욕망을 살펴보는 자기판단 테스트" />
+  <title>Like × Want — 나는 정말 이걸 좋아해서 원하는 걸까?</title>
+  <style>
+    :root{
+      --bg:#f4f1ea;--paper:#fffdf8;--ink:#171714;--muted:#77736b;--line:#ddd7cc;
+      --like:#17695d;--want:#cf5d2d;--cost:#625b89;--soft-like:#dcece7;--soft-want:#f7e2d6;--soft-cost:#e9e5f3;
+      --shadow:0 18px 50px rgba(34,29,21,.07);
+    }
+    *{box-sizing:border-box} html{scroll-behavior:smooth}
+    body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Pretendard","Noto Sans KR","Segoe UI",sans-serif;letter-spacing:-.02em;line-height:1.55}
+    button,input{font:inherit} button{cursor:pointer}
+    .wrap{width:min(1040px,calc(100% - 32px));margin:0 auto}
+    .hero{padding:72px 0 44px}
+    .eyebrow{font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+    h1{font-size:clamp(38px,7vw,78px);line-height:.98;letter-spacing:-.07em;margin:14px 0 20px;max-width:900px}
+    .hero p{font-size:clamp(17px,2.3vw,22px);max-width:760px;color:#514e48;margin:0}
+    .formula{margin-top:28px;display:inline-flex;align-items:center;gap:9px;flex-wrap:wrap;font-weight:800;font-size:18px}
+    .chip{padding:7px 11px;border-radius:999px}.chip.like{background:var(--soft-like);color:var(--like)}.chip.want{background:var(--soft-want);color:var(--want)}.chip.cost{background:var(--soft-cost);color:var(--cost)}
+    .note{margin-top:12px;color:var(--muted);font-size:13px}
+    .layout{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:24px;align-items:start;padding-bottom:80px}
+    .panel{background:var(--paper);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow)}
+    .survey{padding:28px}.section+.section{margin-top:46px}.section-head{display:flex;align-items:end;justify-content:space-between;gap:16px;border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:6px}.section h2{font-size:28px;line-height:1;margin:0;letter-spacing:-.05em}.section-head p{margin:0;color:var(--muted);font-size:13px;text-align:right}.section.like h2{color:var(--like)}.section.want h2{color:var(--want)}.section.cost h2{color:var(--cost)}
+    .q{padding:24px 0;border-bottom:1px solid #ebe6dc}.q:last-child{border-bottom:0}.q-title{font-size:17px;font-weight:800;margin-bottom:14px}.choices{display:grid;gap:8px}.choice{position:relative}.choice input{position:absolute;opacity:0;pointer-events:none}.choice label{display:grid;grid-template-columns:30px 1fr;gap:10px;align-items:start;padding:12px 13px;border:1px solid var(--line);border-radius:13px;background:#fff;transition:.15s ease;color:#4f4b45}.choice label:hover{transform:translateY(-1px);border-color:#bbb3a5}.num{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:#f1eee8;font-size:12px;font-weight:800;color:#6e685f}.choice input:checked+label{border-color:var(--ink);box-shadow:0 0 0 1px var(--ink);color:var(--ink);font-weight:650}.choice input:checked+label .num{background:var(--ink);color:#fff}
+    .result{position:sticky;top:18px;padding:22px}.result-top{display:flex;justify-content:space-between;align-items:baseline}.result h2{font-size:16px;margin:0}.score{font-size:46px;line-height:1;font-weight:850;letter-spacing:-.06em}.score small{font-size:14px;color:var(--muted);letter-spacing:0}.score-label{font-size:13px;color:var(--muted);margin-top:5px}.meters{display:grid;gap:11px;margin:20px 0}.meter-row{display:grid;grid-template-columns:48px 1fr 32px;gap:8px;align-items:center;font-size:12px;font-weight:750}.track{height:7px;background:#ebe7df;border-radius:99px;overflow:hidden}.fill{height:100%;width:0;border-radius:99px;transition:width .25s ease}.fill.like{background:var(--like)}.fill.want{background:var(--want)}.fill.cost{background:var(--cost)}
+    .quad-wrap{margin-top:20px}.quad-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;font-size:12px;color:var(--muted)}.quad{position:relative;aspect-ratio:1;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#fff}.quad-grid{position:absolute;inset:0;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr}.cell{padding:10px;font-size:11px;line-height:1.25;color:#756f66}.cell:nth-child(1){background:#f6eee8}.cell:nth-child(2){background:#e8f3ef}.cell:nth-child(3){background:#f1eee9}.cell:nth-child(4){background:#edf0e7}.cell b{display:block;color:#393630;font-size:11px;margin-bottom:2px}.axis-x,.axis-y{position:absolute;background:#c9c2b7;z-index:2}.axis-x{left:0;right:0;top:50%;height:1px}.axis-y{top:0;bottom:0;left:50%;width:1px}.dot{position:absolute;width:16px;height:16px;border-radius:50%;background:var(--ink);border:3px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.24);z-index:5;transform:translate(-50%,50%);transition:left .25s ease,bottom .25s ease}.axis-label{font-size:10px;color:var(--muted);display:flex;justify-content:space-between;margin-top:5px}.interpret{margin-top:18px;padding:16px;border-radius:15px;background:#f2efe9}.interpret b{display:block;font-size:15px;margin-bottom:4px}.interpret p{margin:0;font-size:13px;color:#615c54}.incomplete{color:var(--muted)}
+    .reset{width:100%;margin-top:14px;border:1px solid var(--line);background:transparent;border-radius:12px;padding:10px;color:var(--muted)}
+    .method{margin:0 0 80px;padding:26px}.method h2{font-size:23px;margin:0 0 8px}.method p{color:var(--muted);margin:7px 0;font-size:14px}.method code{background:#eee9df;border-radius:7px;padding:2px 6px;color:var(--ink)}
+    @media(max-width:800px){.hero{padding-top:48px}.layout{grid-template-columns:1fr}.result{position:static;order:-1}.survey{padding:20px}.section-head{align-items:start;flex-direction:column}.section-head p{text-align:left}.quad{max-width:320px;margin:auto}.hero h1{font-size:48px}}
+  </style>
+</head>
+<body>
+  <header class="hero wrap">
+    <div class="eyebrow">Like without Want? Want without Like?</div>
+    <h1>나는 정말 이걸<br>좋아해서 원하는 걸까?</h1>
+    <p>갖고 싶은 마음과 실제로 좋아하는 마음을 분리해 본다. 숫자에 동의하는 대신, 지금의 나와 가장 가까운 구체적인 상태를 고른다.</p>
+    <div class="formula"><span class="chip like">Like</span><span>×</span><span class="chip want">Want</span><span>−</span><span class="chip cost">Opportunity Cost</span></div>
+    <div class="note">진단이나 과학적 심리검사가 아니라, 소비 결정을 더 선명하게 보기 위한 사고 도구입니다.</div>
+  </header>
+
+  <main class="wrap layout">
+    <div class="panel survey" id="survey"></div>
+
+    <aside class="panel result">
+      <div class="result-top"><h2>Decision Score</h2><div class="score"><span id="score">—</span><small>/100</small></div></div>
+      <div class="score-label" id="scoreLabel">응답할수록 결과가 채워집니다.</div>
+      <div class="meters">
+        <div class="meter-row"><span>LIKE</span><div class="track"><div class="fill like" id="likeFill"></div></div><span id="likeValue">—</span></div>
+        <div class="meter-row"><span>WANT</span><div class="track"><div class="fill want" id="wantFill"></div></div><span id="wantValue">—</span></div>
+        <div class="meter-row"><span>COST</span><div class="track"><div class="fill cost" id="costFill"></div></div><span id="costValue">—</span></div>
+      </div>
+      <div class="quad-wrap">
+        <div class="quad-title"><span>Like × Want 사사분면</span><span id="quadCoords">—</span></div>
+        <div class="quad">
+          <div class="quad-grid">
+            <div class="cell"><b>Like 없는 Want</b>강하게 원하지만 실제 선호는 낮음</div>
+            <div class="cell"><b>좋아하고 원함</b>구매 동기가 가장 단단한 영역</div>
+            <div class="cell"><b>살 이유가 적음</b>선호와 욕망 모두 낮음</div>
+            <div class="cell"><b>좋아하지만 지금은 아님</b>선호는 높지만 구매 욕망은 낮음</div>
+          </div>
+          <div class="axis-x"></div><div class="axis-y"></div><div class="dot" id="dot" style="display:none"></div>
+        </div>
+        <div class="axis-label"><span>← Like 낮음</span><span>Like 높음 →</span></div>
+      </div>
+      <div class="interpret incomplete" id="interpret"><b>아직 판단 중</b><p>Like와 Want 문항을 채우면 현재 위치가 사사분면에 나타납니다.</p></div>
+      <button class="reset" type="button" id="reset">응답 초기화</button>
+    </aside>
+  </main>
+
+  <section class="wrap panel method">
+    <h2>어떻게 계산하나</h2>
+    <p>Like와 Want는 각각 5문항의 평균으로 1–5점을 만든다. 기회비용은 3문항 평균이며, 소비 욕망 자체보다 비중을 낮춰 감점항으로 둔다.</p>
+    <p><code>Decision Score = (Like / 5 × Want / 5 × 100) − (Cost / 5 × 25)</code></p>
+    <p>사사분면은 Like와 Want의 평균 3점을 경계로 나눈다. 점수보다 중요한 것은 어느 축이 왜 높고 낮은지 보는 것이다.</p>
+  </section>
+
+<script>
+const sections = [
+  {key:'like', title:'LIKE', desc:'대상 자체와 사용 경험을 실제로 좋아하는가?', questions:[
+    ['타인의 인정 없이도 좋은가?',['남들이 알아봐야 갖는 의미가 크다','남들이 알아봐주는 것이 꽤 중요하다','타인의 시선과 내 만족이 비슷하게 중요하다','아무도 몰라도 충분히 좋다','철저히 나만 알고 써도 전혀 아쉽지 않다']],
+    ['소유의 설렘이 사라진 뒤에도 좋은가?',['사고 개봉하는 순간이 가장 기대된다','초반의 새것 같은 느낌이 중요한 편이다','구매의 설렘과 실제 사용 모두 비슷하다','새것이라는 느낌이 사라져도 계속 잘 쓸 것 같다','이미 오래 가지고 있었다고 해도 지금 다시 선택할 것 같다']],
+    ['실제 생활에서 얼마나 쓰고 싶은가?',['막상 사면 거의 쓰지 않을 것 같다','특정 상황에서 가끔 사용할 것 같다','있으면 제법 활용할 것 같다','일상에서 상당히 자주 사용할 것 같다','지금도 없어서 반복적으로 불편함을 느끼는 기능이다']],
+    ['비슷한 경험을 실제로 좋아해왔는가?',['이런 종류의 경험을 과거에는 별로 좋아하지 않았다','관심은 있었지만 실제로는 잘 사용하지 않았다','좋아했는지 싫어했는지 애매하다','비슷한 경험을 이전에도 꽤 즐겼다','과거 행동을 봐도 내가 확실히 좋아하는 종류의 경험이다']],
+    ['제품을 가질 수 없어도 그 경험을 원하는가?',['내 것이 아니라면 별로 관심 없다','소유하는 것 자체가 상당히 중요하다','소유와 경험 모두 중요하다','빌려 쓰는 것이어도 경험할 수 있다면 좋다','평생 내 것이 될 수 없어도 계속 사용할 수 있다면 만족한다']]
+  ]},
+  {key:'want', title:'WANT', desc:'지금 이 대상을 획득하고 싶은 힘은 얼마나 큰가?', questions:[
+    ['지금 얼마나 자주 생각나는가?',['누가 말해주지 않으면 거의 생각나지 않는다','가끔 생각난다','종종 생각난다','거의 매일 생각난다','다른 일을 하다가도 자연스럽게 계속 생각난다']],
+    ['얼마나 적극적으로 정보를 찾고 있는가?',['관련 정보를 전혀 찾아보지 않는다','우연히 보면 관심 있게 보는 정도다','가끔 검색하거나 리뷰를 본다','가격·후기·비교를 반복해서 찾아본다','이미 살 사람처럼 세부 정보까지 계속 확인하고 있다']],
+    ['지금 당장 생긴다면 얼마나 기쁜가?',['생겨도 별 감흥이 없을 것 같다','있으면 좋겠다 정도다','꽤 기쁠 것 같다','상당히 기쁠 것 같다','오늘 바로 손에 들어온다면 굉장히 흥분될 것 같다']],
+    ['대체재가 생기면 쉽게 마음이 바뀌는가?',['비슷한 다른 제품이면 아무거나 괜찮다','조금만 좋은 대안이 있어도 바꿀 수 있다','대안과 이 제품 사이에서 고민한다','대안을 봐도 결국 이 제품으로 돌아온다','대안이 있어도 이 제품 자체를 원한다']],
+    ['사지 않으면 얼마나 아쉬울 것 같은가?',['안 사도 전혀 아쉽지 않을 것 같다','잠깐 아쉽다가 잊을 것 같다','어느 정도 미련이 남을 것 같다','꽤 오래 생각날 것 같다','구매하지 않은 선택을 계속 되돌아볼 것 같다']]
+  ]},
+  {key:'cost', title:'OPPORTUNITY COST', desc:'이 선택으로 포기하거나 감당해야 하는 것은 얼마나 큰가?', questions:[
+    ['이걸 사기 위해 무엇을 포기해야 하는가?',['사실상 아무것도 포기하지 않아도 된다','사소한 소비 정도를 줄이면 된다','다른 사고 싶은 것 하나 정도는 미뤄야 한다','꽤 중요한 소비나 저축을 포기해야 한다','지금 내게 더 중요한 목표를 실제로 희생해야 한다']],
+    ['지출 규모가 내 경제상황에서 얼마나 부담스러운가?',['거의 느껴지지 않는 지출이다','충분히 여유 있게 감당할 수 있다','살 수 있지만 금액이 신경 쓰인다','구매 후 꽤 오랫동안 재정적으로 의식할 것 같다','현재 상황에서는 명백하게 큰 부담이다']],
+    ['잘못 샀을 때 손실이 얼마나 큰가?',['마음에 안 들면 별 부담 없이 처분하거나 포기할 수 있다','조금 아깝겠지만 큰 문제는 아니다','제법 후회할 것 같다','상당한 돈이나 불편을 감수해야 한다','잘못된 선택이면 다른 중요한 선택까지 영향을 받는다']]
+  ]}
+];
+const survey = document.getElementById('survey');
+sections.forEach(section=>{
+  const el=document.createElement('section'); el.className=`section ${section.key}`;
+  el.innerHTML=`<div class="section-head"><h2>${section.title}</h2><p>${section.desc}</p></div>`;
+  section.questions.forEach((q,qi)=>{
+    const box=document.createElement('div'); box.className='q';
+    box.innerHTML=`<div class="q-title">${qi+1}. ${q[0]}</div><div class="choices">${q[1].map((text,i)=>`<div class="choice"><input type="radio" name="${section.key}-${qi}" id="${section.key}-${qi}-${i+1}" value="${i+1}"><label for="${section.key}-${qi}-${i+1}"><span class="num">${i+1}</span><span>${text}</span></label></div>`).join('')}</div>`;
+    el.appendChild(box);
+  }); survey.appendChild(el);
+});
+
+const allInputs=[...document.querySelectorAll('input[type=radio]')];
+allInputs.forEach(i=>i.addEventListener('change',update));
+function avg(key){
+  const sec=sections.find(s=>s.key===key); const vals=[];
+  sec.questions.forEach((_,i)=>{const c=document.querySelector(`input[name="${key}-${i}"]:checked`);if(c)vals.push(+c.value)});
+  return {value:vals.length?vals.reduce((a,b)=>a+b,0)/vals.length:null, count:vals.length,total:sec.questions.length};
+}
+function quadrant(l,w){
+  if(w>=3&&l<3)return ['Like 없는 Want','강하게 원하고 있지만, 실제 사용과 내부 선호가 그 욕망만큼 단단한지는 의심해볼 만합니다. 획득의 흥분이 지나간 뒤를 상상해보세요.'];
+  if(w>=3&&l>=3)return ['좋아하고 원함','실제 선호와 현재의 욕망이 함께 높습니다. 이제 핵심 변수는 기회비용입니다. 비용이 감당 가능하다면 구매 근거가 비교적 단단합니다.'];
+  if(w<3&&l>=3)return ['좋아하지만 지금은 아님','대상이나 경험 자체는 좋아하지만 지금 획득하려는 힘은 낮습니다. 좋아한다고 반드시 지금 살 필요는 없습니다.'];
+  return ['살 이유가 적음','현재의 욕망도 실제 선호도 모두 낮습니다. 구매를 미뤄도 잃는 것이 크지 않을 가능성이 높습니다.'];
+}
+function update(){
+  const l=avg('like'),w=avg('want'),c=avg('cost');
+  [['like',l],['want',w],['cost',c]].forEach(([k,o])=>{
+    document.getElementById(`${k}Value`).textContent=o.value?o.value.toFixed(1):'—';
+    document.getElementById(`${k}Fill`).style.width=o.value?`${o.value/5*100}%`:'0%';
+  });
+  if(l.value&&w.value){
+    const dot=document.getElementById('dot');dot.style.display='block';dot.style.left=`${(l.value-1)/4*100}%`;dot.style.bottom=`${(w.value-1)/4*100}%`;
+    document.getElementById('quadCoords').textContent=`L ${l.value.toFixed(1)} · W ${w.value.toFixed(1)}`;
+    const [title,text]=quadrant(l.value,w.value); const box=document.getElementById('interpret'); box.className='interpret';box.innerHTML=`<b>${title}</b><p>${text}</p>`;
+  }
+  const totalAnswered=l.count+w.count+c.count;
+  document.getElementById('scoreLabel').textContent=`${totalAnswered}/13 문항 응답${totalAnswered===13?' · 계산 완료':''}`;
+  if(l.count===l.total&&w.count===w.total&&c.count===c.total){
+    const score=Math.max(0,Math.min(100,(l.value/5*w.value/5*100)-(c.value/5*25)));
+    document.getElementById('score').textContent=score.toFixed(0);
+  }else document.getElementById('score').textContent='—';
+}
+document.getElementById('reset').addEventListener('click',()=>{allInputs.forEach(i=>i.checked=false);document.getElementById('score').textContent='—';document.getElementById('scoreLabel').textContent='응답할수록 결과가 채워집니다.';['like','want','cost'].forEach(k=>{document.getElementById(`${k}Value`).textContent='—';document.getElementById(`${k}Fill`).style.width='0%'});document.getElementById('dot').style.display='none';document.getElementById('quadCoords').textContent='—';document.getElementById('interpret').className='interpret incomplete';document.getElementById('interpret').innerHTML='<b>아직 판단 중</b><p>Like와 Want 문항을 채우면 현재 위치가 사사분면에 나타납니다.</p>';window.scrollTo({top:0,behavior:'smooth'})});
+</script>
+</body>
+</html>
