@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="상호연결된 쾌락주체와 장기적 쾌락추구 기반의 보존을 중심으로 한 사회정의론 초안" />
+  <title>계적 쾌락주의: 연결된 쾌락주체의 지속가능한 정의론</title>
+  <style>
+    :root {
+      --bg:#f5f4ef; --paper:#fff; --ink:#181a18; --muted:#666b64; --line:#dedfd9;
+      --soft:#f0f1eb; --accent:#343d35; --quote:#eef1ec;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root { --bg:#111411; --paper:#191c19; --ink:#eef1eb; --muted:#a7ada5; --line:#343934; --soft:#202520; --accent:#dce7dc; --quote:#202720; }
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.78 -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR",sans-serif;letter-spacing:-.012em}
+    main{max-width:780px;margin:0 auto;padding:72px 24px 120px}
+    .kicker{font-size:.84rem;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+    h1{font-size:clamp(2.25rem,7vw,4.5rem);line-height:1.08;letter-spacing:-.055em;margin:.4rem 0 1rem}
+    .subtitle{font-size:1.12rem;color:var(--muted);max-width:660px;margin:0 0 2rem}
+    .meta{display:flex;gap:.75rem;flex-wrap:wrap;color:var(--muted);font-size:.85rem;border-top:1px solid var(--line);padding-top:1rem}
+    nav{margin:42px 0;padding:20px 22px;background:var(--paper);border:1px solid var(--line);border-radius:16px}
+    nav strong{display:block;margin-bottom:.45rem}
+    nav a{color:inherit;text-decoration:none;border-bottom:1px solid var(--line)}
+    nav ol{margin:.4rem 0 0;padding-left:1.3rem}
+    section{margin-top:64px}
+    h2{font-size:1.7rem;line-height:1.3;letter-spacing:-.035em;margin:0 0 1.2rem}
+    h3{font-size:1.15rem;margin:2rem 0 .7rem}
+    p{margin:.9rem 0}
+    .abstract,.box{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:22px 24px}
+    .abstract strong,.box strong{display:block;margin-bottom:.5rem}
+    blockquote{margin:1.6rem 0;padding:18px 22px;background:var(--quote);border-left:4px solid var(--accent);border-radius:0 12px 12px 0;font-size:1.04rem}
+    code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:var(--soft);padding:.1em .34em;border-radius:5px;font-size:.9em}
+    .formula{overflow:auto;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:18px 20px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;line-height:1.8}
+    .case{border-left:2px solid var(--line);padding-left:18px;margin:1.3rem 0}
+    .note{font-size:.92rem;color:var(--muted)}
+    .keywords{font-size:.9rem;color:var(--muted);margin-top:1rem}
+    ul,ol{padding-left:1.35rem}
+    li{margin:.45rem 0}
+    footer{margin-top:80px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:.85rem}
+    .tag{display:inline-block;border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:.28rem .6rem;margin:.18rem .18rem .18rem 0;font-size:.78rem;color:var(--muted)}
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <div class="kicker">Working Paper · Draft 0.1</div>
+    <h1>계적 쾌락주의</h1>
+    <p class="subtitle">연결된 쾌락주체의 장기적 쾌락추구 기반을 보존하는 사회정의론 — “모두 같이, 오래, 즐겁게 놀기”를 위한 하나의 초안</p>
+    <div class="meta"><span>작성일 2026-08-19</span><span>·</span><span>개념 초안</span><span>·</span><span>사례 익명화</span></div>
+  </header>
+
+  <section class="abstract">
+    <strong>초록</strong>
+    <p>이 글은 인간을 넓은 의미의 쾌락을 추구하는 존재로 가정하고, 그 전제로부터 오히려 타인의 쾌락추구 기반을 보존해야 할 합리적 유인이 도출될 수 있는지 검토한다. 핵심 주장은 다음과 같다. 쾌락주체들은 독립된 점이 아니라 시간과 관계 속에서 서로 연결된 계(system)를 구성하며, 한 주체의 행위는 인과연쇄를 통해 다른 좌표의 쾌락 가능성을 변화시키고 다시 자신의 기반으로 피드백될 수 있다. 따라서 장기적 자기쾌락의 극대화조차 계의 쾌락 생산 능력과 타 주체의 선택 가능성을 보존할 이유를 제공한다. 이 글은 이를 잠정적으로 ‘계적 쾌락주의(Systemic Hedonism)’라 부른다.</p>
+    <p class="keywords"><b>핵심어</b> 쾌락주의, 심리적 이기주의, 사회정의, 결과주의, 상호의존성, 인과연쇄, 시간축, 지속가능성</p>
+  </section>
+
+  <nav>
+    <strong>목차</strong>
+    <ol>
+      <li><a href="#problem">문제 제기</a></li>
+      <li><a href="#premises">기본 전제</a></li>
+      <li><a href="#coordinates">주체의 좌표: 고유성 축과 시간축</a></li>
+      <li><a href="#system">계와 인과연쇄</a></li>
+      <li><a href="#justice">정의의 도출</a></li>
+      <li><a href="#case">익명화 사례</a></li>
+      <li><a href="#objections">예상 반론</a></li>
+      <li><a href="#research">논문화를 위한 연구 과제</a></li>
+    </ol>
+  </nav>
+
+  <section id="problem">
+    <h2>1. 문제 제기: 정의와 쾌락은 정말 대립하는가</h2>
+    <p>사람은 정의를 말하면서도 즉각적인 쾌락에 비용을 지불한다. 누군가의 실패를 희화화한 콘텐츠가 소비되고, 그 소비가 다시 조회수와 수익이라는 인센티브를 만든다. 이 장면에서 흔히 도출되는 결론은 ‘인간은 위선적이다’ 또는 ‘사람은 정의보다 쾌락을 원한다’이다.</p>
+    <p>그러나 여기서는 다른 출발점을 택한다. 정의로운 행동, 희생, 선행, 자기절제 또한 완전히 비쾌락적인 행동이라고 가정하지 않는다. 자기일관성, 주체감, 존경, 의미, 죄책감의 회피, 장기적 안정 역시 넓은 의미의 쾌락 또는 효용으로 간주할 수 있다. 그렇다면 윤리의 질문은 ‘쾌락을 포기할 것인가’가 아니라 <b>어떤 쾌락추구가 장기적으로 더 많은 쾌락추구를 가능하게 하는가</b>로 이동한다.</p>
+    <blockquote>이 글의 출발점은 인간의 이기성을 제거하는 것이 아니라, 이기적 주체들이 연결된 세계에서 어떻게 공존 가능한 정의가 도출되는지를 묻는 것이다.</blockquote>
+  </section>
+
+  <section id="premises">
+    <h2>2. 기본 전제</h2>
+    <h3>2.1 쾌락주체</h3>
+    <p>‘쾌락주체’란 자신의 상태를 더 선호되는 방향으로 이동시키려는 모든 주체를 뜻한다. 여기서 쾌락은 감각적 즐거움에 한정되지 않는다. 만족, 자존감, 의미, 안정, 소속감, 성취감, 사회적 존경, 미래에 대한 기대 등 주체가 선호하는 상태 전반을 포함하는 넓은 개념이다.</p>
+
+    <h3>2.2 목적 없는 출발</h3>
+    <p>우리는 스스로 목적을 선택해 태어나지 않는다. 그러나 존재하게 된 뒤에는 자신의 존재와 선호 상태를 가능한 한 지속하려는 경향을 보인다. 이 글은 이를 형이상학적 진리로 확정하기보다, 윤리 모델을 구성하기 위한 최소 전제로 사용한다.</p>
+
+    <h3>2.3 놀이터 은유</h3>
+    <p>세계를 하나의 놀이터로 비유할 수 있다. 참가자는 특별한 목적 없이 들어왔지만, 들어온 뒤에는 가능한 오래 그리고 즐겁게 놀고 싶어 한다. 좋은 규칙은 특정 참가자에게 희생을 강요하는 규칙이라기보다, 참가자들이 서로의 놀이 가능성을 파괴하지 않으면서 계속 놀 수 있도록 조정하는 규칙이다.</p>
+  </section>
+
+  <section id="coordinates">
+    <h2>3. 주체의 좌표: 고유성 축과 시간축</h2>
+    <p>일반적인 윤리 논의는 같은 시간에 존재하는 서로 다른 사람, 즉 <b>고유성 축</b>의 관계에 집중한다. 그러나 동일한 개인도 시간에 따라 서로 다른 이해관계를 가진다. 현재의 나와 미래의 나는 강하게 연결되어 있지만 완전히 동일한 효용 상태를 갖지 않는다.</p>
+    <div class="formula">좌표 = (고유성 i, 시간 t)<br><br>A(t₁) → B(t₁) : 타인에 대한 영향<br>A(t₁) → A(t₂) : 미래의 나에 대한 영향<br>A(t₁) → B(t₂) : 타인의 미래에 대한 영향</div>
+    <p>따라서 현재의 쾌락을 위해 미래의 자신의 건강, 선택권, 관계, 자기존중을 소모하는 행위와 현재의 쾌락을 위해 타인의 기반을 소모하는 행위는 구조적으로 유사하게 해석될 수 있다. 둘 다 <b>한 좌표의 효용을 위해 다른 좌표의 쾌락추구 기반을 외부화하는 행위</b>이기 때문이다.</p>
+  </section>
+
+  <section id="system">
+    <h2>4. 계와 인과연쇄</h2>
+    <p>쾌락주체들은 독립적으로 존재하지 않는다. 개인, 가족, 조직, 사회, 세대는 서로 겹치는 여러 계를 구성하며, 한 좌표의 선택은 다른 좌표의 가능 상태를 변화시킨다.</p>
+    <div class="formula">A(t₁)의 선택<br>↓<br>B의 행동 변화<br>↓<br>C의 규범 인식 변화<br>↓<br>집단의 관행 변화<br>↓<br>제도·관계·문화 변화<br>↓<br>A(tₙ)의 쾌락추구 기반에 재영향</div>
+    <p>이러한 효과는 직접적일 필요가 없다. 한 행동은 다른 사람의 행동과 기대를 바꾸고, 그것이 다시 제도와 문화에 영향을 주며, 충분히 긴 시간 뒤에는 최초 행위자가 의존하던 환경 자체를 바꿀 수 있다. 여기서는 이를 <b>인과연쇄(causal chain)</b>라고 부른다.</p>
+    <p>카오스 이론의 초기조건 민감성은 이 논증의 직접 증명이라기보다 보조 모델로 활용할 수 있다. 복잡한 비선형계에서는 작은 변화의 장기 결과를 완전히 예측하기 어려울 수 있기 때문이다. 따라서 “타인의 기반을 침해하되 나에게 돌아오는 피드백만 완벽히 차단하겠다”는 전략은 현실의 복잡계에서 강한 모델 위험을 가진다.</p>
+    <p class="note">※ 양자역학은 불확실성의 직관을 제공할 수 있으나, 사회적 인과의 통제불가능성을 직접 증명하는 근거로 사용하기에는 비약이 크므로 본 초안의 핵심 논증에서는 제외한다.</p>
+  </section>
+
+  <section id="justice">
+    <h2>5. 정의의 도출: 쾌락 총량이 아니라 쾌락추구 기반</h2>
+    <p>단순한 쾌락 총량 최대화는 한 시점의 다수 쾌락을 위해 소수의 지속적 피해를 정당화할 위험이 있다. 따라서 이 글은 쾌락의 순간적 합보다 <b>쾌락을 계속 생산할 수 있는 기반</b>에 초점을 둔다.</p>
+    <blockquote>정의란 각 쾌락주체의 자유로운 쾌락추구를 인정하되, 그 추구가 다른 좌표의 쾌락추구 기반을 과도하게 소모하지 않도록 상호 견제·보완하고, 계 전체의 장기적 쾌락 생산 가능성을 보존·확대하는 조정 원리다.</blockquote>
+    <p>여기서 ‘계 전체’는 개인보다 우위에 있는 절대적 주체가 아니다. 개인과 집단, 사회는 서로 견제한다. 사회가 ‘전체의 이익’을 명분으로 특정 개인의 기반을 무제한 소모한다면 그것 역시 동일한 원리 아래 비판 대상이 된다.</p>
+    <div class="box">
+      <strong>잠정 판단 기준</strong>
+      <ul>
+        <li><b>외부화:</b> 현재의 쾌락 비용을 다른 주체 또는 미래의 자신에게 떠넘기는가.</li>
+        <li><b>기반 훼손:</b> 상대가 이후 쾌락을 선택·생산할 능력 자체를 감소시키는가.</li>
+        <li><b>비가역성:</b> 현재 얻는 효용에 비해 손실의 회복 비용이 지나치게 큰가.</li>
+        <li><b>일반화 가능성:</b> 동일한 행동 규칙이 계 전체에 퍼져도 쾌락추구 기반이 존속 가능한가.</li>
+        <li><b>피드백 위험:</b> 인과연쇄를 통해 훼손이 다시 행위자의 기반으로 돌아올 가능성을 감수할 만한가.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="case">
+    <h2>6. 익명화 사례: 실패를 상품화하는 조롱 콘텐츠</h2>
+    <div class="case">
+      <p><b>사례.</b> 한 대중 콘텐츠 제작자가 특정 프로 경쟁자의 반복적인 경기 실패를 소재로 조롱성 콘텐츠를 만든다. 일부 시청자는 이를 즐기고, 높은 관심은 제작자의 수익으로 전환된다. 실명, 채널명, 구체 경기 정보는 의도적으로 제거한다.</p>
+    </div>
+    <p>이 사례에서 제작자와 소비자의 즉각적 쾌락은 명백할 수 있다. 재미, 우월감, 집단 소속감, 승리감, 수익 등이 발생한다. 그러나 판단은 여기서 끝나지 않는다.</p>
+    <p>실패를 반복적으로 하나의 고정된 인격적 캐릭터로 가공하면 당사자의 현재 감정뿐 아니라 이후의 활동 가능성, 평판, 도전 비용에 영향을 줄 수 있다. 더 나아가 이러한 콘텐츠가 보상될수록 ‘실패한 사람은 오락 자원으로 사용해도 된다’는 규범이 강화될 수 있다.</p>
+    <p>그 규범은 제작자와 소비자 역시 언젠가 취약한 좌표에 위치할 수 있다는 사실과 충돌한다. 반드시 동일한 방식의 공격이 되돌아온다는 뜻은 아니다. 핵심은 실패를 공개하기 어려운 문화, 높은 공격성, 낮은 상호신뢰처럼 <b>모두가 의존하는 놀이 환경의 상태</b>가 변화한다는 데 있다.</p>
+    <p>따라서 이 행동을 비판하는 이유는 ‘조롱하는 사람은 나쁜 사람’이라는 인격적 서열화가 아니다. 오히려 <b>타인의 일시적 취약성을 자신의 쾌락 생산 원료로 사용하는 규칙이 일반화될 때, 계의 장기적 쾌락 생산 능력이 감소할 수 있다</b>는 구조적 판단이다.</p>
+  </section>
+
+  <section id="objections">
+    <h2>7. 예상 반론과 현재의 답</h2>
+    <h3>반론 1. “내게 피해가 돌아오지 않게 통제하면 되지 않는가?”</h3>
+    <p>이론적으로 완전히 닫힌 계에서 모든 인과경로를 알고 차단할 수 있는 행위자라면 이 유인은 약해질 수 있다. 그러나 현실의 사회는 다수 주체가 상호작용하는 복잡계이며, 장기 인과경로 전체를 예측·통제하기 어렵다. 따라서 타인의 기반 훼손은 자신의 미래 기반에 대한 불확실한 위험을 증가시키는 선택이 된다.</p>
+
+    <h3>반론 2. “모든 행동을 쾌락으로 설명하면 반증 불가능하지 않은가?”</h3>
+    <p>그 비판은 타당하다. 따라서 ‘모든 행동은 쾌락추구다’는 명제 자체를 본 이론의 독창적 결론으로 삼지 않는다. 그것은 설명적 전제로만 사용한다. 실질적 규범 명제는 <b>어떤 쾌락추구가 다른 좌표의 쾌락추구 기반과 양립 가능한가</b>를 판별하는 데 있다.</p>
+
+    <h3>반론 3. “사회 전체를 위해 개인을 희생시킬 수 있지 않은가?”</h3>
+    <p>계는 개인보다 상위의 절대자가 아니다. 개인·집단·사회는 중첩된 계이며 서로 견제한다. 어떤 사회적 효용 증가가 특정 주체의 쾌락추구 기반을 비가역적으로 파괴한다면 그 손실 자체가 다시 계의 지속가능성을 평가하는 변수에 포함되어야 한다.</p>
+
+    <h3>반론 4. “쾌락의 종류와 크기를 어떻게 비교하는가?”</h3>
+    <p>현재 초안의 가장 큰 미해결 문제다. 감각적 즐거움, 자기존중, 사회적 신뢰, 미래 선택권을 단일 척도로 환산하기는 어렵다. 향후에는 쾌락 ‘양’의 정밀 계량보다 선택 가능성, 회복 가능성, 외부화 정도, 시간 할인과 같은 비교 가능한 구조적 기준을 우선 검토할 필요가 있다.</p>
+  </section>
+
+  <section id="research">
+    <h2>8. 논문화를 위한 연구 과제</h2>
+    <p>현재 문서는 철학적 아이디어를 구조화한 초안이며, 학술적 독창성을 주장하려면 선행연구 검토와 개념 정제가 필요하다. 특히 다음 계보와의 차이를 명확히 해야 한다.</p>
+    <div>
+      <span class="tag">심리적 쾌락주의</span>
+      <span class="tag">심리적 이기주의</span>
+      <span class="tag">공리주의</span>
+      <span class="tag">규칙 결과주의</span>
+      <span class="tag">사회계약론</span>
+      <span class="tag">반복게임</span>
+      <span class="tag">제한된 합리성</span>
+      <span class="tag">복잡계</span>
+      <span class="tag">세대간 정의</span>
+      <span class="tag">시간적 복지</span>
+    </div>
+    <ol>
+      <li><b>쾌락의 정의:</b> pleasure, utility, preference satisfaction, well-being 중 어느 개념이 가장 적합한지 구분한다.</li>
+      <li><b>계의 경계:</b> 어떤 인과적 연결을 같은 계로 취급할지 기준을 제시한다.</li>
+      <li><b>과도한 훼손의 기준:</b> 단순 손해와 쾌락추구 기반의 침해를 구분한다.</li>
+      <li><b>시간축 모델:</b> 현재의 나와 미래의 나를 어느 정도 별개의 좌표로 취급할지 정교화한다.</li>
+      <li><b>분배 문제:</b> 총량 증가와 특정 주체의 심각한 손실이 충돌할 때 제약 조건을 제시한다.</li>
+      <li><b>불확실성:</b> 카오스, 복잡계, Knightian uncertainty를 어디까지 규범 논증의 근거로 사용할 수 있는지 검토한다.</li>
+      <li><b>실증 가능성:</b> 온라인 조롱 문화, 협력 게임, 중독·과소비 등 사례에 동일한 판단 규칙을 적용해 설명력과 한계를 시험한다.</li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>9. 잠정 결론</h2>
+    <p>이 글의 가장 단순한 표현은 “모두 같이 즐겁게 놀자”이다. 그러나 이 문장은 선의에 대한 호소만을 뜻하지 않는다. 모든 주체가 자기 쾌락을 추구하고, 그 주체들이 시간과 관계를 통해 인과적으로 연결되어 있으며, 각자의 쾌락 생산 기반이 서로에게 의존한다면, 타인의 기반을 보존하는 일은 장기적 자기이익과도 연결된다.</p>
+    <blockquote>나의 쾌락을 오래 지키려면, 내가 의존하는 쾌락의 생태계를 지켜야 한다.</blockquote>
+    <p>따라서 계적 쾌락주의가 제안하는 정의는 이기심의 제거가 아니다. 각자의 이기심이 다른 존재와 미래의 자신을 파괴하지 않고 서로의 놀이 가능성을 보존하도록 조정하는 것이다. 인간에게 숭고함을 요구하기보다, 연결된 세계에서 오래 즐겁게 살고자 하는 욕망 자체를 윤리의 동력으로 삼는다.</p>
+  </section>
+
+  <footer>
+    이 문서는 대화에서 발전한 철학적 아이디어를 논문 초안 형식으로 정리한 작업 문서다. 특정 실존 인물과 채널에 대한 직접적 식별 정보는 제거했으며, 사례는 구조적 논의를 위해 일반화했다.
+  </footer>
+</main>
+</body>
+</html>
