@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="ViewUp Native App — 웹 서비스를 React Native / Expo 기반 네이티브 앱으로 전환하고 제품 구조, 배포, 관측, 협업 워크플로우까지 확장한 프로젝트" />
+  <title>ViewUp Native App — 주도현</title>
+  <style>
+    :root {
+      --bg:#f3f3ef;
+      --paper:#fff;
+      --text:#171816;
+      --muted:#6c7069;
+      --line:#dddfd8;
+      --accent:#1f5a44;
+      --accent-soft:#dfece5;
+      --dark:#111411;
+      --dark-muted:#aeb5ae;
+      --warm:#efe7d8;
+      --max:1180px;
+      --content:800px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR",sans-serif;line-height:1.7;letter-spacing:-.018em}
+    a{color:inherit}
+    .wrap{width:min(calc(100% - 36px),var(--max));margin:0 auto}
+    header{padding:28px 0 0}
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:10px 0 30px;font-size:14px}
+    .brand{font-weight:800;letter-spacing:-.035em;text-decoration:none}
+    .nav-right{display:flex;gap:18px;color:var(--muted)}
+    .nav-right a{text-decoration:none}.nav-right a:hover{color:var(--text)}
+    .hero{padding:78px 0 84px;border-top:1px solid var(--line)}
+    .eyebrow{display:flex;align-items:center;gap:8px;margin-bottom:22px;color:var(--accent);font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+    .eyebrow:before{content:"";width:8px;height:8px;border-radius:50%;background:var(--accent)}
+    h1{margin:0;max-width:930px;font-size:clamp(52px,8vw,100px);line-height:.95;letter-spacing:-.07em;font-weight:860}
+    .lead{max-width:850px;margin:32px 0 0;color:var(--muted);font-size:clamp(18px,2.5vw,23px);line-height:1.72}
+    .lead strong{color:var(--text)}
+    .hero-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:32px}
+    .button{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:10px 16px;border-radius:999px;border:1px solid var(--line);background:var(--paper);text-decoration:none;font-size:14px;font-weight:800}
+    .button.primary{background:var(--text);border-color:var(--text);color:#fff}
+    .button:hover{transform:translateY(-1px)}
+    .meta-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:54px}
+    .meta-card{min-height:130px;padding:20px;border:1px solid var(--line);border-radius:16px;background:var(--paper)}
+    .meta-card small{display:block;margin-bottom:10px;color:var(--muted);font-size:11px;font-weight:800;letter-spacing:.07em;text-transform:uppercase}
+    .meta-card strong{font-size:17px;line-height:1.45}
+    .section{padding:78px 0;border-top:1px solid var(--line)}
+    .section-grid{display:grid;grid-template-columns:minmax(220px,.34fr) minmax(0,.66fr);gap:70px}
+    .section-label{position:sticky;top:26px;align-self:start}
+    .section-kicker{margin-bottom:10px;color:var(--accent);font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+    h2{margin:0;font-size:clamp(30px,4.2vw,48px);line-height:1.08;letter-spacing:-.05em}
+    .content{max-width:var(--content)}
+    .content p{margin:0 0 24px;font-size:17px;line-height:1.86}
+    .content p:last-child{margin-bottom:0}
+    .content strong{font-weight:780}
+    .callout{margin:34px 0;padding:28px 30px;border-radius:20px;background:var(--dark);color:#f3f4f0}
+    .callout small{display:block;margin-bottom:14px;color:var(--dark-muted);font-weight:800;letter-spacing:.06em;text-transform:uppercase}
+    .callout p{margin:0;font-size:clamp(22px,3vw,31px);line-height:1.45;letter-spacing:-.035em;font-weight:760}
+    .feature-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:30px}
+    .feature{min-height:220px;padding:24px;border:1px solid var(--line);border-radius:18px;background:var(--paper)}
+    .feature .num{margin-bottom:38px;color:var(--accent);font-size:12px;font-weight:900;letter-spacing:.08em}
+    .feature h3{margin:0 0 10px;font-size:21px;line-height:1.35;letter-spacing:-.035em}
+    .feature p{margin:0;color:var(--muted);font-size:14px;line-height:1.72}
+    .flow{display:grid;gap:8px;margin:30px 0}
+    .flow-item{display:grid;grid-template-columns:150px 1fr;gap:22px;padding:18px 0;border-bottom:1px solid var(--line)}
+    .flow-item:first-child{border-top:1px solid var(--line)}
+    .flow-item b{font-size:14px}.flow-item span{color:var(--muted);font-size:15px}
+    .result-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:30px}
+    .result{min-height:205px;padding:24px;border-radius:18px;background:var(--accent-soft)}
+    .result small{display:block;margin-bottom:44px;color:var(--accent);font-size:11px;font-weight:900;letter-spacing:.07em;text-transform:uppercase}
+    .result p{margin:0;font-size:18px;line-height:1.55;font-weight:730;letter-spacing:-.025em}
+    .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px}
+    .tag{padding:7px 10px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.45);color:var(--muted);font-size:12px;font-weight:750}
+    .closing{padding:86px 0;border-top:1px solid var(--line)}
+    .closing-card{padding:44px;border-radius:26px;background:var(--dark);color:#f3f4f0}
+    .closing-card small{color:var(--dark-muted);font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+    .closing-card h2{max-width:850px;margin:18px 0 26px;font-size:clamp(38px,6vw,68px);line-height:1.02}
+    .closing-card p{max-width:700px;margin:0 0 30px;color:var(--dark-muted);font-size:16px;line-height:1.8}
+    .closing-card .button{background:#f3f4f0;color:var(--dark);border-color:#f3f4f0}
+    footer{padding:38px 0 64px;border-top:1px solid var(--line);color:var(--muted);font-size:13px}
+    .footer-inner{display:flex;justify-content:space-between;gap:20px}
+    footer a{color:var(--accent);font-weight:750;text-decoration:none}
+    @media(max-width:900px){.meta-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.section-grid{grid-template-columns:1fr;gap:30px}.section-label{position:static}.result-grid{grid-template-columns:1fr}.feature-grid{grid-template-columns:1fr}}
+    @media(max-width:640px){.wrap{width:min(calc(100% - 24px),var(--max))}.nav-right{display:none}.hero{padding:52px 0 62px}h1{font-size:clamp(50px,17vw,72px)}.meta-grid{grid-template-columns:1fr}.section{padding:58px 0}.flow-item{grid-template-columns:1fr;gap:6px}.closing{padding:58px 0}.closing-card{padding:28px;border-radius:20px}.footer-inner{flex-direction:column}}
+  </style>
+</head>
+<body>
+  <header class="wrap">
+    <nav class="nav">
+      <a class="brand" href="../">← PROJECT ARCHIVE</a>
+      <div class="nav-right">
+        <a href="#scope">Scope</a>
+        <a href="#workflow">Workflow</a>
+        <a href="#operation">Operation</a>
+        <a href="https://viewup.co.kr" target="_blank" rel="noreferrer">ViewUp ↗</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero wrap">
+      <div class="eyebrow">2026 · Mobile · Product Engineering</div>
+      <h1>ViewUp<br>Native App</h1>
+      <p class="lead">기존 웹 서비스를 React Native / Expo 기반 네이티브 앱으로 전환했습니다. 약 한 달 안에 포팅과 스토어 출시를 진행한 뒤, <strong>제품 UI 구조·배포 운영·관측성·협업 방식까지 앱을 지속적으로 운영할 수 있는 개발 시스템</strong>으로 확장했습니다.</p>
+      <div class="hero-actions">
+        <a class="button primary" href="https://viewup.co.kr" target="_blank" rel="noreferrer">실제 서비스 보기 ↗</a>
+        <a class="button" href="../">프로젝트 아카이브로 돌아가기</a>
+      </div>
+      <div class="meta-grid">
+        <div class="meta-card"><small>Role</small><strong>Software Engineer</strong></div>
+        <div class="meta-card"><small>Company</small><strong>스마일드래곤</strong></div>
+        <div class="meta-card"><small>Period</small><strong>2026.06 — 현재</strong></div>
+        <div class="meta-card"><small>Core stack</small><strong>React Native · Expo · EAS</strong></div>
+      </div>
+    </section>
+
+    <section class="section" id="context">
+      <div class="wrap section-grid">
+        <div class="section-label">
+          <div class="section-kicker">Context</div>
+          <h2>포팅보다 더 큰 문제</h2>
+        </div>
+        <div class="content">
+          <p>출발점은 이미 운영 중이던 웹 서비스를 네이티브 앱으로 옮기는 일이었습니다. 홈, 포인트, 퀘스트, 출석체크, 장소미션, 응모, 마이페이지와 기존 적립 기능을 모바일 환경으로 이관하고 카카오 로그인·소셜 회원가입·계정 연동·알림까지 연결해야 했습니다.</p>
+          <p>하지만 앱이 출시되면 구현 자체보다 <strong>화면을 계속 고치고, 스토어와 OTA를 안전하게 운영하고, 실제 사용자 오류를 추적하고, 디자인과 백엔드 변경을 빠르게 검증하는 구조</strong>가 더 중요해집니다. 그래서 네이티브 앱 포팅을 단발성 개발 과제가 아니라 이후 운영 방식까지 다시 설계하는 계기로 사용했습니다.</p>
+          <div class="callout">
+            <small>Project thesis</small>
+            <p>웹을 앱으로 복제하는 것이 아니라, 앱을 계속 바꿀 수 있는 개발·리뷰·배포·관측의 루프를 함께 만든다.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="scope">
+      <div class="wrap section-grid">
+        <div class="section-label">
+          <div class="section-kicker">Scope</div>
+          <h2>어디까지 맡았는가</h2>
+        </div>
+        <div class="content">
+          <p>프로젝트 범위는 앱 화면 구현에 머물지 않았습니다. 제품 구조, 인증 안정성, 릴리즈 체계, 관측, 협업 도구까지 실제 운영 과정에서 필요한 경계를 따라 역할을 확장했습니다.</p>
+          <div class="feature-grid">
+            <article class="feature"><div class="num">01 · APP</div><h3>웹 기능의 네이티브 이관</h3><p>홈·포인트·퀘스트·출석체크·장소미션·응모·마이페이지와 기존 적립 기능을 React Native / Expo로 구현하고 실제 API에 연결했습니다.</p></article>
+            <article class="feature"><div class="num">02 · PRODUCT UI</div><h3>화면에서 공용 구조를 분리</h3><p>디자인 토큰, 공용 버튼, 서브헤더, 바텀시트, 모달 호스트 등 반복되는 UI 구조를 화면 구현에서 분리했습니다.</p></article>
+            <article class="feature"><div class="num">03 · RELEASE</div><h3>스토어와 OTA 운영 체계</h3><p>EAS의 development·preview·production 티어, runtimeVersion baseline, 핫픽스 백머지, SDK gate와 업데이트 진입점을 정리했습니다.</p></article>
+            <article class="feature"><div class="num">04 · OBSERVABILITY</div><h3>사용자 오류에서 백엔드까지 추적</h3><p>SigNoz 에러 리포팅과 traceparent 전파를 연결해 프론트 오류에서 API 응답과 Backend trace까지 따라갈 수 있게 했습니다.</p></article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="architecture">
+      <div class="wrap section-grid">
+        <div class="section-label">
+          <div class="section-kicker">Product UI Architecture</div>
+          <h2>화면을 빠르게 바꾸기 위한 구조</h2>
+        </div>
+        <div class="content">
+          <p>2.1 개편에서는 Figma 개정본을 기준으로 화면군을 다시 구현하면서 디자인 드리프트를 정리했습니다. 디자인 토큰과 공용 컴포넌트를 분리하고, Pretendard 및 공용 Text/TextInput 래퍼를 통해 OS별 한글 폰트·줄바꿈 차이를 줄였습니다.</p>
+          <p>모달은 여러 화면에서 동시에 present/dismiss가 발생하며 빈 카드가 노출될 수 있었습니다. 이를 Promise 기반 호스트에서 직렬화해 화면 단위 임시 처리가 아니라 공용 레이어에서 경합을 해결했습니다. 데스크톱 리뷰 시 실제 앱 폭과 결과가 달라지는 문제는 440px 앱 프레임을 두어 리뷰 surface와 실제 환경을 최대한 맞췄습니다.</p>
+          <div class="flow">
+            <div class="flow-item"><b>Design source</b><span>Figma 개정본을 기준으로 최신 화면 구조를 읽고 구현</span></div>
+            <div class="flow-item"><b>Shared layer</b><span>Token · Button · Header · Bottom Sheet · Modal Host를 공용 계층으로 분리</span></div>
+            <div class="flow-item"><b>Review frame</b><span>실제 앱 폭과 유사한 고정 프레임에서 화면을 검증</span></div>
+            <div class="flow-item"><b>API wiring</b><span>Mock 화면을 기능 단위로 실제 API에 순차 연결</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="workflow">
+      <div class="wrap section-grid">
+        <div class="section-label">
+          <div class="section-kicker">Collaboration · AX</div>
+          <h2>코드 리뷰보다 결과 리뷰에 가까워지기</h2>
+        </div>
+        <div class="content">
+          <p>AI가 구현을 맡는 비중이 커질수록 사람이 모든 코드 diff를 검증하는 방식은 병목이 됩니다. 대신 TDD를 작업 경계와 완료 조건으로 사용하고, 코드 스타일·반복 패턴·작업 맥락은 Skill·Context·Test·Agent workflow에 위임했습니다.</p>
+          <p>Storybook은 단순 컴포넌트 문서가 아니라 <strong>화면 단위 User Flow QA 카탈로그</strong>로 재구성했습니다. 디자이너가 UI Picker로 수정 대상을 직접 지정하고 같은 화면에서 결과를 확인할 수 있게 했고, MSW로 실제 백엔드를 수정하기 전에 응답 변경이 UI에 미치는 영향을 확인하도록 만들었습니다.</p>
+          <p>Figma 역시 사람이 다시 자연어로 설명해 AI에 전달하기보다, 공식 Figma MCP와 Comment MCP를 통해 Agent가 최신 디자인과 코멘트를 직접 읽고 구현하도록 연결했습니다. 디자인 링크 자체가 구현 Context의 진입점이 되도록 한 것입니다.</p>
+          <div class="callout">
+            <small>Workflow change</small>
+            <p>디자인 → 개발자 해석 → AI용 재설명 → 구현의 경로를, 디자인 링크 → Agent 탐색 → 구현·검증으로 단축했다.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="operation">
+      <div class="wrap section-grid">
+        <div class="section-label">
+          <div class="section-kicker">Release · Observability</div>
+          <h2>출시 이후를 제품 개발의 일부로</h2>
+        </div>
+        <div class="content">
+          <p>앱 배포는 EAS 티어를 development(로컬), preview(TestFlight·APK), production으로 정리했습니다. runtimeVersion이 바뀌는 정식 릴리즈에서는 OTA baseline을 함께 갱신하고, 핫픽스 이후 main → develop 백머지 PR을 자동 생성하도록 구성했습니다. production 승격 시 prerelease SDK가 들어가지 않도록 gate를 두고, OTA 즉시 적용·수동 업데이트·서버 지시 업데이트 진입점도 구현했습니다.</p>
+          <p>관측 측면에서는 Next.js와 Expo 양쪽에 SigNoz Error Reporting을 배선하고, 프론트 요청의 traceparent를 백엔드까지 전파했습니다. 이 구조의 핵심은 특정 관측 도구를 도입한 것이 아니라 <strong>사용자가 경험한 오류 → 해당 API 요청·응답 → Backend trace</strong>라는 인과관계를 한 흐름으로 볼 수 있게 만든 것입니다.</p>
+          <div class="result-grid">
+            <article class="result"><small>Shipping</small><p>웹 서비스의 주요 기능을 네이티브 앱으로 전환하고 스토어 출시·운영까지 연결</p></article>
+            <article class="result"><small>Feedback loop</small><p>Figma·Storybook·Mock·실앱을 이어 구현 중간부터 결과 단위로 검증</p></article>
+            <article class="result"><small>Operation</small><p>릴리즈·OTA·관측을 개발 워크플로우 안으로 넣어 출시 이후 변경 비용을 낮춤</p></article>
+          </div>
+          <div class="tags">
+            <span class="tag">React Native</span><span class="tag">Expo</span><span class="tag">EAS</span><span class="tag">Storybook</span><span class="tag">MSW</span><span class="tag">SigNoz</span><span class="tag">Figma MCP</span><span class="tag">TDD</span><span class="tag">OTA</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="closing">
+      <div class="wrap">
+        <div class="closing-card">
+          <small>Live product</small>
+          <h2>설명보다 실제 제품을 확인할 수 있습니다.</h2>
+          <p>이 페이지는 제가 맡은 개발 범위와 판단을 정리한 Case Study입니다. 현재 서비스 자체는 ViewUp 공식 웹사이트에서 확인할 수 있습니다.</p>
+          <a class="button" href="https://viewup.co.kr" target="_blank" rel="noreferrer">ViewUp 방문하기 ↗</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <div>ViewUp Native App · Case Study · Dohyeon Ju</div>
+      <div><a href="../">← Project Archive</a></div>
+    </div>
+  </footer>
+</body>
+</html>
